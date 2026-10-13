@@ -43,14 +43,10 @@ Provider documentation: https://docs.cdp.coinbase.com/exchange/websocket-feed/ch
 
 ## Asset provenance
 
-Official project artwork is stored locally and unmodified:
-
-- Bitcoin: `public/assets/bitcoin.svg`, from Bitcoin.org's official repository: https://raw.githubusercontent.com/bitcoin-dot-org/Bitcoin.org/master/img/icons/but_bitcoin.svg
-- Ethereum: `public/assets/ethereum.png`, from ethereum.org's official repository: https://raw.githubusercontent.com/ethereum/ethereum-org-website/dev/public/images/eth-logo-grey.png
-- Solana: `public/assets/solana.svg`, from the official brand kit: https://solana.com/src/img/branding/solanaLogoMark.svg — guidelines: https://solana.com/branding
-- Inter variable font: https://github.com/rsms/inter — SIL Open Font License is included at `public/fonts/OFL.txt`.
-
+Coin icons are local files provided for this site (`public/assets/btc.png`, `eth.png`, `sol.png`).
 Brand marks identify the quoted assets; no partnership or endorsement is implied.
+
+- Inter variable font: https://github.com/rsms/inter — SIL Open Font License is included at `public/fonts/OFL.txt`.
 
 ## Publishing
 
