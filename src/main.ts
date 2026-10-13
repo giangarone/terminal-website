@@ -49,6 +49,40 @@ if ('IntersectionObserver' in window) {
   });
   scenes.forEach(scene => observer.observe(scene));
 }
+
+// First-view reveal: tag meaningful blocks, stagger siblings, show once on entry.
+const revealSelector = [
+  '.hero-content > *', '.market-strip-heading', '.market-quote', '.market-note',
+  '.section-heading > *', '.section-topline', '.split-heading > *', '.depth-feature',
+  '.depth-visual', '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
+  '.workflow-card', '.workflow-bottom > *', '.pricing-card', '.pricing-note',
+  '.faq-heading > *', '.faq-list details', '.closing-section > *',
+  '.platform-media', '.platform-caption', '.asset-classes span',
+  '.footer-main', '.footer-bottom',
+].join(', ');
+const revealElements = [...document.querySelectorAll<HTMLElement>(revealSelector)];
+if (revealElements.length) {
+  const scaleSelector = '.workflow-card, .pricing-card, .media-slot, .prompt-example, .market-quote';
+  const siblingCounts = new Map<Element | null, number>();
+  for (const element of revealElements) {
+    element.dataset.reveal = element.closest(scaleSelector) ? 'scale' : 'up';
+    const count = (siblingCounts.get(element.parentElement) ?? 0) + 1;
+    siblingCounts.set(element.parentElement, count);
+    element.style.setProperty('--reveal-delay', `${Math.min((count - 1) * 90, 450)}ms`);
+  }
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
+    revealElements.forEach(element => element.classList.add('is-visible'));
+  } else {
+    const revealObserver = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    revealElements.forEach(element => revealObserver.observe(element));
+  }
+}
 const updateMotion = () => document.documentElement.classList.toggle('motion-paused', document.hidden);
 document.addEventListener('visibilitychange', updateMotion);
 updateMotion();
