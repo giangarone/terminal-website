@@ -65,7 +65,7 @@ if (revealElements.length) {
   const scaleSelector = '.workflow-card, .pricing-card, .media-slot, .prompt-example, .market-quote';
   const siblingCounts = new Map<Element | null, number>();
   for (const element of revealElements) {
-    element.dataset.reveal = element.closest(scaleSelector) ? 'scale' : 'up';
+    element.dataset.reveal = element.matches(scaleSelector) ? 'scale' : 'up';
     const count = (siblingCounts.get(element.parentElement) ?? 0) + 1;
     siblingCounts.set(element.parentElement, count);
     element.style.setProperty('--reveal-delay', `${Math.min((count - 1) * 90, 450)}ms`);
