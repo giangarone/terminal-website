@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="description" content="See deeper. Trade smarter. PrimeTerminal brings live NASDAQ and CME data, full-depth order books, AI-powered analysis, and direct chart trading into one powerful workspace." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PrimeTerminal — See deeper. Trade smarter." />
+    <meta property="og:description" content="Institutional-grade market data. Intelligence built in. Your entire trading workflow, in one terminal." />
+    <meta property="og:site_name" content="PrimeTerminal" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="PrimeTerminal — See deeper. Trade smarter." />
+    <meta name="twitter:description" content="Live NASDAQ and CME data, full-depth market visibility, AI analysis, and precision execution." />
+    <link rel="icon" href="data:," />
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/style.css" />
+    <title>PrimeTerminal — See deeper. Trade smarter.</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="wordmark" href="#" aria-label="PrimeTerminal home">PrimeTerminal</a>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="#platform">Platform</a>
+          <a href="#market-data">Market data</a>
+          <a href="#intelligence">Intelligence</a>
+          <a href="#pricing">Pricing</a>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-primary button-small" href="#pricing">Get started for free <span aria-hidden="true">↗</span></a>
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation">
+            <span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <nav class="mobile-nav container" id="mobile-navigation" aria-label="Mobile navigation" hidden>
+        <a href="#platform">Platform</a>
+        <a href="#market-data">Market data</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-light motion-scene" aria-hidden="true">
+          <div class="light-bloom"></div>
+          <div class="light-orbit light-orbit-one"></div>
+          <div class="light-orbit light-orbit-two"></div>
+          <div class="light-horizon"></div>
+        </div>
+        <div class="container hero-content">
+          <a class="hero-eyebrow" href="#market-data"><span class="eyebrow-dot" aria-hidden="true"></span> Institutional data. Individual edge. <span class="eyebrow-arrow" aria-hidden="true">↗</span></a>
+          <h1 id="hero-title">See deeper.<br /><span>Trade smarter.</span></h1>
+          <p class="hero-description">Live NASDAQ and CME futures. L1, L2, and full market depth.<br class="desktop-break" /> Powerful AI. Precision execution. All in one terminal.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary" href="#market-data">Explore the platform <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-footnote">Your edge starts with a clearer view.</p>
+        </div>
+      </section>
+
+      <section class="market-strip container" aria-label="Live cryptocurrency market prices">
+        <div class="market-strip-heading">
+          <span class="overline">The market never stands still.</span>
+          <div class="feed-status" data-status="connecting"><span class="status-dot" aria-hidden="true"></span><span id="feed-status" role="status">Connecting</span><span class="feed-source">via <a href="https://www.coinbase.com/advanced-trade" target="_blank" rel="noreferrer">Coinbase</a></span></div>
+        </div>
+        <div class="market-quotes">
+          <article class="market-quote" data-product="BTC-USD" aria-label="Bitcoin price">
+            <div class="asset-identity"><img src="/assets/bitcoin.svg" width="32" height="32" alt="" /><div><h2>Bitcoin <span>BTC</span></h2><p>BTC / USD</p></div></div>
+            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
+          </article>
+          <article class="market-quote" data-product="ETH-USD" aria-label="Ethereum price">
+            <div class="asset-identity"><img src="/assets/ethereum.png" width="32" height="32" alt="" /><div><h2>Ethereum <span>ETH</span></h2><p>ETH / USD</p></div></div>
+            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
+          </article>
+          <article class="market-quote" data-product="SOL-USD" aria-label="Solana price">
+            <div class="asset-identity"><img src="/assets/solana.svg" width="32" height="32" alt="" /><div><h2>Solana <span>SOL</span></h2><p>SOL / USD</p></div></div>
+            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
+          </article>
+        </div>
+        <p class="market-note"><span>Spot prices · USD</span><span id="feed-updated">Waiting for market data</span></p>
+        <noscript><p class="no-script-note">Enable JavaScript to receive live market prices.</p></noscript>
+      </section>
+
+      <section class="platform-section section container" id="platform" aria-labelledby="platform-title">
+        <div class="section-heading centered-heading">
+          <p class="overline">Built around the way you trade</p>
+          <h2 id="platform-title">All your markets.<br /><span class="muted">One powerful workspace.</span></h2>
+          <p>From the first signal to the final execution.<br class="desktop-break" /> Bring your data, analysis, and trading into focus.</p>
+        </div>
+        <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
+        <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
+        <div class="platform-caption"><span>One connected trading workflow</span><span>Analyze <span class="caption-separator">/</span> Build <span class="caption-separator">/</span> Execute</span></div>
+        <div class="asset-classes" aria-label="Supported asset classes"><span>Crypto</span><span>Stocks</span><span>Futures</span><span>Commodities</span></div>
+      </section>
+
+      <section class="data-section section section-divider container" id="market-data" aria-labelledby="data-title">
+        <div class="section-topline"><p class="overline">01 / Institutional-grade data</p><p class="topline-detail">NASDAQ <span>+</span> CME</p></div>
+        <div class="split-heading"><h2 id="data-title">Go beyond price.<br /><span class="muted">See the whole market.</span></h2><p>A chart tells you where price has been. Market depth shows you what’s behind it. Get the visibility that serious decisions demand.</p></div>
+        <div class="data-layout">
+          <div class="depth-features">
+            <article class="depth-feature"><span class="depth-label">L1</span><div><h3>Every move, in real time.</h3><p>Live NASDAQ and CME futures quotes. Follow the best bid, ask, and latest trades as the market moves.</p></div></article>
+            <article class="depth-feature"><span class="depth-label">L2</span><div><h3>Understand the pressure.</h3><p>Look beyond the best price. See resting liquidity across multiple levels and where buying meets selling.</p></div></article>
+            <article class="depth-feature"><span class="depth-label depth-label-full">FULL</span><div><h3>The depth makes the difference.</h3><p>Full-depth order books and advanced liquidity analysis reveal the structure that price alone can’t show.</p></div></article>
+          </div>
+          <div class="depth-visual">
+            <!-- IMAGE SLOT: depth — set its src in src/content.ts. -->
+            <div class="media-slot depth-media" data-image-slot="depth" aria-hidden="true"></div>
+            <div class="visual-caption"><span>More context. A clearer decision.</span><span>Full-depth visibility</span></div>
+          </div>
+        </div>
+        <a class="text-link" href="#pricing">Find your level of access <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="ai-section section section-divider container" id="intelligence" aria-labelledby="ai-title">
+        <div class="section-topline"><p class="overline">02 / Intelligence, built in</p><p class="topline-detail">Your ideas. Amplified.</p></div>
+        <div class="ai-layout">
+          <div class="ai-copy">
+            <h2 id="ai-title">A sharper mind.<br /><span class="muted">For every market.</span></h2>
+            <p class="section-description">Turn a question into insight. Turn an idea into an indicator. Let AI connect the dots while you stay in control.</p>
+            <div class="ai-feature"><span class="small-index">01</span><div><h3>Ask. Analyze. Understand.</h3><p>Ask about any chart, asset, or market condition. Scan for opportunities in your own words.</p></div></div>
+            <div class="ai-feature"><span class="small-index">02</span><div><h3>Your next indicator starts with an idea.</h3><p>Describe what you want to see. AI builds it. Use it on your charts or sell it in the integrated marketplace.</p></div></div>
+            <a class="text-link" href="#pricing">Put intelligence to work <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="ai-visual">
+            <!-- IMAGE SLOT: intelligence — set its src in src/content.ts. -->
+            <div class="media-slot ai-media" data-image-slot="intelligence" aria-hidden="true"></div>
+            <div class="prompt-example"><span class="prompt-label">Start with a question</span><p>“Find stocks breaking their opening range<br class="desktop-break" /> with above-average volume.”</p><span class="prompt-arrow" aria-hidden="true">↗</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow-section section section-divider container" aria-labelledby="workflow-title">
+        <div class="section-topline"><p class="overline">03 / From insight to execution</p></div>
+        <div class="split-heading"><h2 id="workflow-title">Less switching.<br /><span class="muted">More perspective.</span></h2><p>Everything you need to understand the move, build your conviction, and manage the trade. Right where you need it.</p></div>
+        <div class="workflow-grid">
+          <article class="workflow-card"><span class="card-number">01 — EXECUTION</span><h3>Trade where<br />you see the opportunity.</h3><p>Execute directly on your charts. Drag stops and targets, set trailing stops, and move to breakeven without breaking your flow.</p><div class="card-footer">Direct chart trading</div></article>
+          <article class="workflow-card"><span class="card-number">02 — SMART MONEY</span><h3>Follow more<br />than the price.</h3><p>Track whale activity, institutional dark pools, and order flow. See where liquidity is building and understand the forces behind the move.</p><div class="card-footer">Institutional intelligence</div></article>
+          <article class="workflow-card"><span class="card-number">03 — MARKET CONTEXT</span><h3>Know the why.<br />Not just the when.</h3><p>Connect price moves to breaking news and economic events. Analyze Asian, London, and New York sessions with opening ranges and directional bias.</p><div class="card-footer">News & session analysis</div></article>
+        </div>
+        <div class="workflow-bottom"><p>Your exchanges. Your assets. Your edge.</p><a class="text-link" href="#pricing">Bring it all together <span aria-hidden="true">↗</span></a></div>
+      </section>
+
+      <section class="pricing-section section section-divider container" id="pricing" aria-labelledby="pricing-title">
+        <div class="section-heading centered-heading"><p class="overline">Invest in your perspective</p><h2 id="pricing-title">A clearer edge.<br /><span class="muted">At every level.</span></h2><p>Start free. Go deeper when you’re ready.</p></div>
+        <!-- Mock monthly prices and features are intentionally editable here. Checkout buttons have no actions. -->
+        <div class="pricing-grid">
+          <article class="pricing-card" aria-labelledby="free-plan">
+            <div class="plan-heading"><h3 id="free-plan">Free</h3></div><p class="plan-description">Find your footing. Build your workflow.</p>
+            <p class="plan-price">$0<span>/ month</span></p><p class="plan-billing">Free to get started</p>
+            <button class="button button-plan" type="button" aria-disabled="true">Get started for free</button>
+            <div class="plan-features"><p>The essentials, in one place</p><ul><li>Core multi-asset charts</li><li>Personal watchlists</li><li>Standard technical indicators</li><li>Limited AI assistance</li><li>Marketplace access</li></ul></div>
+          </article>
+          <article class="pricing-card featured-plan" aria-labelledby="pro-plan">
+            <div class="plan-heading"><h3 id="pro-plan">Pro</h3><span class="plan-badge">For active traders</span></div><p class="plan-description">More intelligence. Greater control.</p>
+            <p class="plan-price">$49<span>/ month</span></p><p class="plan-billing">USD · Billed monthly</p>
+            <button class="button button-primary button-plan" type="button" aria-disabled="true">Choose Pro <span aria-hidden="true">↗</span></button>
+            <div class="plan-features"><p>Everything in Free, plus</p><ul><li>Live NASDAQ & CME L1 and L2</li><li>Unlimited indicators per chart</li><li>AI indicator creation & scanning</li><li>Direct chart trading</li><li>Advanced stops & take-profits</li><li>News & session analysis</li></ul></div>
+          </article>
+          <article class="pricing-card" aria-labelledby="elite-plan">
+            <div class="plan-heading"><h3 id="elite-plan">Elite</h3></div><p class="plan-description">The full picture. Nothing held back.</p>
+            <p class="plan-price">$99<span>/ month</span></p><p class="plan-billing">USD · Billed monthly</p>
+            <button class="button button-plan" type="button" aria-disabled="true">Choose Elite</button>
+            <div class="plan-features"><p>Everything in Pro, plus</p><ul><li>Full-depth order books</li><li>Advanced liquidity analysis</li><li>Whale & dark-pool intelligence</li><li>Expanded AI usage</li><li>Advanced order-flow analysis</li><li>Priority support</li></ul></div>
+          </article>
+        </div>
+        <p class="pricing-note">One workspace. A plan for the way you trade.</p>
+      </section>
+
+      <section class="faq-section section section-divider container" aria-labelledby="faq-title">
+        <div class="faq-heading"><p class="overline">A little more clarity</p><h2 id="faq-title">Good questions.<br /><span class="muted">Clear answers.</span></h2></div>
+        <div class="faq-list">
+          <details><summary>Can I start with a free plan?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. Free gives you core charts, personal watchlists, standard indicators, and limited AI assistance. Pro and Elite add deeper market data, more advanced tools, and expanded intelligence as your workflow grows.</p></details>
+          <details><summary>Which markets can I trade?<span class="faq-indicator" aria-hidden="true"></span></summary><p>PrimeTerminal brings crypto, stocks, futures, and commodities into one workspace. Connect supported exchanges and trading accounts to analyze your markets and manage trades from your charts.</p></details>
+          <details><summary>What’s the difference between L1, L2, and full depth?<span class="faq-indicator" aria-hidden="true"></span></summary><p>L1 covers top-of-book information, including the best bid, ask, and latest trade. L2 shows additional price levels and resting liquidity. Full depth extends that view across the available order book for a more complete picture of market structure. Pro includes NASDAQ and CME L1 and L2; Elite adds full-depth capabilities.</p></details>
+          <details><summary>Can I create indicators without writing code?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. Describe the indicator you have in mind in natural language and let AI build it. Refine it, add it to your charts, and share or sell it through PrimeTerminal’s integrated marketplace.</p></details>
+          <details><summary>Can I execute trades directly on a chart?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Pro and Elite support direct chart trading through connected trading accounts. Place orders, drag stop-losses and take-profits, set trailing stops, and make breakeven adjustments in the same workspace you use for analysis.</p></details>
+          <details><summary>Are the prices on this page live?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. The Bitcoin, Ethereum, and Solana spot prices above come from Coinbase’s public market feed and refresh approximately every five seconds when prices change. The connection indicator shows whether the feed is live. These crypto quotes are separate from the NASDAQ and CME data available inside PrimeTerminal.</p></details>
+        </div>
+      </section>
+
+      <section class="closing-section section container" aria-labelledby="closing-title">
+        <p class="overline">Your next level starts here</p><h2 id="closing-title">The market moves.<br /><span class="muted">Move with clarity.</span></h2><p>Better data. Deeper insight. One PrimeTerminal.</p><a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+    <footer class="site-footer container"><div class="footer-main"><a class="wordmark" href="#">PrimeTerminal</a><nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#market-data">Market data</a><a href="#pricing">Pricing</a></nav><a class="back-to-top" href="#">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© <span id="copyright-year">2026</span> PrimeTerminal</span><span>Perspective is everything.</span></div></footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
