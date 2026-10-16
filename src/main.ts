@@ -65,7 +65,7 @@ const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero-content > *', '.market-strip-heading', '.market-quotes', '.market-note',
-  '.section-heading', '.section-topline', '.split-heading', '.coverage-card',
+  '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
