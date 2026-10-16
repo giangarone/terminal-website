@@ -50,4 +50,10 @@ Brand marks identify the quoted assets; no partnership or endorsement is implied
 
 ## Publishing
 
-The contents of `dist/` can be served by any static host. If the host enforces a Content Security Policy, allow `connect-src wss://ws-feed.exchange.coinbase.com`; images and fonts are local. This repository contains no sign-in flow, payment processing, trading engine, or deployment configuration.
+The public repository is https://github.com/giangarone/terminal-website and the live site is https://giangarone.github.io/terminal-website/.
+
+GitHub Pages uses **GitHub Actions** as its deployment source. Each push to `main` runs `.github/workflows/deploy.yml`, which installs dependencies, runs the tests, builds the site, and publishes only `dist/`. The workflow can also be run manually from the Actions tab. Do not configure Pages to serve the source folder directly: browsers need the compiled JavaScript and CSS produced by Vite.
+
+`vite.config.js` sets the base path to `/terminal-website/` so scripts, styles, fonts, and images load under the GitHub Pages project URL. To deploy at a different path or a custom domain, update `base` accordingly and rebuild.
+
+The contents of `dist/` can also be served by other static hosts at the configured base path. If the host enforces a Content Security Policy, allow `connect-src wss://ws-feed.exchange.coinbase.com`; images and fonts are local. This repository contains no sign-in flow, payment processing, or trading engine.
