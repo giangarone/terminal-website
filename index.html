@@ -46,12 +46,7 @@
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-light" aria-hidden="true">
-          <div class="light-bloom"></div>
-          <div class="light-orbit light-orbit-one"></div>
-          <div class="light-orbit light-orbit-two"></div>
-        </div>
+      <section class="hero aurora-section aurora-subtle" data-aurora aria-labelledby="hero-title">
         <div class="container hero-content">
           <a class="hero-eyebrow" href="#market-data"><span class="eyebrow-dot" aria-hidden="true"></span> Institutional data. Individual edge. <span class="eyebrow-arrow" aria-hidden="true">↗</span></a>
           <h1 id="hero-title">The market speaks.<br /><span>Now you hear it.</span></h1>
@@ -290,8 +285,11 @@
         </div>
       </section>
 
-      <section class="closing-section section container" aria-labelledby="closing-title">
-        <p class="overline">Your next level starts here</p><h2 id="closing-title">The market moves.<br /><span class="muted">Move with clarity.</span></h2><p>Better data. Deeper insight. One MarketStream.</p><a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">→</span></a>
+      <section class="closing-section section aurora-section" data-aurora aria-labelledby="closing-title">
+        <div class="closing-content container">
+          <p class="overline">Your next level starts here</p><h2 id="closing-title">The market moves.<br /><span class="muted">Move with clarity.</span></h2><p>Better data. Deeper insight. One MarketStream.</p><a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">→</span></a>
+        </div>
+        <button class="aurora-toggle" type="button" data-aurora-toggle aria-pressed="false" hidden>Pause motion</button>
       </section>
     </main>
     <footer class="site-footer container"><div class="footer-main"><a class="wordmark" href="#">MarketStream</a><nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#market-data">Market data</a><a href="#pricing">Pricing</a><a role="link" aria-disabled="true">Privacy policy</a><a role="link" aria-disabled="true">Terms &amp; conditions</a></nav><a class="back-to-top" href="#">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© <span id="copyright-year">2026</span> MarketStream</span><span>Perspective is everything.</span></div></footer>

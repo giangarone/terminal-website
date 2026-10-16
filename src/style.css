@@ -30,9 +30,6 @@
   --light-soft: rgb(255 255 255 / 3%);
   --light-medium: rgb(255 255 255 / 7%);
   --light-strong: rgb(255 255 255 / 20%);
-  --hero-glow: rgb(255 255 255 / 18%);
-  --hero-glow-core: rgb(255 255 255 / 24%);
-  --hero-rim: rgb(255 255 255 / 22%);
   --light: #ffffff;
   --header-background: rgb(8 8 8 / 88%);
   --container: 1248px;
@@ -98,22 +95,30 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 .hero-footnote { font-size: 11px; color: var(--text-secondary); margin-top: 19px; }
-.hero-light { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; mask-image: linear-gradient(transparent, var(--light) 20%, var(--light) 88%, transparent); }
-.light-bloom { position: absolute; width: 1040px; height: 600px; left: calc(50% - 520px); bottom: -556px; border-radius: 50%; box-shadow: 0 -56px 170px 44px var(--hero-glow), 0 -18px 70px 12px var(--hero-glow-core); }
-.light-orbit { position: absolute; width: 1600px; height: 750px; bottom: -704px; left: calc(50% - 800px); border-radius: 50%; border: 0.5px solid var(--hero-rim); box-shadow: 0 -12px 40px -18px var(--hero-glow-core); }
-.light-orbit-two { width: 1450px; left: calc(50% - 725px); bottom: -726px; opacity: 0.65; }
-.light-bloom { animation: bloom 13s ease-in-out -6s infinite alternate; }
-.light-orbit { animation: orbit 18s ease-in-out infinite alternate; }
-.light-orbit-two { animation-delay: -9s; }
-@keyframes bloom {
-  from { transform: translate(-100px, 0) scale(0.85); opacity: 0.7; }
-  to { transform: translate(100px, -28px) scale(1.06); opacity: 1; }
+/* Reusable aurora. Only transforms/opacity animate; the light stays decorative. */
+.aurora-section { --aurora-intensity: 0.8; position: relative; isolation: isolate; }
+.aurora { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: var(--aurora-intensity); mask-image: linear-gradient(transparent, #000 20%, #000 75%, transparent); }
+.aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 44%, rgb(8 8 8 / 85%) 0%, rgb(8 8 8 / 50%) 25%, transparent 65%); }
+.aurora svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.aurora-ribbon { transform-origin: 50% 50%; animation: aurora-drift 24s ease-in-out infinite alternate; animation-play-state: paused; }
+.aurora-ribbon-b { animation-name: aurora-sway; animation-duration: 31s; animation-delay: -14s; opacity: 0.6; }
+.aurora-ribbon-c { animation-duration: 37s; animation-delay: -21s; opacity: 0.4; }
+.aurora-haze { stroke-width: 100px; filter: blur(44px); opacity: 0.38; }
+.aurora-body { stroke-width: 27px; filter: blur(16px); opacity: 0.65; }
+.aurora-edge { stroke-width: 2px; filter: blur(2px); opacity: 0.65; }
+.aurora-running .aurora-ribbon { animation-play-state: running; }
+.aurora-subtle { --aurora-intensity: 0.42; }
+.aurora-monochrome .aurora { filter: grayscale(1); }
+@keyframes aurora-drift {
+  from { transform: translate(-28px, 12px) rotate(-4deg) scale(1.04); opacity: 0.65; }
+  to { transform: translate(38px, -16px) rotate(4deg) scale(1.12); opacity: 1; }
 }
-@keyframes orbit {
-  from { transform: translate(-70px, 3px) rotate(-3deg); }
-  to { transform: translate(70px, -35px) rotate(3deg); }
+@keyframes aurora-sway {
+  from { transform: translate(30px, 22px) rotate(3deg) scale(1.08); }
+  to { transform: translate(-35px, -20px) rotate(-4deg) scale(1.02); }
 }
-.hero-light.is-paused > * { animation-play-state: paused; }
+.aurora-toggle { position: absolute; right: max(24px, calc((100% - var(--container)) / 2)); bottom: 22px; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 10px; }
+.aurora-toggle:hover { color: var(--text); background: var(--light-soft); }
 
 /* Genuine, source-attributed spot prices. */
 .market-strip { padding-top: 22px; }
@@ -305,9 +310,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 .faq-indicator::before, .faq-indicator::after { content: ''; position: absolute; background: var(--text-muted); left: 0; top: 5px; width: 12px; height: 1px; }
 .faq-indicator::after { transform: rotate(90deg); }
 details[open] .faq-indicator::after { transform: rotate(0); }
-.closing-section { text-align: center; padding-block: 100px 113px; }
+.closing-section { text-align: center; padding-block: 130px 145px; }
+.closing-content { position: relative; }
+.closing-section h2 .muted { color: #bcc5d4; }
 .closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
-.closing-section > p:not(.overline) { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
+.closing-content > p:not(.overline) { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
 .closing-section .button { margin-top: 28px; }
 .site-footer { padding-block: 37px 24px; }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
@@ -423,7 +430,9 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
   .hero-footnote { font-size: 10px; margin-top: 17px; }
-  .light-bloom { box-shadow: 0 -50px 140px 18px var(--hero-glow), 0 -15px 60px 8px var(--hero-glow-core); }
+  .aurora svg { width: 180%; max-width: none; margin-left: -40%; }
+  .aurora-section { --aurora-intensity: 0.65; }
+  .aurora-subtle { --aurora-intensity: 0.38; }
   .market-strip { padding-top: 17px; }
   .market-strip-heading { padding-bottom: 15px; gap: 12px; }
   .market-strip-heading .overline { font-size: 8px; letter-spacing: 0.035em; }
@@ -482,9 +491,9 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .faq-section { grid-template-columns: 1fr; gap: 35px; }
   .faq-list summary { font-size: 13px; gap: 15px; padding-block: 22px; }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
-  .closing-section { padding-block: 70px; }
+  .closing-section { padding-block: 90px 110px; }
   .closing-section h2 { font-size: 43px; }
-  .closing-section > p:not(.overline) { font-size: 12px; }
+  .closing-content > p:not(.overline) { font-size: 12px; }
   .site-footer { padding-top: 28px; }
   .footer-main { flex-wrap: wrap; gap: 25px; }
   .site-footer nav { order: 3; width: 100%; gap: 25px; }

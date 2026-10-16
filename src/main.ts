@@ -2,8 +2,10 @@ import { productImages } from './content.ts';
 import { connectMarketFeed, PRODUCTS } from './market-feed.ts';
 import type { FeedSnapshot } from './market-feed.ts';
 import { setupIndicators } from './indicators.ts';
+import { setupAuroras } from './aurora.ts';
 
 setupIndicators();
+setupAuroras();
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
@@ -45,23 +47,6 @@ for (const [slot, image] of Object.entries(productImages)) {
   frame.append(img);
 }
 
-// Pause decorative lighting when the hero or browser tab is out of view.
-const hero = document.querySelector<HTMLElement>('.hero')!;
-const heroLight = hero.querySelector<HTMLElement>('.hero-light')!;
-let heroInView = true;
-function updateHeroMotion() {
-  heroLight.classList.toggle('is-paused', document.hidden || !heroInView);
-}
-if ('IntersectionObserver' in window) {
-  const heroObserver = new IntersectionObserver(entries => {
-    heroInView = entries[0].isIntersecting;
-    updateHeroMotion();
-  });
-  heroObserver.observe(hero);
-}
-document.addEventListener('visibilitychange', updateHeroMotion);
-updateHeroMotion();
-
 // Reveal complete content groups, with a short stagger only for adjacent
 // items entering together. Default HTML stays readable without JavaScript.
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
@@ -72,7 +57,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
-  '.faq-heading', '.faq-list details', '.closing-section > *',
+  '.faq-heading', '.faq-list details', '.closing-content > *',
   '.footer-main', '.indicator-track',
 ].join(', '))];
 let entranceObserver: IntersectionObserver | undefined;
