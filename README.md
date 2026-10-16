@@ -1,4 +1,4 @@
-# PrimeTerminal
+# MarketStream
 
 A static, responsive marketing homepage built with semantic HTML, plain CSS, TypeScript, and Vite. No framework, backend, or runtime dependencies.
 
@@ -29,7 +29,7 @@ Example source: `/images/platform.webp`. Empty sources render empty charcoal fra
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
-Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The PrimeTerminal brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
+Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
 
 ## Live prices
 
