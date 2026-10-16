@@ -42,50 +42,79 @@ for (const [slot, image] of Object.entries(productImages)) {
   frame.append(img);
 }
 
-const scenes = document.querySelectorAll<HTMLElement>('.motion-scene');
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) entry.target.classList.toggle('is-paused', !entry.isIntersecting);
-  });
-  scenes.forEach(scene => observer.observe(scene));
+// Reveal complete content groups, with a short stagger only for adjacent
+// items entering together. Default HTML stays readable without JavaScript.
+const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+const entranceAnimations = new Map<Element, Animation>();
+const entranceElements = [...document.querySelectorAll<HTMLElement>([
+  '.hero-content > *', '.market-strip-heading', '.market-quotes', '.market-note',
+  '.section-heading', '.section-topline', '.split-heading', '.coverage-card',
+  '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
+  '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
+  '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
+  '.faq-heading', '.faq-list details', '.closing-section > *',
+  '.footer-main',
+].join(', '))];
+let entranceObserver: IntersectionObserver | undefined;
+
+function showImmediately(element: Element) {
+  entranceObserver?.unobserve(element);
+  element.removeAttribute('data-entrance-pending');
+  entranceAnimations.get(element)?.cancel();
+  entranceAnimations.delete(element);
 }
 
-// First-view reveal: tag meaningful blocks, stagger siblings, show once on entry.
-const revealSelector = [
-  '.hero-content > *', '.market-strip-heading', '.market-quote', '.market-note',
-  '.section-heading > *', '.section-topline', '.split-heading > *', '.depth-feature',
-  '.depth-visual', '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
-  '.workflow-card', '.workflow-bottom > *', '.pricing-card', '.pricing-note',
-  '.faq-heading > *', '.faq-list details', '.closing-section > *',
-  '.platform-media', '.platform-caption',
-  '.footer-main', '.footer-bottom',
-].join(', ');
-const revealElements = [...document.querySelectorAll<HTMLElement>(revealSelector)];
-if (revealElements.length) {
-  const scaleSelector = '.workflow-card, .pricing-card, .media-slot, .market-quote';
-  const siblingCounts = new Map<Element | null, number>();
-  for (const element of revealElements) {
-    element.dataset.reveal = element.matches(scaleSelector) ? 'scale' : 'up';
-    const count = (siblingCounts.get(element.parentElement) ?? 0) + 1;
-    siblingCounts.set(element.parentElement, count);
-    element.style.setProperty('--reveal-delay', `${Math.min((count - 1) * 90, 450)}ms`);
-  }
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    revealElements.forEach(element => element.classList.add('is-visible'));
-  } else {
-    const revealObserver = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
+if (!motionPreference.matches && 'IntersectionObserver' in window && 'animate' in Element.prototype) {
+  entranceObserver = new IntersectionObserver(entries => {
+    const siblingCounts = new Map<Element | null, number>();
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      const element = entry.target;
+      entranceObserver!.unobserve(element);
+      if (motionPreference.matches || document.hidden) {
+        showImmediately(element);
+        continue;
       }
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-    revealElements.forEach(element => revealObserver.observe(element));
-  }
+      const index = siblingCounts.get(element.parentElement) ?? 0;
+      siblingCounts.set(element.parentElement, index + 1);
+      const isVisual = element.matches('.platform-media, .depth-visual, .ai-visual');
+      const animation = element.animate([
+        { opacity: 0, transform: `translateY(${isVisual ? 28 : 20}px)` },
+        { opacity: 1, transform: 'translateY(0)' },
+      ], {
+        duration: isVisual ? 900 : 720,
+        delay: Math.min(index * 75, 225),
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        fill: 'backwards',
+      });
+      element.removeAttribute('data-entrance-pending');
+      entranceAnimations.set(element, animation);
+      animation.finished.then(
+        () => entranceAnimations.delete(element),
+        () => entranceAnimations.delete(element),
+      );
+    }
+  }, { threshold: 0, rootMargin: `0px 0px -${Math.min(100, window.innerHeight * 0.12)}px 0px` });
+
+  entranceElements.forEach(element => {
+    // Content above a restored scroll position should never be left hidden.
+    if (element.getBoundingClientRect().bottom <= 0) return;
+    element.setAttribute('data-entrance-pending', '');
+    entranceObserver!.observe(element);
+  });
 }
-const updateMotion = () => document.documentElement.classList.toggle('motion-paused', document.hidden);
-document.addEventListener('visibilitychange', updateMotion);
-updateMotion();
+
+// Keyboard navigation and preference changes must never wait for an entrance.
+document.addEventListener('focusin', event => {
+  const target = event.target;
+  if (!(target instanceof Element)) return;
+  entranceElements.filter(element => element.contains(target)).forEach(showImmediately);
+});
+motionPreference.addEventListener('change', event => {
+  if (!event.matches) return;
+  entranceObserver?.disconnect();
+  entranceElements.forEach(showImmediately);
+});
 
 const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 const percentage = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2, signDisplay: 'exceptZero' });
