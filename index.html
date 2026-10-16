@@ -95,7 +95,104 @@
         <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
         <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
         <div class="platform-caption"><span>One connected trading workflow</span><span>Analyze <span class="caption-separator">/</span> Build <span class="caption-separator">/</span> Execute</span></div>
-        <div class="asset-classes" aria-label="Supported asset classes"><span>Crypto</span><span>Stocks</span><span>Futures</span><span>Commodities</span></div>
+      </section>
+
+      <section class="coverage-section section container" id="markets" aria-labelledby="coverage-title">
+        <div class="section-topline"><p class="overline">A world of markets. One terminal.</p><p class="topline-detail">Coverage meets context</p></div>
+        <div class="split-heading"><h2 id="coverage-title">Follow every market.<br /><span class="muted">See every angle.</span></h2><p>From the assets you follow to the liquidity and events that move them. Bring the whole picture into view.</p></div>
+        <div class="coverage-grid">
+          <article class="coverage-card coverage-crypto">
+            <div class="coverage-card-heading"><h3>Crypto</h3><div class="coverage-coins" aria-hidden="true"><img src="/assets/btc.png" width="25" height="25" alt="" loading="lazy" /><img src="/assets/eth.png" width="25" height="25" alt="" loading="lazy" /><img src="/assets/sol.png" width="25" height="25" alt="" loading="lazy" /></div></div>
+            <p class="coverage-stat">4,000<span>+</span></p>
+            <p class="coverage-description">Perpetuals and spot pairs.<br />A market that never closes.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>BTC / USD</span><span>24 / 7</span></div>
+              <svg class="coverage-chart" viewBox="0 0 320 86" fill="none">
+                <path class="chart-gridline" d="M0 22H320M0 64H320" />
+                <path class="chart-area" d="M0 61L12 57L24 64L36 48L48 53L60 42L72 46L84 35L96 44L108 39L120 54L132 48L144 52L156 38L168 42L180 30L192 34L204 23L216 32L228 27L240 36L252 21L264 26L276 13L288 20L300 11L316 16V86H0Z" />
+                <path class="chart-line" d="M0 61L12 57L24 64L36 48L48 53L60 42L72 46L84 35L96 44L108 39L120 54L132 48L144 52L156 38L168 42L180 30L192 34L204 23L216 32L228 27L240 36L252 21L264 26L276 13L288 20L300 11L316 16" />
+                <circle class="chart-point" cx="316" cy="16" r="3" />
+              </svg>
+              <div class="coverage-chart-axis"><span>Spot</span><span>Perpetuals</span></div>
+            </div>
+          </article>
+          <article class="coverage-card coverage-stocks">
+            <div class="coverage-card-heading"><h3>US stocks</h3><span class="coverage-symbols" aria-hidden="true">NVDA · AAPL · TSLA</span></div>
+            <p class="coverage-stat">5,000<span>+</span></p>
+            <p class="coverage-description">Stocks and ETFs listed on<br />NYSE and Nasdaq.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>US equities</span><span>Regular session</span></div>
+              <svg class="coverage-chart" viewBox="0 0 320 86" fill="none">
+                <path class="chart-gridline" d="M0 22H320M0 64H320" />
+                <g class="chart-candles"><path d="M8 62V80M27 55V74M65 48V67M84 36V59M103 29V49M141 37V57M160 27V47M179 23V39M217 22V41M236 12V34M274 16V35M293 6V25M312 4V20" /><path stroke-width="7" d="M8 68V74M27 60V68M65 54V61M84 42V52M103 35V43M141 43V50M160 33V41M179 28V34M217 28V35M236 18V28M274 22V29M293 12V20M312 9V14" /></g>
+                <g class="chart-candles chart-down"><path d="M46 54V74M122 31V53M198 23V42M255 14V33" /><path stroke-width="7" d="M46 60V68M122 37V46M198 29V36M255 20V27" /></g>
+              </svg>
+              <div class="coverage-chart-axis"><span>09:30</span><span>16:00 ET</span></div>
+            </div>
+          </article>
+          <article class="coverage-card coverage-forex">
+            <div class="coverage-card-heading"><h3>Forex</h3><span class="coverage-symbols" aria-hidden="true">USD · EUR · JPY</span></div>
+            <p class="coverage-stat">1,000<span>+</span></p>
+            <p class="coverage-description">Currency pairs across global markets.<br />Plus gold and silver.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>EUR / USD</span><span>Global FX</span></div>
+              <svg class="coverage-chart" viewBox="0 0 320 86" fill="none">
+                <path class="chart-gridline" d="M0 22H320M0 64H320" />
+                <path class="chart-reference" d="M0 47H320" />
+                <path class="chart-area" d="M0 58C12 58 14 40 26 42S42 64 56 54S70 30 84 38S99 54 112 43S129 22 142 31S156 46 170 35S184 19 198 27S212 40 226 29S242 13 256 21S273 34 286 23S305 10 317 14V86H0Z" />
+                <path class="chart-line" d="M0 58C12 58 14 40 26 42S42 64 56 54S70 30 84 38S99 54 112 43S129 22 142 31S156 46 170 35S184 19 198 27S212 40 226 29S242 13 256 21S273 34 286 23S305 10 317 14" />
+                <circle class="chart-point" cx="317" cy="14" r="3" />
+              </svg>
+              <div class="coverage-chart-axis"><span>Major & cross pairs</span><span>XAU · XAG</span></div>
+            </div>
+          </article>
+          <article class="coverage-card coverage-futures">
+            <div class="coverage-card-heading"><h3>Futures</h3><span class="coverage-symbols" aria-hidden="true">ES · ZN · CL · GC</span></div>
+            <p class="coverage-stat">CME <span class="stat-word">Group</span></p>
+            <p class="coverage-description">Index, rates, energy, and metals.<br />The benchmarks that move the world.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>Futures curve</span><span>Across expiries</span></div>
+              <svg class="coverage-chart" viewBox="0 0 320 86" fill="none">
+                <path class="chart-gridline" d="M0 22H320M0 64H320" />
+                <path class="chart-line" d="M8 20C35 20 46 33 68 34S109 45 129 46S170 49 190 50S230 53 251 55S294 63 312 65" />
+                <g class="chart-point"><circle cx="8" cy="20" r="4" /><circle cx="68" cy="34" r="3" /><circle cx="129" cy="46" r="3" /><circle cx="190" cy="50" r="3" /><circle cx="251" cy="55" r="3" /><circle cx="312" cy="65" r="3" /></g>
+              </svg>
+              <div class="coverage-chart-axis"><span>Near term</span><span>Longer dated</span></div>
+            </div>
+          </article>
+          <article class="coverage-card coverage-depth">
+            <div class="coverage-card-heading"><h3>Market depth</h3><span class="coverage-symbols" aria-hidden="true">BID / ASK</span></div>
+            <p class="coverage-stat coverage-stat-depth">L1 <span>/</span> L2 <span>/</span> FULL</p>
+            <p class="coverage-description">From the best bid and ask<br />to the full order book.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>Resting liquidity</span><span>Order book</span></div>
+              <svg class="coverage-chart" viewBox="0 0 320 86" fill="none">
+                <path class="chart-gridline" d="M0 22H320M0 64H320" />
+                <path class="chart-area" d="M0 15H25V24H53V34H79V47H105V58H130V69H150V80H0Z" />
+                <path class="chart-line" d="M0 15H25V24H53V34H79V47H105V58H130V69H150V80" />
+                <path class="chart-area chart-ask" d="M170 80V69H191V56H216V46H242V33H267V23H294V12H320V80Z" />
+                <path class="chart-line chart-ask" d="M170 80V69H191V56H216V46H242V33H267V23H294V12H320" />
+                <path class="chart-reference" d="M160 8V80" />
+              </svg>
+              <div class="coverage-chart-axis"><span class="bid-label">Bids</span><span class="ask-label">Asks</span></div>
+            </div>
+          </article>
+          <article class="coverage-card coverage-context">
+            <div class="coverage-card-heading"><h3>Market context</h3><span class="coverage-symbols" aria-hidden="true">NEWS + SESSIONS</span></div>
+            <p class="coverage-stat">3 <span class="stat-word">sessions</span></p>
+            <p class="coverage-description">Asian, London, and New York.<br />Opening ranges and news, in context.</p>
+            <div class="coverage-visual" aria-hidden="true">
+              <div class="coverage-chart-label"><span>Follow the trading day</span><span>Session view</span></div>
+              <div class="session-chart">
+                <div class="session-row"><span>Asian</span><div class="session-track"><i class="session-bar session-asian"></i></div></div>
+                <div class="session-row"><span>London</span><div class="session-track"><i class="session-bar session-london"></i></div></div>
+                <div class="session-row"><span>New York</span><div class="session-track"><i class="session-bar session-newyork"></i></div></div>
+              </div>
+              <div class="coverage-chart-axis"><span>Opening ranges</span><span class="context-news"><i></i> News & events</span></div>
+            </div>
+          </article>
+        </div>
+        <p class="coverage-note">Charts are illustrative.</p>
       </section>
 
       <section class="data-section section section-divider container" id="market-data" aria-labelledby="data-title">
@@ -174,7 +271,7 @@
         <div class="faq-heading"><p class="overline">A little more clarity</p><h2 id="faq-title">Good questions.<br /><span class="muted">Clear answers.</span></h2></div>
         <div class="faq-list">
           <details><summary>Can I start with a free plan?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. You can start for free and trade from your charts with a connected account. Our most powerful features — deeper market data, advanced AI, and more — are on premium plans.</p></details>
-          <details><summary>Which markets can I trade?<span class="faq-indicator" aria-hidden="true"></span></summary><p>MarketStream brings crypto, stocks, futures, and commodities into one workspace. Connect supported exchanges and trading accounts to analyze your markets and manage trades from your charts.</p></details>
+          <details><summary>Which markets can I trade?<span class="faq-indicator" aria-hidden="true"></span></summary><p>MarketStream brings crypto, US stocks and ETFs, forex, futures, and commodities into one workspace. Connect supported exchanges and trading accounts to analyze your markets and manage trades from your charts.</p></details>
           <details><summary>What’s the difference between L1, L2, and full depth?<span class="faq-indicator" aria-hidden="true"></span></summary><p>L1 covers top-of-book information, including the best bid, ask, and latest trade. L2 shows additional price levels and resting liquidity. Full depth extends that view across the available order book for a more complete picture of market structure. Pro includes NASDAQ and CME L1 and L2; Elite adds full-depth capabilities.</p></details>
           <details><summary>Can I create indicators without writing code?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. Describe the indicator you have in mind in natural language and let AI build it. Refine it, add it to your charts, and share or sell it through MarketStream’s integrated marketplace.</p></details>
           <details><summary>Can I execute trades directly on a chart?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. Trade directly on the chart through connected trading accounts. Place orders, drag stop-losses and take-profits, set trailing stops, and make breakeven adjustments in the same workspace you use for analysis.</p></details>

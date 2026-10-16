@@ -57,7 +57,7 @@ const revealSelector = [
   '.depth-visual', '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom > *', '.pricing-card', '.pricing-note',
   '.faq-heading > *', '.faq-list details', '.closing-section > *',
-  '.platform-media', '.platform-caption', '.asset-classes span',
+  '.platform-media', '.platform-caption', '.coverage-card', '.coverage-note',
   '.footer-main', '.footer-bottom',
 ].join(', ');
 const revealElements = [...document.querySelectorAll<HTMLElement>(revealSelector)];
