@@ -95,30 +95,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 .hero-footnote { font-size: 11px; color: var(--text-secondary); margin-top: 19px; }
-/* Reusable aurora. Only transforms/opacity animate; the light stays decorative. */
-.aurora-section { --aurora-intensity: 0.8; position: relative; isolation: isolate; }
-.aurora { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: var(--aurora-intensity); mask-image: linear-gradient(transparent, #000 20%, #000 75%, transparent); }
-.aurora::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 44%, rgb(8 8 8 / 85%) 0%, rgb(8 8 8 / 50%) 25%, transparent 65%); }
-.aurora svg { width: 100%; height: 100%; display: block; overflow: visible; }
-.aurora-ribbon { transform-origin: 50% 50%; animation: aurora-drift 24s ease-in-out infinite alternate; animation-play-state: paused; }
-.aurora-ribbon-b { animation-name: aurora-sway; animation-duration: 31s; animation-delay: -14s; opacity: 0.6; }
-.aurora-ribbon-c { animation-duration: 37s; animation-delay: -21s; opacity: 0.4; }
-.aurora-haze { stroke-width: 100px; filter: blur(44px); opacity: 0.38; }
-.aurora-body { stroke-width: 27px; filter: blur(16px); opacity: 0.65; }
-.aurora-edge { stroke-width: 2px; filter: blur(2px); opacity: 0.65; }
-.aurora-running .aurora-ribbon { animation-play-state: running; }
-.aurora-subtle { --aurora-intensity: 0.42; }
-.aurora-monochrome .aurora { filter: grayscale(1); }
-@keyframes aurora-drift {
-  from { transform: translate(-28px, 12px) rotate(-4deg) scale(1.04); opacity: 0.65; }
-  to { transform: translate(38px, -16px) rotate(4deg) scale(1.12); opacity: 1; }
+/* Silver atmosphere: a diffused spotlight and softly illuminated horizon. */
+.atmosphere-section { --atmosphere-intensity: 0.9; position: relative; isolation: isolate; }
+.atmosphere { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: var(--atmosphere-intensity); mask-image: linear-gradient(transparent, #000 18%, #000 85%, transparent); }
+.atmosphere-light { position: absolute; inset: -20% -15% 0; background: conic-gradient(from -45deg at 50% 100%, transparent 0deg, rgb(218 226 238 / 19%) 30deg, rgb(244 246 250 / 30%) 45deg, rgb(218 226 238 / 12%) 60deg, transparent 90deg); filter: blur(38px); transform-origin: 50% 100%; mask-image: radial-gradient(ellipse at 50% 90%, #000, transparent 72%); animation: atmosphere-sweep 8s ease-in-out -3s infinite alternate; animation-play-state: paused; }
+.atmosphere-horizon { position: absolute; top: 91%; left: -15%; width: 130%; height: 100%; border-radius: 50%; background: var(--background); box-shadow: 0 -24px 65px rgb(230 237 250 / 25%), 0 -70px 140px rgb(195 207 228 / 9%); filter: blur(6px); animation: atmosphere-breathe 9s ease-in-out -4s infinite alternate; animation-play-state: paused; }
+.atmosphere-grain { position: absolute; inset: 0; opacity: 0.055; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.6' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); mask-image: radial-gradient(ellipse at 50% 75%, #000, transparent 75%); }
+.atmosphere-running .atmosphere-light, .atmosphere-running .atmosphere-horizon { animation-play-state: running; }
+.atmosphere-subtle { --atmosphere-intensity: 0.55; }
+@keyframes atmosphere-sweep {
+  from { transform: rotate(-18deg) scaleX(0.85); opacity: 0.65; }
+  to { transform: rotate(18deg) scaleX(1.25); opacity: 1; }
 }
-@keyframes aurora-sway {
-  from { transform: translate(30px, 22px) rotate(3deg) scale(1.08); }
-  to { transform: translate(-35px, -20px) rotate(-4deg) scale(1.02); }
+@keyframes atmosphere-breathe {
+  from { transform: translate(-3%, 2%) scaleX(0.96); opacity: 0.65; }
+  to { transform: translate(3%, -2%) scaleX(1.04); opacity: 1; }
 }
-.aurora-toggle { position: absolute; right: max(24px, calc((100% - var(--container)) / 2)); bottom: 22px; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 10px; }
-.aurora-toggle:hover { color: var(--text); background: var(--light-soft); }
+.atmosphere-toggle { position: absolute; right: max(24px, calc((100% - var(--container)) / 2)); bottom: 22px; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 10px; }
+.atmosphere-toggle:hover { color: var(--text); background: var(--light-soft); }
 
 /* Genuine, source-attributed spot prices. */
 .market-strip { padding-top: 22px; }
@@ -312,7 +306,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 details[open] .faq-indicator::after { transform: rotate(0); }
 .closing-section { text-align: center; padding-block: 130px 145px; }
 .closing-content { position: relative; }
-.closing-section h2 .muted { color: #bcc5d4; }
+.closing-section h2 .muted { color: #bfc1c6; }
 .closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
 .closing-content > p:not(.overline) { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
 .closing-section .button { margin-top: 28px; }
@@ -430,9 +424,8 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
   .hero-footnote { font-size: 10px; margin-top: 17px; }
-  .aurora svg { width: 180%; max-width: none; margin-left: -40%; }
-  .aurora-section { --aurora-intensity: 0.65; }
-  .aurora-subtle { --aurora-intensity: 0.38; }
+  .atmosphere-light { inset-inline: -45%; filter: blur(28px); }
+  .atmosphere-horizon { left: -40%; width: 180%; }
   .market-strip { padding-top: 17px; }
   .market-strip-heading { padding-bottom: 15px; gap: 12px; }
   .market-strip-heading .overline { font-size: 8px; letter-spacing: 0.035em; }

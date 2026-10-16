@@ -39,18 +39,17 @@ The collection supports touch swiping, trackpad scrolling, previous/next buttons
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
-Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative auroras use inline SVG and CSS, with no image downloads or animation dependencies. Motion stops off-screen, in hidden tabs, or when reduced motion is preferred. The closing section includes a pause/resume control for all auroras.
+Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative lighting uses CSS gradients, a soft horizon, and a small static SVG grain texture. Motion stops off-screen, in hidden tabs, or when reduced motion is preferred. The closing section includes a pause/resume control for all atmospheric backgrounds.
 
-## Reusable aurora backgrounds
+## Reusable atmospheric backgrounds
 
-Add `class="aurora-section" data-aurora` to a section. `src/aurora.ts` supplies the decorative layer automatically; keep content in a child container and keep background artwork out of entrance-animation selectors. For a full-width treatment, put `.container` on that child instead of the section.
+Add `class="atmosphere-section" data-atmosphere` to a section. `src/atmosphere.ts` supplies a decorative silver spotlight, softly illuminated horizon, and subtle grain automatically. Keep content in a child container and background artwork out of entrance-animation selectors. For a full-width treatment, put `.container` on that child instead of the section.
 
-- Default: teal, blue, and violet ribbons, used in the closing section.
-- Add `aurora-subtle` for a quieter treatment, used in the hero.
-- Add `aurora-monochrome` for silver light.
-- Override `--aurora-intensity` on the section to tune opacity (0–1).
+- Default: a monochrome illuminated horizon, used in the closing section.
+- Add `atmosphere-subtle` for a quieter treatment, used in the hero.
+- Override `--atmosphere-intensity` on the section to tune opacity (0–1).
 
-Keep the treatment selective so data, pricing, and product content remain visually calm. Without JavaScript the original dark background and all content remain available. Reduced motion retains the static aurora.
+The spotlight sweeps in eight-second alternating passes, while the horizon gently shifts over nine seconds. Only transforms and opacity animate. Reduced motion retains a static composition. Without JavaScript the original dark background and all content remain available.
 
 ## Live prices
 

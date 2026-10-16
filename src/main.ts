@@ -2,10 +2,10 @@ import { productImages } from './content.ts';
 import { connectMarketFeed, PRODUCTS } from './market-feed.ts';
 import type { FeedSnapshot } from './market-feed.ts';
 import { setupIndicators } from './indicators.ts';
-import { setupAuroras } from './aurora.ts';
+import { setupAtmospheres } from './atmosphere.ts';
 
 setupIndicators();
-setupAuroras();
+setupAtmospheres();
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
