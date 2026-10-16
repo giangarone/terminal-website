@@ -62,7 +62,7 @@ const revealSelector = [
 ].join(', ');
 const revealElements = [...document.querySelectorAll<HTMLElement>(revealSelector)];
 if (revealElements.length) {
-  const scaleSelector = '.workflow-card, .pricing-card, .media-slot, .prompt-example, .market-quote';
+  const scaleSelector = '.workflow-card, .pricing-card, .media-slot, .market-quote';
   const siblingCounts = new Map<Element | null, number>();
   for (const element of revealElements) {
     element.dataset.reveal = element.matches(scaleSelector) ? 'scale' : 'up';
