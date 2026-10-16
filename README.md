@@ -27,6 +27,16 @@ Example source: `/images/platform.webp`. Empty sources render empty charcoal fra
 
 ## Edit content and pricing
 
+### Premium indicators
+
+The indicator showcase follows market depth. Edit or add entries in `premiumIndicators` in `src/content.ts`; card rendering and carousel navigation adapt automatically. Names stay unchanged.
+
+Each entry has an empty image source ready for a screenshot (approximately 1.8:1). Include the deployment base in image paths, e.g. `/terminal-website/images/indicator.webp` for the current GitHub Pages setup. Empty or failed images leave a clean charcoal frame.
+
+Favorite counts are invented design placeholders between 200 and 2,000, requested for the mockup. Replace them with verified counts before launch; `null` displays an em dash. The “View indicator” buttons are intentionally inactive and marked `aria-disabled`.
+
+The collection supports touch swiping, trackpad scrolling, previous/next buttons, and Left/Right/Home/End keys when focused. Reduced-motion preferences disable animated scrolling.
+
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.

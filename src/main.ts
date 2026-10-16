@@ -1,6 +1,9 @@
 import { productImages } from './content.ts';
 import { connectMarketFeed, PRODUCTS } from './market-feed.ts';
 import type { FeedSnapshot } from './market-feed.ts';
+import { setupIndicators } from './indicators.ts';
+
+setupIndicators();
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
@@ -70,7 +73,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
   '.faq-heading', '.faq-list details', '.closing-section > *',
-  '.footer-main',
+  '.footer-main', '.indicator-track',
 ].join(', '))];
 let entranceObserver: IntersectionObserver | undefined;
 

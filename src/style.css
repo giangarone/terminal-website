@@ -169,6 +169,50 @@ ul { margin: 0; padding: 0; list-style: none; }
 .text-link span[aria-hidden] { font-size: 17px; text-decoration: none; }
 .data-section > .text-link { margin-top: 38px; }
 
+/* Premium collection: native swipe, reserved image frames, and expandable content. */
+.indicators-heading h2 { margin-top: 21px; }
+.indicators-heading > p { max-width: 360px; }
+.indicator-track { margin-top: 48px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 14px; }
+.indicator-track::-webkit-scrollbar { display: none; }
+.indicator-track:focus-visible { outline-offset: 4px; }
+.indicator-list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 68px) / 3.2); gap: 20px; }
+.indicator-item { min-width: 0; scroll-snap-align: start; }
+.indicator-card { display: flex; flex-direction: column; height: 100%; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); transition: border-color 180ms ease; }
+.indicator-image { position: relative; aspect-ratio: 1.8; background: linear-gradient(145deg, var(--surface-raised), var(--surface) 90%); border-bottom: 0.5px solid var(--border); }
+.indicator-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.indicator-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
+.indicator-card h3 { font-size: 18px; line-height: 1.4; }
+.indicator-description { color: var(--text-secondary); font-size: 12px; line-height: 1.85; margin-top: 12px; margin-bottom: 25px; }
+.indicator-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 0.5px solid var(--border); padding-top: 15px; margin-top: auto; }
+.indicator-favorites { display: inline-flex; align-items: center; gap: 7px; color: var(--text-muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+.indicator-favorites svg { width: 14px; height: 14px; }
+.indicator-detail { display: inline-flex; align-items: center; justify-content: center; gap: 13px; background: transparent; border: 0.5px solid var(--border-strong); border-radius: 100px; padding: 8px 16px; font-size: 10px; white-space: nowrap; }
+.indicator-detail:focus-visible { outline-offset: 2px; }
+.indicator-navigation { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 14px; }
+.indicator-navigation > p { color: var(--text-secondary); font-size: 10px; }
+.indicator-navigation > p > span { color: var(--text-muted); margin-left: 5px; }
+.indicator-controls { display: flex; align-items: center; gap: 8px; }
+.indicator-arrow { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border: 0.5px solid var(--border-strong); border-radius: 50%; background: transparent; font-size: 19px; transition: background-color 180ms ease; }
+.indicator-arrow:disabled { opacity: 0.3; cursor: default; }
+.indicator-arrow:not(:disabled):hover { background: var(--surface-hover); }
+@media (hover: hover) {
+  .indicator-card:hover { border-color: var(--border-strong); }
+}
+@media (max-width: 1100px) {
+  .indicator-list { grid-auto-columns: calc((100% - 46px) / 2.3); }
+}
+@media (max-width: 640px) {
+  .indicators-heading > p { max-width: 360px; }
+  .indicator-track { margin-top: 32px; }
+  .indicator-list { grid-auto-columns: 87%; gap: 14px; }
+  .indicator-body { padding: 22px; }
+  .indicator-card h3 { font-size: 18px; }
+  .indicator-navigation { gap: 12px; align-items: flex-start; }
+  .indicator-navigation > p { max-width: 130px; font-size: 9px; padding-top: 3px; }
+  .indicator-navigation > p > span { display: block; margin-left: 0; margin-top: 4px; }
+  .indicator-controls { gap: 6px; }
+}
+
 /* Market coverage: restrained accents and illustrative, non-live charts. */
 .coverage-section { padding-top: 56px; }
 .coverage-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 53px; }

@@ -25,6 +25,7 @@
         <nav class="desktop-nav" aria-label="Main navigation">
           <a href="#platform">Platform</a>
           <a href="#market-data">Market data</a>
+          <a href="#indicators">Indicators</a>
           <a href="#intelligence">Intelligence</a>
           <a href="#pricing">Pricing</a>
         </nav>
@@ -38,6 +39,7 @@
       <nav class="mobile-nav container" id="mobile-navigation" aria-label="Mobile navigation" hidden>
         <a href="#platform">Platform</a>
         <a href="#market-data">Market data</a>
+        <a href="#indicators">Indicators</a>
         <a href="#intelligence">Intelligence</a>
         <a href="#pricing">Pricing</a>
       </nav>
@@ -206,6 +208,24 @@
           </div>
         </div>
         <a class="text-link" href="#pricing">Find your level of access <span aria-hidden="true">↗</span></a>
+      </section>
+
+      <section class="indicators-section section container" id="indicators" aria-labelledby="indicators-title">
+        <div class="split-heading indicators-heading">
+          <div><p class="overline">Premium indicators</p><h2 id="indicators-title">Read the signals.<br /><span class="muted">Find your edge.</span></h2></div>
+          <p>Go deeper with indicators used by professional traders. Powered by live L1 and L2 data to bring order flow, hidden liquidity, and market intent into focus.</p>
+        </div>
+        <div class="indicator-track" id="indicator-track" role="region" aria-label="Premium indicator collection" aria-describedby="indicator-browse-hint" tabindex="0">
+          <ul class="indicator-list" id="indicator-list"></ul>
+        </div>
+        <noscript><p class="no-script-note">Enable JavaScript to browse the premium indicator collection.</p></noscript>
+        <div class="indicator-navigation">
+          <p id="indicator-browse-hint">A closer look. <span>Scroll or swipe to explore the collection.</span></p>
+          <div class="indicator-controls">
+            <button class="indicator-arrow" id="indicator-previous" type="button" aria-label="Previous indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">←</span></button>
+            <button class="indicator-arrow" id="indicator-next" type="button" aria-label="Next indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
       </section>
 
       <section class="ai-section section container" id="intelligence" aria-labelledby="ai-title">
