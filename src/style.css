@@ -95,24 +95,23 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 .hero-footnote { font-size: 11px; color: var(--text-secondary); margin-top: 19px; }
-/* Silver atmosphere: a diffused spotlight and softly illuminated horizon. */
+/* Silver atmosphere: overlapping rising light above a steady horizon. */
 .atmosphere-section { --atmosphere-intensity: 0.9; position: relative; isolation: isolate; }
 .atmosphere { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: var(--atmosphere-intensity); mask-image: linear-gradient(transparent, #000 18%, #000 85%, transparent); }
-.atmosphere-light { position: absolute; inset: -20% -15% 0; background: conic-gradient(from -45deg at 50% 100%, transparent 0deg, rgb(218 226 238 / 19%) 30deg, rgb(244 246 250 / 30%) 45deg, rgb(218 226 238 / 12%) 60deg, transparent 90deg); filter: blur(38px); transform-origin: 50% 100%; mask-image: radial-gradient(ellipse at 50% 90%, #000, transparent 72%); animation: atmosphere-sweep 8s ease-in-out -3s infinite alternate; animation-play-state: paused; }
-.atmosphere-horizon { position: absolute; top: 91%; left: -15%; width: 130%; height: 100%; border-radius: 50%; background: var(--background); box-shadow: 0 -24px 65px rgb(230 237 250 / 25%), 0 -70px 140px rgb(195 207 228 / 9%); filter: blur(6px); animation: atmosphere-breathe 9s ease-in-out -4s infinite alternate; animation-play-state: paused; }
+.atmosphere-light { position: absolute; inset: -20% -15% 0; background: conic-gradient(from -45deg at 50% 100%, transparent 0deg, rgb(218 226 238 / 19%) 30deg, rgb(244 246 250 / 38%) 45deg, rgb(218 226 238 / 12%) 60deg, transparent 90deg); filter: blur(38px); transform-origin: 50% 100%; mask-image: radial-gradient(ellipse at 50% 90%, #000, transparent 72%); opacity: 0.55; }
+.atmosphere-plume, .atmosphere-plume-secondary { position: absolute; left: 15%; top: 48%; width: 70%; height: 70%; background: radial-gradient(ellipse, rgb(231 237 248 / 32%), rgb(202 216 236 / 10%) 36%, transparent 68%); filter: blur(28px); transform-origin: 50% 100%; opacity: 0.35; transform: translateY(-15%); animation: atmosphere-rise 7s linear -2s infinite; animation-play-state: paused; }
+.atmosphere-plume-secondary { left: 26%; width: 48%; height: 80%; animation-duration: 9s; animation-delay: -6s; }
+.atmosphere-horizon { position: absolute; top: 91%; left: -15%; width: 130%; height: 100%; border-radius: 50%; background: var(--background); box-shadow: 0 -24px 65px rgb(230 237 250 / 25%), 0 -70px 140px rgb(195 207 228 / 9%); filter: blur(6px); }
 .atmosphere-grain { position: absolute; inset: 0; opacity: 0.055; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.6' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); mask-image: radial-gradient(ellipse at 50% 75%, #000, transparent 75%); }
-.atmosphere-running .atmosphere-light, .atmosphere-running .atmosphere-horizon { animation-play-state: running; }
+.atmosphere-running .atmosphere-plume, .atmosphere-running .atmosphere-plume-secondary { animation-play-state: running; }
 .atmosphere-subtle { --atmosphere-intensity: 0.55; }
-@keyframes atmosphere-sweep {
-  from { transform: rotate(-18deg) scaleX(0.85); opacity: 0.65; }
-  to { transform: rotate(18deg) scaleX(1.25); opacity: 1; }
+/* Fade each plume out before it resets; there is no reverse travel. */
+@keyframes atmosphere-rise {
+  0% { transform: translateY(32%) scale(0.75, 0.8); opacity: 0; }
+  25% { opacity: 0.85; }
+  60% { opacity: 0.65; }
+  100% { transform: translateY(-85%) scale(1.3, 1.15); opacity: 0; }
 }
-@keyframes atmosphere-breathe {
-  from { transform: translate(-3%, 2%) scaleX(0.96); opacity: 0.65; }
-  to { transform: translate(3%, -2%) scaleX(1.04); opacity: 1; }
-}
-.atmosphere-toggle { position: absolute; right: max(24px, calc((100% - var(--container)) / 2)); bottom: 22px; min-height: 44px; padding: 10px 12px; border: 0; border-radius: 8px; background: transparent; color: var(--text-muted); font-size: 10px; }
-.atmosphere-toggle:hover { color: var(--text); background: var(--light-soft); }
 
 /* Genuine, source-attributed spot prices. */
 .market-strip { padding-top: 22px; }

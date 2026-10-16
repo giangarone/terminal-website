@@ -39,17 +39,17 @@ The collection supports touch swiping, trackpad scrolling, previous/next buttons
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
-Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative lighting uses CSS gradients, a soft horizon, and a small static SVG grain texture. Motion stops off-screen, in hidden tabs, or when reduced motion is preferred. The closing section includes a pause/resume control for all atmospheric backgrounds.
+Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative lighting uses CSS gradients, a soft horizon, and a small static SVG grain texture. Motion stops off-screen, in hidden tabs, or when reduced motion is preferred.
 
 ## Reusable atmospheric backgrounds
 
-Add `class="atmosphere-section" data-atmosphere` to a section. `src/atmosphere.ts` supplies a decorative silver spotlight, softly illuminated horizon, and subtle grain automatically. Keep content in a child container and background artwork out of entrance-animation selectors. For a full-width treatment, put `.container` on that child instead of the section.
+Add `class="atmosphere-section" data-atmosphere` to a section. `src/atmosphere.ts` supplies overlapping silver light plumes, a softly illuminated horizon, and subtle grain automatically. Keep content in a child container and background artwork out of entrance-animation selectors. For a full-width treatment, put `.container` on that child instead of the section.
 
 - Default: a monochrome illuminated horizon, used in the closing section.
 - Add `atmosphere-subtle` for a quieter treatment, used in the hero.
 - Override `--atmosphere-intensity` on the section to tune opacity (0–1).
 
-The spotlight sweeps in eight-second alternating passes, while the horizon gently shifts over nine seconds. Only transforms and opacity animate. Reduced motion retains a static composition. Without JavaScript the original dark background and all content remain available.
+Two overlapping light plumes rise continuously in seven- and nine-second cycles above a stationary horizon. Each expands and fades out before resetting, with staggered timing to avoid a synchronized pulse or reversing sweep. Only transforms and opacity animate. Reduced motion retains a static composition. Without JavaScript the original dark background and all content remain available.
 
 ## Live prices
 
