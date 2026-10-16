@@ -42,6 +42,23 @@ for (const [slot, image] of Object.entries(productImages)) {
   frame.append(img);
 }
 
+// Pause decorative lighting when the hero or browser tab is out of view.
+const hero = document.querySelector<HTMLElement>('.hero')!;
+const heroLight = hero.querySelector<HTMLElement>('.hero-light')!;
+let heroInView = true;
+function updateHeroMotion() {
+  heroLight.classList.toggle('is-paused', document.hidden || !heroInView);
+}
+if ('IntersectionObserver' in window) {
+  const heroObserver = new IntersectionObserver(entries => {
+    heroInView = entries[0].isIntersecting;
+    updateHeroMotion();
+  });
+  heroObserver.observe(hero);
+}
+document.addEventListener('visibilitychange', updateHeroMotion);
+updateHeroMotion();
+
 // Reveal complete content groups, with a short stagger only for adjacent
 // items entering together. Default HTML stays readable without JavaScript.
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
