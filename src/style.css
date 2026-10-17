@@ -68,7 +68,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Navigation */
 .site-header { position: sticky; top: 0; z-index: 20; background: var(--header-background); backdrop-filter: blur(18px); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 90px; gap: 32px; border-bottom: 0.5px solid var(--border); }
-.wordmark { font-size: 22px; font-weight: 560; letter-spacing: -0.065em; line-height: 1.3; white-space: nowrap; }
+.wordmark { display: inline-flex; align-items: center; gap: 0.4em; font-size: 22px; font-weight: 560; letter-spacing: -0.065em; line-height: 1.3; white-space: nowrap; }
+/* Placeholder isotype mark until the real logo lands. */
+.wordmark::before { content: ''; width: 0.72em; height: 0.72em; flex-shrink: 0; border-radius: 50%; background: var(--text-secondary); }
 .desktop-nav { display: flex; align-items: center; gap: 30px; margin-left: 45px; }
 .desktop-nav a, .site-footer nav a { color: var(--text-secondary); font-size: 13px; }
 .desktop-nav a:hover, .site-footer nav a:not([aria-disabled='true']):hover { color: var(--text); }
