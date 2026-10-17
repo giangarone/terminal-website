@@ -30,9 +30,6 @@
   --light-soft: rgb(255 255 255 / 3%);
   --light-medium: rgb(255 255 255 / 7%);
   --light-strong: rgb(255 255 255 / 20%);
-  --hero-glow: rgb(255 255 255 / 18%);
-  --hero-glow-core: rgb(255 255 255 / 24%);
-  --hero-rim: rgb(255 255 255 / 22%);
   --light: #ffffff;
   --header-background: rgb(8 8 8 / 50%);
   --container: 1248px;
@@ -90,7 +87,7 @@ main { overflow-x: clip; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
 
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
-.hero { position: relative; isolation: isolate; overflow: hidden; padding-block: 92px 84px; text-align: center; }
+.hero { position: relative; isolation: isolate; padding-block: 92px 84px; text-align: center; }
 .hero-content { position: relative; z-index: 2; }
 .hero-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: var(--text-secondary); padding: 6px 12px; border: 0.5px solid var(--border); border-radius: 100px; font-size: 11px; background: var(--header-background); }
 .hero-eyebrow:hover { border-color: var(--border-strong); }
@@ -101,22 +98,6 @@ main { overflow-x: clip; }
 .hero-description { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 .hero-footnote { font-size: 11px; color: var(--text-secondary); margin-top: 19px; }
-.hero-light { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; mask-image: linear-gradient(transparent, var(--light) 20%, var(--light) 88%, transparent); }
-.light-bloom { position: absolute; width: 1040px; height: 600px; left: calc(50% - 520px); bottom: -556px; border-radius: 50%; box-shadow: 0 -56px 170px 44px var(--hero-glow), 0 -18px 70px 12px var(--hero-glow-core); }
-.light-orbit { position: absolute; width: 1600px; height: 750px; bottom: -704px; left: calc(50% - 800px); border-radius: 50%; border: 0.5px solid var(--hero-rim); box-shadow: 0 -12px 40px -18px var(--hero-glow-core); }
-.light-orbit-two { width: 1450px; left: calc(50% - 725px); bottom: -726px; opacity: 0.65; }
-.light-bloom { animation: bloom 13s ease-in-out -6s infinite alternate; }
-.light-orbit { animation: orbit 18s ease-in-out infinite alternate; }
-.light-orbit-two { animation-delay: -9s; }
-@keyframes bloom {
-  from { transform: translate(-100px, 0) scale(0.85); opacity: 0.7; }
-  to { transform: translate(100px, -28px) scale(1.06); opacity: 1; }
-}
-@keyframes orbit {
-  from { transform: translate(-70px, 3px) rotate(-3deg); }
-  to { transform: translate(70px, -35px) rotate(3deg); }
-}
-.hero-light.is-paused > * { animation-play-state: paused; }
 
 /* Genuine, source-attributed spot prices. */
 .market-strip { padding-top: 22px; }
@@ -432,7 +413,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
   .hero-footnote { font-size: 10px; margin-top: 17px; }
-  .light-bloom { box-shadow: 0 -50px 140px 18px var(--hero-glow), 0 -15px 60px 8px var(--hero-glow-core); }
+
   .market-strip { padding-top: 17px; }
   .market-strip-heading { padding-bottom: 15px; gap: 12px; }
   .market-strip-heading .overline { font-size: 8px; letter-spacing: 0.035em; }
