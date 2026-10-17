@@ -2,8 +2,12 @@ import { productImages } from './content.ts';
 import { connectMarketFeed, PRODUCTS } from './market-feed.ts';
 import type { FeedSnapshot } from './market-feed.ts';
 import { setupIndicators } from './indicators.ts';
+import { initAurora } from './aurora.ts';
 
 setupIndicators();
+
+const auroraCanvas = document.querySelector<HTMLCanvasElement>('.aurora-canvas');
+const stopAurora = auroraCanvas ? initAurora(auroraCanvas) : () => {};
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
@@ -72,7 +76,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
-  '.faq-heading', '.faq-list details', '.closing-section > *',
+  '.faq-heading', '.faq-list details', '.closing-section > *:not(canvas)',
   '.footer-main', '.indicator-track',
 ].join(', '))];
 let entranceObserver: IntersectionObserver | undefined;
@@ -170,7 +174,7 @@ function renderFeed(snapshot: FeedSnapshot) {
 }
 
 let disconnect = connectMarketFeed(renderFeed);
-window.addEventListener('pagehide', () => disconnect());
+window.addEventListener('pagehide', () => { disconnect(); stopAurora(); });
 window.addEventListener('pageshow', event => {
   if (event.persisted) disconnect = connectMarketFeed(renderFeed);
 });

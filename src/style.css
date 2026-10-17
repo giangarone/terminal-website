@@ -309,7 +309,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .faq-indicator::before, .faq-indicator::after { content: ''; position: absolute; background: var(--text-muted); left: 0; top: 5px; width: 12px; height: 1px; }
 .faq-indicator::after { transform: rotate(90deg); }
 details[open] .faq-indicator::after { transform: rotate(0); }
-.closing-section { text-align: center; padding-block: 100px 113px; }
+.closing-section { position: relative; overflow: hidden; text-align: center; padding-block: 100px 113px; }
+/* Aurora sits past the section edges so its shader fade lands outside the visible area. */
+.aurora-canvas { position: absolute; top: -12rem; left: 0; width: 100%; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
+.closing-section > *:not(.aurora-canvas) { position: relative; z-index: 1; }
 .closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
 .closing-section > p:not(.overline) { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
 .closing-section .button { margin-top: 28px; }
