@@ -56,6 +56,8 @@ void main() {
   float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
   col *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
   col *= uIntensity;
+  // Monochrome: drop hue, keep luminance.
+  col = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
   float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
   col += (n - 0.5) / 255.0;
   gl_FragColor = vec4(col, 1.0);
