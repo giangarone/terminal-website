@@ -60,7 +60,9 @@ void main() {
   col = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
   float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
   col += (n - 0.5) / 255.0;
-  gl_FragColor = vec4(col, 1.0);
+  // Alpha = luminance so dark areas stay transparent and the page background
+  // (#080808) shows through instead of solid black.
+  gl_FragColor = vec4(col, col.r);
 }`;
 
 function hexToRgb(hex: string): Float32Array {
@@ -136,7 +138,7 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
 
 export function initAurora(canvas: HTMLCanvasElement): () => void {
   const gl = canvas.getContext('webgl', {
-    alpha: false,
+    alpha: true,
     depth: false,
     stencil: false,
     antialias: false,
