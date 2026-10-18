@@ -56,7 +56,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .container { width: min(var(--container), calc(100% - 96px)); margin-inline: auto; }
 main { overflow-x: clip; }
 .section { padding-block: 116px; }
-.overline { color: var(--text-secondary); font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; font-weight: 500; }
 .muted { color: var(--text-muted); }
 .section h2 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 450; letter-spacing: -0.055em; }
 .section h3 { font-weight: 500; letter-spacing: -0.025em; }
@@ -64,8 +63,8 @@ main { overflow-x: clip; }
 .skip-link:focus { transform: translateY(0); }
 
 /* Navigation */
-.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-background); backdrop-filter: blur(12px); }
-.header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 32px; border-bottom: 0.5px solid var(--border); }
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-background); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 32px; }
 .wordmark { display: inline-flex; align-items: center; gap: 0.4em; font-size: 22px; font-weight: 560; letter-spacing: -0.065em; line-height: 1.3; white-space: nowrap; }
 /* Placeholder isotype mark until the real logo lands. */
 .wordmark::before { content: ''; width: 0.72em; height: 0.72em; flex-shrink: 0; background: var(--text-secondary); }
@@ -102,7 +101,6 @@ main { overflow-x: clip; }
 /* Genuine, source-attributed spot prices. */
 .market-strip { padding-top: 22px; }
 .market-strip-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 18px; }
-.market-strip-heading .overline { font-size: 10px; letter-spacing: 0.1em; }
 .feed-status { display: flex; align-items: center; gap: 7px; font-size: 10px; color: var(--text-secondary); }
 .status-dot { height: 5px; width: 5px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
 .feed-status[data-status='live'] .status-dot { background: var(--positive); box-shadow: 0 0 8px var(--positive-glow); }
@@ -296,7 +294,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
 .closing-section > *:not(.aurora-canvas) { position: relative; z-index: 1; }
 .closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
-.closing-section > p:not(.overline) { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
+.closing-section > p { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
 .closing-section .button { margin-top: 28px; }
 .site-footer { padding-block: 37px 24px; }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
@@ -398,7 +396,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .container { width: calc(100% - 40px); }
   .section { padding-block: 68px; }
   .section h2 { font-size: 37px; letter-spacing: -0.05em; }
-  .overline { font-size: 9px; }
   .header-inner { height: 72px; gap: 12px; }
   .wordmark { font-size: 21px; }
   .header-actions { gap: 8px; }
@@ -416,7 +413,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 
   .market-strip { padding-top: 17px; }
   .market-strip-heading { padding-bottom: 15px; gap: 12px; }
-  .market-strip-heading .overline { font-size: 8px; letter-spacing: 0.035em; }
   .feed-status { font-size: 9px; gap: 5px; }
   .feed-source { margin-left: 0; padding-left: 6px; }
   .market-quotes { grid-template-columns: 1fr; padding-block: 0; }
@@ -474,7 +470,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
   .closing-section { padding-block: 70px; }
   .closing-section h2 { font-size: 43px; }
-  .closing-section > p:not(.overline) { font-size: 12px; }
+  .closing-section > p { font-size: 12px; }
   .site-footer { padding-top: 28px; }
   .footer-main { flex-wrap: wrap; gap: 25px; }
   .site-footer nav { order: 3; width: 100%; gap: 25px; }
