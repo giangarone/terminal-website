@@ -52,13 +52,13 @@ for (const [slot, image] of Object.entries(productImages)) {
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
-  '.hero .centered-heading > *',
+  '.hero .centered-heading > *', '.closing-section .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
   '.workflow-card', '.workflow-bottom', '.pricing-card', '.pricing-note',
-  '.faq-heading', '.faq-list details', '.closing-section > *:not(canvas)',
-  '.footer-main', '.indicator-track',
+  '.faq-heading', '.faq-list details',
+  '.indicator-track',
 ].join(', '))];
 let entranceObserver: IntersectionObserver | undefined;
 

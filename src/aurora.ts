@@ -1,8 +1,7 @@
-// Aurora background for the closing section.
-// WebGL domain-warped gradient, cloned from luxalgo.com.
+// Aurora background shared by the hero and closing sections.
 const CONFIG = {
-  colorA: '#0d8ed6',
-  colorB: '#19282f',
+  colorA: '#F59E0B',
+  colorB: '#F87171',
   brightness: 1,
   speed: 0.55,
   spread: 0.27,
@@ -46,7 +45,10 @@ vec3 warp3d(vec3 pos, float t) {
 
 void main() {
   vec2 uv = 2.0 * vUv - 1.0;
-  vec3 w = pow(warp3d(vec3(uv.x, sin(uv.y), uv.y), uTime), vec3(1.5));
+  // GPU rounding can push cosine-derived values below zero; fractional pow
+  // is undefined there and produces black specks. Keep its input in range.
+  vec3 wave = clamp(warp3d(vec3(uv.x, sin(uv.y), uv.y), uTime), 0.0, 1.0);
+  vec3 w = pow(wave, vec3(1.5));
   vec3 col = 1.5 * uColorA * w.x;
   col *= w.y;
   col += uColorB * w.z;
@@ -56,13 +58,13 @@ void main() {
   float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
   col *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
   col *= uIntensity;
-  // Monochrome: drop hue, keep luminance.
+  // Keep the wave brightness while rendering every channel in monochrome.
   col = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
   float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
   col += (n - 0.5) / 255.0;
-  // Alpha = luminance so dark areas stay transparent and the page background
-  // (#080808) shows through instead of solid black.
-  gl_FragColor = vec4(col, col.r);
+  // Base opacity on luminance so every hue fades into the page background.
+  float opacity = clamp(dot(col, vec3(0.299, 0.587, 0.114)), 0.0, 1.0);
+  gl_FragColor = vec4(col, opacity);
 }`;
 
 function hexToRgb(hex: string): Float32Array {
@@ -144,10 +146,10 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     antialias: false,
     powerPreference: 'low-power',
   });
-  if (!gl) return () => {};
+  if (!gl) return () => { };
 
   const initial = setup(gl);
-  if (!initial) return () => {};
+  if (!initial) return () => { };
   let state: AuroraState = initial;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');

@@ -86,7 +86,9 @@ main { overflow: clip; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
 
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
-.hero { position: relative; isolation: isolate; text-align: center; }
+.hero, .closing-section { position: relative; isolation: isolate; text-align: center; }
+.hero { padding-block: 107px 58px; }
+.closing-section.section { padding-block: clamp(140px, 18vw, 280px); }
 .hero-content { position: relative; z-index: 2; }
 .hero-description { margin-top: 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
@@ -97,7 +99,6 @@ main { overflow: clip; }
 .centered-heading { text-align: center; margin-inline: auto; max-width: 750px; }
 .section-heading h2 { margin-top: 21px; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
-.platform-section { padding-top: 107px; padding-bottom: 58px; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .media-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
 .platform-media { aspect-ratio: 2.25; margin-top: 52px; box-shadow: 0 -1px 0 var(--light-medium), 0 28px 65px var(--shadow); background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
@@ -258,13 +259,8 @@ main { overflow: clip; }
 .faq-indicator::before, .faq-indicator::after { content: ''; position: absolute; background: var(--text-muted); left: 0; top: 5px; width: 12px; height: 1px; }
 .faq-indicator::after { transform: rotate(90deg); }
 details[open] .faq-indicator::after { transform: rotate(0); }
-.closing-section { position: relative; text-align: center; padding-block: 100px 113px; }
 /* Full-bleed aurora: spans the viewport and bleeds past the section's edges. */
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
-.closing-section > *:not(.aurora-canvas) { position: relative; z-index: 1; }
-.closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
-.closing-section > p { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
-.closing-section .button { margin-top: 28px; }
 .site-footer { padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); border-top: 0.5px solid var(--border); }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .site-footer .wordmark { font-size: 20px; }
@@ -294,7 +290,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .desktop-nav a, .site-footer nav a, .back-to-top { font-size: 14px; }
 }
 @media (min-width: 1600px) {
-  .hero { padding-top: 110px; padding-bottom: 95px; }
+  .hero { padding-block: 110px 95px; }
   .hero-description { font-size: 16px; }
 }
 @media (max-width: 1100px) {
@@ -322,7 +318,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .wordmark { font-size: 21px; }
   .desktop-nav { display: none; }
   .menu-toggle { display: block; }
-  .hero { padding-top: 82px; padding-bottom: 72px; }
+  .hero { padding-block: 82px 72px; }
   .split-heading { display: block; }
   .split-heading > p { margin-top: 23px; max-width: 480px; }
   .data-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -364,14 +360,13 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 10px; }
   .header-actions .button-small span { display: none; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
-  .hero { padding: 61px 0 58px; }
+  .hero { padding-block: 67px 40px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
   .desktop-break { display: none; }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
 
   .section-heading > p:last-child { font-size: 13px; max-width: 300px; margin-inline: auto; }
-  .platform-section { padding-top: 67px; padding-bottom: 40px; }
   .platform-media { margin-top: 32px; aspect-ratio: 1.55; border-radius: 12px; }
   .platform-caption { font-size: 8px; gap: 12px; }
   .caption-separator { margin-inline: 4px; }
@@ -412,9 +407,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .faq-section { grid-template-columns: 1fr; gap: 35px; }
   .faq-list summary { font-size: 13px; gap: 15px; padding-block: 22px; }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
-  .closing-section { padding-block: 70px; }
-  .closing-section h2 { font-size: 43px; }
-  .closing-section > p { font-size: 12px; }
   .site-footer { padding-top: 28px; }
   .footer-main { flex-wrap: wrap; gap: 25px; }
   .site-footer nav { order: 3; width: 100%; gap: 25px; }
