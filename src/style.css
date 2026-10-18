@@ -54,7 +54,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
 [hidden] { display: none !important; }
 .container { width: min(var(--container), calc(100% - 96px)); margin-inline: auto; }
-main { overflow-x: clip; }
+/* Keep decorative backgrounds from extending the page past the footer. */
+main { overflow: clip; }
 .section { padding-block: 116px; }
 .muted { color: var(--text-muted); }
 .section h2 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 450; letter-spacing: -0.055em; }
@@ -296,7 +297,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .closing-section h2 { font-size: clamp(48px, 5.2vw, 72px); margin-top: 23px; }
 .closing-section > p { color: var(--text-secondary); font-size: 13px; margin-top: 24px; }
 .closing-section .button { margin-top: 28px; }
-.site-footer { padding-block: 37px 24px; }
+.site-footer { padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); border-top: 0.5px solid var(--border); }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .site-footer .wordmark { font-size: 20px; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 30px; }
@@ -322,6 +323,9 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .indicator-detail:hover { border-color: var(--text-secondary); }
 }
 
+@media (min-width: 851px) {
+  .desktop-nav a, .site-footer nav a, .back-to-top { font-size: 14px; }
+}
 @media (min-width: 1600px) {
   .hero { padding-top: 110px; padding-bottom: 95px; }
   .hero-description { font-size: 16px; }
