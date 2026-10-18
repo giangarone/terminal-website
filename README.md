@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-`npm run build` checks TypeScript and produces `dist/`. `npm run preview` serves that production build. `npm test` runs the market-feed tests with Node's built-in test runner. `npm run typecheck` checks types independently.
+`npm run build` checks TypeScript and produces `dist/`. `npm run preview` serves that production build. `npm run typecheck` checks types independently.
 
 ## Replace the three product images
 
@@ -41,20 +41,10 @@ Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are U
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
 
-## Live prices
-
-`src/market-feed.ts` opens one public connection to `wss://ws-feed.exchange.coinbase.com` for BTC-USD, ETH-USD, and SOL-USD. It subscribes to `ticker_batch` (changed prices approximately every five seconds) and per-product heartbeats. No API credentials are required.
-
-Percentages use `(price - open_24h) / open_24h * 100`. Only validated provider messages populate prices. A 15-second watchdog detects silent or incomplete feeds. Disconnects retain the last real quote with a stale status; initial failures remain empty. Reconnection backs off from 1 to 30 seconds and requires refreshed quotes for all three assets before returning to Live. Source timestamps and sequences are validated; older sequences are ignored. All connections and timers are cleaned up when the page closes, including back/forward-cache restoration.
-
-The landing-page feed is Coinbase crypto spot data. NASDAQ/CME capability descriptions are separate product content. Browser or network restrictions can prevent the public feed; the rest of the site remains usable.
-
-Provider documentation: https://docs.cdp.coinbase.com/exchange/websocket-feed/channels
-
 ## Asset provenance
 
 Coin icons are local files provided for this site (`public/assets/btc.png`, `eth.png`, `sol.png`).
-Brand marks identify the quoted assets; no partnership or endorsement is implied.
+Brand marks identify the illustrated assets; no partnership or endorsement is implied.
 
 - Inter variable font: https://github.com/rsms/inter — SIL Open Font License is included at `public/fonts/OFL.txt`.
 
@@ -62,8 +52,8 @@ Brand marks identify the quoted assets; no partnership or endorsement is implied
 
 The public repository is https://github.com/giangarone/terminal-website and the live site is https://giangarone.github.io/terminal-website/.
 
-GitHub Pages uses **GitHub Actions** as its deployment source. Each push to `main` runs `.github/workflows/deploy.yml`, which installs dependencies, runs the tests, builds the site, and publishes only `dist/`. The workflow can also be run manually from the Actions tab. Do not configure Pages to serve the source folder directly: browsers need the compiled JavaScript and CSS produced by Vite.
+GitHub Pages uses **GitHub Actions** as its deployment source. Each push to `main` runs `.github/workflows/deploy.yml`, which installs dependencies, builds the site, and publishes only `dist/`. The workflow can also be run manually from the Actions tab. Do not configure Pages to serve the source folder directly: browsers need the compiled JavaScript and CSS produced by Vite.
 
 `vite.config.js` sets the base path to `/terminal-website/` so scripts, styles, fonts, and images load under the GitHub Pages project URL. To deploy at a different path or a custom domain, update `base` accordingly and rebuild.
 
-The contents of `dist/` can also be served by other static hosts at the configured base path. If the host enforces a Content Security Policy, allow `connect-src wss://ws-feed.exchange.coinbase.com`; images and fonts are local. This repository contains no sign-in flow, payment processing, or trading engine.
+The contents of `dist/` can also be served by other static hosts at the configured base path. Images and fonts are local. This repository contains no sign-in flow, payment processing, or trading engine.

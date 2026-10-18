@@ -46,49 +46,20 @@
     </header>
 
     <main id="main">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero platform-section section" id="platform" aria-labelledby="platform-title">
         <canvas class="aurora-canvas" aria-hidden="true"></canvas>
         <div class="container hero-content">
-          <a class="hero-eyebrow" href="#market-data"><span class="eyebrow-dot" aria-hidden="true"></span> Institutional data. Individual edge. <span class="eyebrow-arrow" aria-hidden="true">↗</span></a>
-          <h1 id="hero-title">The market speaks.<br /><span>Now you hear it.</span></h1>
-          <p class="hero-description">Live NASDAQ and CME futures. L1, L2, and full market depth.<br class="desktop-break" /> Powerful AI. Precision execution. All in one terminal.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">→</span></a>
+          <div class="centered-heading">
+            <h1 id="platform-title">All your markets.<br /><span class="muted">One powerful workspace.</span></h1>
+            <p class="hero-description">Live NASDAQ and CME futures. L1, L2, and full market depth.<br class="desktop-break" /> Powerful AI. Precision execution. All in one terminal.</p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#pricing">Get started for free <span aria-hidden="true">→</span></a>
+            </div>
           </div>
-          <p class="hero-footnote">Your edge starts with a clearer view.</p>
+          <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
+          <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
+          <div class="platform-caption"><span>One connected trading workflow</span><span>Analyze <span class="caption-separator">/</span> Build <span class="caption-separator">/</span> Execute</span></div>
         </div>
-      </section>
-
-      <section class="market-strip container" aria-label="Live cryptocurrency market prices">
-        <div class="market-strip-heading">
-          <div class="feed-status" data-status="connecting"><span class="status-dot" aria-hidden="true"></span><span id="feed-status" role="status">Connecting</span><span class="feed-source">via <a href="https://www.coinbase.com/advanced-trade" target="_blank" rel="noreferrer">Coinbase</a></span></div>
-        </div>
-        <div class="market-quotes">
-          <article class="market-quote" data-product="BTC-USD" aria-label="Bitcoin price">
-            <div class="asset-identity"><img src="/assets/btc.png" width="32" height="32" alt="" /><div><h2>Bitcoin <span>BTC</span></h2><p>BTC / USD</p></div></div>
-            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
-          </article>
-          <article class="market-quote" data-product="ETH-USD" aria-label="Ethereum price">
-            <div class="asset-identity"><img src="/assets/eth.png" width="32" height="32" alt="" /><div><h2>Ethereum <span>ETH</span></h2><p>ETH / USD</p></div></div>
-            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
-          </article>
-          <article class="market-quote" data-product="SOL-USD" aria-label="Solana price">
-            <div class="asset-identity"><img src="/assets/sol.png" width="32" height="32" alt="" /><div><h2>Solana <span>SOL</span></h2><p>SOL / USD</p></div></div>
-            <div class="quote-values"><p class="quote-price">—</p><p class="quote-change"><span data-change>—</span><span class="change-period">24h</span></p></div>
-          </article>
-        </div>
-        <p class="market-note"><span>Spot prices · USD</span><span id="feed-updated">Waiting for market data</span></p>
-        <noscript><p class="no-script-note">Enable JavaScript to receive live market prices.</p></noscript>
-      </section>
-
-      <section class="platform-section section container" id="platform" aria-labelledby="platform-title">
-        <div class="section-heading centered-heading">
-          <h2 id="platform-title">All your markets.<br /><span class="muted">One powerful workspace.</span></h2>
-          <p>From the first signal to the final execution.<br class="desktop-break" /> Bring your data, analysis, and trading into focus.</p>
-        </div>
-        <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
-        <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
-        <div class="platform-caption"><span>One connected trading workflow</span><span>Analyze <span class="caption-separator">/</span> Build <span class="caption-separator">/</span> Execute</span></div>
       </section>
 
       <section class="coverage-section section container" id="markets" aria-labelledby="coverage-title">
