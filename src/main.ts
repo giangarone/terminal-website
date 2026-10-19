@@ -66,8 +66,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
-  '.data-section > .text-link', '.ai-copy > *', '.ai-visual',
-  '.workflow-card', '.workflow-bottom', '.feature-copy', '.pricing-card', '.pricing-note',
+  '.workflow-card', '.feature-copy', '.pricing-card', '.pricing-note',
   '.faq-heading', '.faq-list details',
   '.indicator-track',
 ].join(', '))];
@@ -93,7 +92,7 @@ if (!motionPreference.matches && 'IntersectionObserver' in window && 'animate' i
       }
       const index = siblingCounts.get(element.parentElement) ?? 0;
       siblingCounts.set(element.parentElement, index + 1);
-      const isVisual = element.matches('.platform-media, .depth-visual, .ai-visual');
+      const isVisual = element.matches('.platform-media, .depth-visual');
       const animation = element.animate([
         { opacity: 0, transform: `translateY(${isVisual ? 28 : 20}px)` },
         { opacity: 1, transform: 'translateY(0)' },

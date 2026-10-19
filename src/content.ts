@@ -5,7 +5,6 @@
 export const productImages = {
   platform: { src: '', alt: 'MarketStream multi-asset trading workspace' },
   depth: { src: '', alt: 'MarketStream market depth and liquidity analysis' },
-  intelligence: { src: '', alt: 'MarketStream AI assistant and indicator builder' },
 } satisfies Record<string, { src: string; alt: string }>;
 
 export interface PremiumIndicator {
