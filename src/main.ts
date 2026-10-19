@@ -63,7 +63,7 @@ for (const [slot, image] of Object.entries(productImages)) {
 const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
-  '.hero .centered-heading > *', '.closing-section .centered-heading > *',
+  '.hero .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
   '.data-section > .text-link', '.ai-copy > *', '.ai-visual',

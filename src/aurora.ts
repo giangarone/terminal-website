@@ -1,4 +1,4 @@
-// Aurora background shared by the hero and closing sections.
+// Aurora background behind the hero.
 const CONFIG = {
   colorA: '#F59E0B',
   colorB: '#F87171',

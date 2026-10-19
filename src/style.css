@@ -92,9 +92,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
 
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
-.hero, .closing-section { position: relative; isolation: isolate; text-align: center; }
-.hero { padding-block: 107px 58px; }
-.closing-section.section { padding-block: clamp(140px, 18vw, 280px); }
+.hero { position: relative; isolation: isolate; text-align: center; padding-block: 107px 58px; }
 .hero-content { position: relative; z-index: 2; }
 .hero-description { margin-top: 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
@@ -387,7 +385,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 details[open] .faq-indicator::after { transform: rotate(0); }
 /* Full-bleed aurora: spans the viewport and bleeds past the section's edges. */
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
-.site-footer { position: relative; z-index: 1; padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); }
+.site-footer { position: relative; z-index: 1; border-top: .5px solid var(--border); padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .site-footer .wordmark { font-size: 20px; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 30px; }
