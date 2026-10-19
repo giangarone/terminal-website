@@ -41,6 +41,10 @@ Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are U
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
 
+### Feature showcase
+
+The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Illustration animations in `src/main.ts` play once, pause off-screen or in hidden tabs, and show their completed state without JavaScript or with reduced motion enabled.
+
 ## Asset provenance
 
 Coin icons are local files provided for this site (`public/assets/btc.png`, `eth.png`, `sol.png`).
