@@ -386,7 +386,7 @@
         </div>
       </section>
 
-      <section class="faq-section section container" aria-labelledby="faq-title">
+      <section class="faq-section section container" id="faq" aria-labelledby="faq-title">
         <div class="faq-heading"><h2 id="faq-title">Your questions.<br /><span class="muted">Answered.</span></h2></div>
         <div class="faq-list">
           <details><summary>Can I start with a free plan?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. You can start for free and trade from your charts with a connected account. Our most powerful features — deeper market data, advanced AI, and more — are on premium plans.</p></details>
@@ -398,7 +398,44 @@
       </section>
 
     </main>
-    <footer class="site-footer"><div class="container"><div class="footer-main"><a class="wordmark" href="#">MarketStream</a><nav aria-label="Footer navigation"><a href="#platform">Platform</a><a href="#market-data">Market data</a><a href="#pricing">Pricing</a><a role="link" aria-disabled="true">Privacy policy</a><a role="link" aria-disabled="true">Terms &amp; conditions</a></nav><a class="back-to-top" href="#">Back to top <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><span>© <span id="copyright-year">2026</span> MarketStream</span><span>Perspective is everything.</span></div></div></footer>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-main">
+          <div class="footer-brand">
+            <a class="wordmark" href="#platform">MarketStream</a>
+            <p>Charts, market data, and intelligence.<br />One connected workspace for the way you trade.</p>
+          </div>
+          <nav class="footer-link-group" aria-labelledby="footer-platform-title">
+            <h2 id="footer-platform-title">Platform</h2>
+            <ul>
+              <li><a href="#platform">Overview</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#indicators">Premium indicators</a></li>
+            </ul>
+          </nav>
+          <nav class="footer-link-group" aria-labelledby="footer-explore-title">
+            <h2 id="footer-explore-title">Explore</h2>
+            <ul>
+              <li><a href="#markets">Markets</a></li>
+              <li><a href="#market-data">Market data</a></li>
+              <li><a href="#pricing">Plans &amp; pricing</a></li>
+              <li><a href="#faq">FAQs</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="footer-disclaimer">
+          <h2>Trade with care.</h2>
+          <p>Trading involves risk, including the loss of your invested capital. Market data, indicators, and AI-generated insights are provided for informational purposes and do not constitute investment advice. Past performance does not guarantee future results. Make your own assessment before placing a trade.</p>
+        </div>
+        <div class="footer-bottom">
+          <span>© <span id="copyright-year">2026</span> MarketStream. All rights reserved.</span>
+          <nav class="footer-legal" aria-label="Legal">
+            <a role="link" aria-disabled="true">Privacy policy</a>
+            <a role="link" aria-disabled="true">Terms &amp; conditions</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

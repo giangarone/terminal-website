@@ -292,7 +292,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Editable pricing. */
-.pricing-section { border-block: 0.5px solid var(--border); }
 .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
 .featured-plan { background: var(--surface-raised); border-color: var(--border-strong); box-shadow: inset 0 1px 0 var(--light-strong); }
@@ -360,32 +359,37 @@ ul { margin: 0; padding: 0; list-style: none; }
 details[open] .faq-indicator::after { transform: rotate(0); }
 /* Full-bleed aurora: spans the viewport and bleeds past the section's edges. */
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
-.site-footer { position: relative; z-index: 1; border-top: .5px solid var(--border); padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); }
-.footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
-.site-footer .wordmark { font-size: 20px; }
-.site-footer nav { display: flex; flex-wrap: wrap; gap: 30px; }
+.site-footer { position: relative; z-index: 1; border-top: .5px solid var(--border); padding-block: 64px 28px; background: var(--header-background); backdrop-filter: blur(12px); }
+.footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; padding-bottom: 48px; }
+.site-footer .wordmark { font-size: 24px; }
+.footer-brand p { max-width: 340px; margin-top: 20px; color: var(--text-secondary); font-size: 13px; line-height: 1.85; }
+.footer-link-group h2 { font-size: 12px; font-weight: 500; color: var(--text-soft); margin-bottom: 20px; }
+.footer-link-group ul { display: grid; gap: 12px; }
 .site-footer nav a[aria-disabled='true'] { cursor: default; }
-.site-footer nav a, .back-to-top { font-size: 11px; color: var(--text-secondary); }
-.back-to-top span { font-size: 15px; margin-left: 15px; }
-.footer-bottom { display: flex; justify-content: space-between; gap: 20px; font-size: 9px; color: var(--text-muted); margin-top: 38px; }
+.site-footer nav a { font-size: 13px; color: var(--text-secondary); }
+.footer-disclaimer { border-top: .5px solid var(--border); padding-block: 28px; }
+.footer-disclaimer h2 { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; }
+.footer-disclaimer p { max-width: 1050px; font-size: 12px; line-height: 1.85; color: var(--text-muted); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 32px; border-top: .5px solid var(--border); padding-top: 24px; font-size: 11px; color: var(--text-muted); }
+.footer-legal { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.site-footer .footer-legal a { font-size: 11px; }
 
 /* Applied only when the entrance observer is available. */
 [data-entrance-pending] { opacity: 0; }
 
 /* Restrained feedback: controls change tone without shifting the layout. */
 .button { transition: background-color 180ms ease, border-color 180ms ease; }
-.desktop-nav a, .site-footer nav a, .back-to-top {
+.desktop-nav a, .site-footer nav a {
   transition: color 180ms ease;
 }
 .menu-toggle span, .faq-indicator::after { transition: transform 160ms ease; }
 @media (hover: hover) {
-  .back-to-top:hover { color: var(--text); }
   .button-plan:hover { border-color: var(--text-secondary); }
   .indicator-detail:hover { border-color: var(--text-secondary); }
 }
 
 @media (min-width: 851px) {
-  .desktop-nav a, .site-footer nav a, .back-to-top { font-size: 14px; }
+  .desktop-nav a { font-size: 14px; }
 }
 @media (min-width: 1600px) {
   .hero { padding-block: 110px 95px; }
@@ -482,11 +486,12 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .faq-section { grid-template-columns: 1fr; gap: 35px; }
   .faq-list summary { font-size: 13px; gap: 15px; padding-block: 22px; }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
-  .site-footer { padding-top: 28px; }
-  .footer-main { flex-wrap: wrap; gap: 25px; }
-  .site-footer nav { order: 3; width: 100%; gap: 25px; }
-  .back-to-top { font-size: 10px; }
-  .footer-bottom { font-size: 8px; margin-top: 28px; }
+  .site-footer { padding-top: 40px; }
+  .footer-main { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; padding-bottom: 36px; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-brand p { margin-top: 16px; }
+  .footer-link-group h2 { margin-bottom: 16px; }
+  .footer-bottom { align-items: flex-start; flex-direction: column; gap: 16px; }
 }
 @media (max-width: 360px) {
   .container { width: calc(100% - 32px); }
