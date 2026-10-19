@@ -4,6 +4,17 @@ import { initAurora } from './aurora.ts';
 
 setupIndicators();
 
+// A matching second group makes the marquee wrap without a visible jump.
+const reviewTrack = document.querySelector<HTMLElement>('.review-track');
+const reviewGroup = reviewTrack?.querySelector<HTMLElement>('.review-group');
+if (reviewTrack && reviewGroup) {
+  const duplicate = reviewGroup.cloneNode(true) as HTMLElement;
+  duplicate.setAttribute('aria-hidden', 'true');
+  duplicate.inert = true;
+  reviewTrack.append(duplicate);
+  reviewTrack.classList.add('is-looping');
+}
+
 const auroraCleanups = Array.from(document.querySelectorAll<HTMLCanvasElement>('.aurora-canvas')).map(canvas => initAurora(canvas));
 const stopAurora = () => auroraCleanups.forEach(cleanup => cleanup());
 
