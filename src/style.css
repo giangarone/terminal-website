@@ -53,8 +53,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 :focus-visible { outline: 2px solid var(--text); outline-offset: 6px; }
 [hidden] { display: none !important; }
 .container { width: min(var(--container), calc(100% - 96px)); margin-inline: auto; }
-/* Keep decorative backgrounds from extending the page past the footer. */
-main { overflow: clip; }
+/* Let the aurora reach behind the footer, then clip at the page's bottom. */
+.page-content { overflow: clip; }
 .section { padding-block: 116px; }
 .muted { color: var(--text-muted); }
 .section h2, .hero h1 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 450; letter-spacing: -0.055em; }
@@ -295,7 +295,7 @@ main { overflow: clip; }
 details[open] .faq-indicator::after { transform: rotate(0); }
 /* Full-bleed aurora: spans the viewport and bleeds past the section's edges. */
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
-.site-footer { padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); border-top: 0.5px solid var(--border); }
+.site-footer { position: relative; z-index: 1; padding-block: 37px 24px; background: var(--header-background); backdrop-filter: blur(12px); border-top: 0.5px solid var(--border); }
 .footer-main { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
 .site-footer .wordmark { font-size: 20px; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 30px; }
