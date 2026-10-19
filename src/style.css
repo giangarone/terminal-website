@@ -201,13 +201,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .context-news { display: inline-flex; align-items: center; gap: 5px; }
 .context-news i { width: 4px; height: 4px; border-radius: 50%; background: var(--accent-gold); }
 
-/* Trading capabilities. */
+/* Trading capabilities: custom, decorative SVG illustrations. */
 .workflow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-.workflow-card { display: flex; flex-direction: column; min-height: 350px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
-.card-number { font-size: 9px; color: var(--text-muted); letter-spacing: 0.1em; }
-.workflow-card h3 { font-size: 25px; line-height: 1.25; margin-top: 28px; letter-spacing: -0.045em; }
+.workflow-card { display: flex; flex-direction: column; min-width: 0; overflow: hidden; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
+.workflow-card h3 { font-size: 25px; line-height: 1.25; letter-spacing: -0.045em; }
 .workflow-card > p { font-size: 13px; color: var(--text-secondary); margin-top: 20px; line-height: 1.85; }
-.card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 30px; margin-top: auto; font-size: 10px; color: var(--text-secondary); }
+.workflow-art { margin-top: auto; padding-top: 32px; user-select: none; }
+.workflow-art svg { display: block; width: 100%; height: auto; max-width: 380px; margin-inline: auto; }
+.workflow-svg-label { fill: #929c96; font-family: var(--font); font-size: 8px; font-weight: 500; letter-spacing: .09em; }
+.workflow-context .workflow-svg-label { fill: #a5b9d1; }
+.workflow-svg-value { font-family: var(--font); font-size: 9px; font-weight: 450; }
+.workflow-gridline { stroke: #ffffff; stroke-opacity: .045; }
+@media (min-width: 641px) and (max-width: 850px) {
+  .workflow-section .workflow-grid { grid-template-columns: 1fr; gap: 16px; }
+  .workflow-section .workflow-card { display: grid; grid-template-columns: 1fr 1fr; column-gap: 28px; padding: 28px; }
+  .workflow-card .workflow-art { grid-column: 2; grid-row: 1 / 3; margin-block: auto; padding-top: 0; }
+  .workflow-section .workflow-card h3 { font-size: 25px; }
+  .workflow-section .workflow-card > p { margin-top: 16px; }
+}
 
 /* Feature showcase: small, illustrative product moments. */
 .features-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px; margin-top: 48px; }
@@ -433,7 +444,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .workflow-card { padding: 22px 19px; }
   .workflow-card h3 { font-size: 21px; }
   .workflow-card > p { font-size: 12px; }
-  .card-footer { font-size: 9px; }
   .pricing-grid { gap: 12px; }
   .pricing-card { padding: 24px 18px; }
   .plan-heading { flex-wrap: wrap; gap: 4px; align-content: start; min-height: 59px; }
@@ -482,9 +492,9 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .visual-caption span:last-child { display: inline; }
   .workflow-grid { grid-template-columns: 1fr; margin-top: 31px; gap: 14px; }
   .workflow-card { min-height: 0; padding: 27px; border-radius: 16px; }
-  .workflow-card h3 { font-size: 27px; margin-top: 22px; }
+  .workflow-card h3 { font-size: 27px; }
   .workflow-card > p { font-size: 13px; margin-top: 16px; }
-  .card-footer { padding-top: 27px; font-size: 10px; }
+  .workflow-art { padding-top: 24px; }
   .pricing-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 35px; }
   .pricing-card { padding: 28px; border-radius: 16px; }
   .plan-heading { min-height: 30px; flex-wrap: nowrap; align-items: center; }
