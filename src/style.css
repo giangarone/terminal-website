@@ -269,13 +269,19 @@ ul { margin: 0; padding: 0; list-style: none; }
 .assistant-art .assistant-chart { height: 98px; margin-top: 19px; }
 .assistant-price { stroke: var(--text-secondary); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .journal-art, .builder-art, .xray-art { padding-top: 40px; }
-.journal-panel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 16px; margin: 0; padding: 16px; border: 0.5px solid var(--border-detail); border-radius: 12px; background: var(--surface-inset); }
+.journal-panel { border: 0.5px solid var(--border-detail); border-radius: 12px; background: var(--surface-inset); overflow: hidden; }
+.journal-balance { display: grid; grid-template-columns: 68fr 32fr; gap: 4px; padding: 14px 12px 4px; }
+.journal-balance > span { height: 5px; border-radius: 2px; background: var(--positive); }
+.journal-balance > span:last-child { background: var(--negative); }
+.journal-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
 .journal-panel dt { font-size: 10px; line-height: 1.5; color: var(--text-secondary); }
 .journal-panel dd { margin: 4px 0 0; font-size: 23px; font-variant-numeric: tabular-nums; letter-spacing: -.035em; line-height: 1.25; white-space: nowrap; }
-.journal-metric { min-width: 0; }
+.journal-metric { min-width: 0; padding: 12px; }
+.journal-metric:nth-child(even) { border-left: 0.5px solid var(--border-detail); }
+.journal-metric:nth-child(n + 3) { border-top: 0.5px solid var(--border-detail); }
 .journal-metric dd > span { font-size: 17px; margin-left: 2px; }
 .journal-day dd { font-size: 18px; }
-.journal-average { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 13px; border-top: 0.5px solid var(--border-detail); }
+.journal-average { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 12px; border-top: 0.5px solid var(--border-detail); }
 .journal-average dd { margin: 0; font-size: 18px; }
 .journal-profit { color: var(--positive); }
 .journal-loss { color: var(--negative); }
