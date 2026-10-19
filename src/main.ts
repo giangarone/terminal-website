@@ -66,7 +66,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
-  '.workflow-card', '.feature-copy', '.pricing-card', '.pricing-note',
+  '.feature-copy', '.pricing-card', '.pricing-note',
   '.faq-heading', '.faq-list details',
   '.indicator-track',
 ].join(', '))];
