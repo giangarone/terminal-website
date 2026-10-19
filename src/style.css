@@ -360,7 +360,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 /* Full-bleed aurora: spans the viewport and bleeds past the section's edges. */
 .aurora-canvas { position: absolute; top: -12rem; left: calc(50% - 50vw); width: 100vw; height: calc(100% + 24rem); pointer-events: none; mix-blend-mode: screen; z-index: 0; }
 .site-footer { position: relative; z-index: 1; border-top: .5px solid var(--border); padding-block: 64px 28px; background: var(--header-background); backdrop-filter: blur(12px); }
-.footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; padding-bottom: 48px; }
+.footer-main { display: grid; grid-template-columns: 2fr repeat(3, minmax(0, 1fr)); gap: 32px; padding-bottom: 48px; }
 .site-footer .wordmark { font-size: 24px; }
 .footer-brand p { max-width: 340px; margin-top: 20px; color: var(--text-secondary); font-size: 13px; line-height: 1.85; }
 .footer-link-group h2 { font-size: 12px; font-weight: 500; color: var(--text-soft); margin-bottom: 20px; }
@@ -370,9 +370,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .footer-disclaimer { border-top: .5px solid var(--border); padding-block: 28px; }
 .footer-disclaimer h2 { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; }
 .footer-disclaimer p { max-width: 1050px; font-size: 12px; line-height: 1.85; color: var(--text-muted); }
-.footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px 32px; border-top: .5px solid var(--border); padding-top: 24px; font-size: 11px; color: var(--text-muted); }
-.footer-legal { display: flex; flex-wrap: wrap; gap: 12px 24px; }
-.site-footer .footer-legal a { font-size: 11px; }
+.footer-brand .footer-copyright { margin-top: 24px; font-size: 11px; color: var(--text-muted); }
 
 /* Applied only when the entrance observer is available. */
 [data-entrance-pending] { opacity: 0; }
@@ -409,6 +407,8 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-badge { font-size: 8px; padding-inline: 7px; }
 }
 @media (max-width: 850px) {
+  .footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
+  .footer-brand { grid-column: 1 / -1; }
   .coverage-card { padding: 28px 24px; }
   .coverage-stat { font-size: 38px; }
   .section { padding-block: 85px; }
@@ -491,7 +491,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .footer-brand { grid-column: 1 / -1; }
   .footer-brand p { margin-top: 16px; }
   .footer-link-group h2 { margin-bottom: 16px; }
-  .footer-bottom { align-items: flex-start; flex-direction: column; gap: 16px; }
 }
 @media (max-width: 360px) {
   .container { width: calc(100% - 32px); }
