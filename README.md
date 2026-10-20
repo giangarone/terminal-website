@@ -43,7 +43,7 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 ### Feature showcase
 
-The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Illustration animations in `src/main.ts` play once, pause off-screen or in hidden tabs, and show their completed state without JavaScript or with reduced motion enabled.
+The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
 
 ## Asset provenance
 

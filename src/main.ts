@@ -66,7 +66,7 @@ const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
   '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
-  '.feature-copy', '.pricing-card', '.pricing-note',
+  '.feature-card', '.pricing-card', '.pricing-note',
   '.faq-heading', '.faq-list details',
   '.indicator-track',
 ].join(', '))];
@@ -131,96 +131,6 @@ motionPreference.addEventListener('change', event => {
   entranceElements.forEach(showImmediately);
 });
 
-// Animate only illustration children; copy uses the shared entrance above.
-// The HTML/CSS is the finished state, so no JS or reduced motion needs no fallback.
-function setupFeatureIllustrations() {
-  if (motionPreference.matches || !('IntersectionObserver' in window) || !('animate' in Element.prototype)) return;
-  const cards = [...document.querySelectorAll<HTMLElement>('.feature-card')];
-  const started = new Set<Element>();
-  const visible = new Set<Element>();
-  const active = new Map<Element, Animation[]>();
-
-  function start(card: Element) {
-    started.add(card);
-    const animations = [...card.querySelectorAll<HTMLElement | SVGElement>('[data-feature-reveal], [data-feature-draw], [data-feature-ring]')].map(element => {
-      const delay = Number(element.style.getPropertyValue('--feature-delay')) || 0;
-      const isLine = element.hasAttribute('data-feature-draw');
-      const isRing = element.hasAttribute('data-feature-ring');
-      const frames: Keyframe[] = isLine
-        ? [{ strokeDasharray: '1', strokeDashoffset: '1' }, { strokeDasharray: '1', strokeDashoffset: '0' }]
-        : isRing
-          ? [{ strokeDasharray: '0 100' }, { strokeDasharray: '68 100' }]
-          : [{ opacity: 0, transform: 'translateY(7px)' }, { opacity: 1, transform: 'translateY(0)' }];
-      const animation = element.animate(frames, {
-        duration: isLine ? 2300 : isRing ? 1800 : 850,
-        delay,
-        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-        fill: 'backwards',
-      });
-      animation.pause();
-      return animation;
-    });
-    active.set(card, animations);
-    Promise.all(animations.map(animation => animation.finished)).then(() => {
-      active.delete(card);
-      visible.delete(card);
-      observer.unobserve(card);
-    }).catch(() => { /* Preference changes cancel and reveal the static artwork. */ });
-  }
-
-  function sync() {
-    for (const [card, animations] of active) {
-      for (const animation of animations) {
-        if (animation.playState === 'finished') continue;
-        if (!document.hidden && visible.has(card)) animation.play();
-        else animation.pause();
-      }
-    }
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        visible.add(entry.target);
-        if (!document.hidden && !started.has(entry.target)) start(entry.target);
-      } else visible.delete(entry.target);
-    }
-    sync();
-  }, { threshold: 0.15 });
-
-  function onVisibilityChange() {
-    if (!document.hidden) {
-      for (const card of visible) if (!started.has(card)) start(card);
-    }
-    sync();
-  }
-
-  function onMotionChange(event: MediaQueryListEvent) {
-    if (event.matches) cleanup();
-  }
-
-  function cleanup() {
-    observer.disconnect();
-    active.forEach(animations => animations.forEach(animation => animation.cancel()));
-    active.clear();
-    visible.clear();
-    document.removeEventListener('visibilitychange', onVisibilityChange);
-    motionPreference.removeEventListener('change', onMotionChange);
-    window.removeEventListener('pagehide', onPageHide);
-  }
-
-  function onPageHide(event: PageTransitionEvent) {
-    // Keep observers for a restored page in the back/forward cache.
-    if (!event.persisted) cleanup();
-  }
-
-  cards.forEach(card => observer.observe(card));
-  document.addEventListener('visibilitychange', onVisibilityChange);
-  motionPreference.addEventListener('change', onMotionChange);
-  window.addEventListener('pagehide', onPageHide);
-}
-
-setupFeatureIllustrations();
 window.addEventListener('pagehide', stopAurora);
 
 document.querySelector('#copyright-year')!.textContent = String(new Date().getFullYear());
