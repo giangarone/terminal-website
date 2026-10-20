@@ -225,16 +225,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 .news-headline { position: absolute; top: 60px; left: 5%; display: flex; align-items: center; gap: 12px; max-width: 92%; padding: 12px; border: 0.5px solid color-mix(in srgb, var(--accent-gold) 16%, var(--border)); border-radius: 12px; background: color-mix(in srgb, var(--accent-gold) 4%, var(--surface-inset)); }
 .news-event-icon { display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; border-radius: 9px; background: color-mix(in srgb, var(--accent-gold) 9%, transparent); color: var(--accent-gold); }
 .news-event-icon svg { width: 16px; height: 16px; }
-.news-headline p { font-size: 12px; margin-top: 4px; line-height: 1.5; }
-.assistant-art { display: flex; flex-direction: column; justify-content: flex-end; margin-top: 20px; padding-top: 0; }
+.news-headline p { font-size: 12px; line-height: 1.5; }
+.assistant-art { display: flex; flex-direction: column; justify-content: flex-end; margin-top: auto; padding-top: 0; }
 .assistant-question { align-self: flex-end; max-width: 100%; padding: 12px 16px; border: 0.5px solid var(--border-strong); border-radius: 14px 14px 4px 14px; background: var(--surface-hover); font-size: 12px; }
-.assistant-response { display: flex; flex-direction: column; gap: 4px; width: 100%; min-width: 0; margin-top: 12px; padding: 14px 18px; border: 0.5px solid color-mix(in srgb, var(--accent-purple) 15%, var(--border)); border-radius: 16px 16px 16px 4px; background: color-mix(in srgb, var(--accent-purple) 3%, var(--surface-inset)); }
+.assistant-response { display: flex; flex-direction: column; gap: 4px; width: 100%; min-width: 0; margin-top: 12px; padding: 12px 18px; border: 0.5px solid color-mix(in srgb, var(--accent-purple) 15%, var(--border)); border-radius: 16px 16px 16px 4px; background: color-mix(in srgb, var(--accent-purple) 3%, var(--surface-inset)); }
 .assistant-spark { font-size: 16px; color: var(--accent-purple); line-height: 1.2; }
 .assistant-response-heading { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .assistant-response .feature-micro-label { color: var(--accent-purple); font-size: 8px; letter-spacing: .07em; }
-.assistant-response p { font-size: 12px; line-height: 1.75; color: var(--text-soft); }
+.assistant-response p { font-size: 12px; line-height: 1.6; color: var(--text-soft); }
 .assistant-response p strong { color: var(--text); font-weight: 550; }
-.assistant-chart-graphic { position: relative; margin-top: 20px; }
+.assistant-chart-graphic { position: relative; margin-top: 8px; }
 .assistant-art .assistant-chart { width: 100%; height: auto; }
 .assistant-chart path, .assistant-chart circle { vector-effect: non-scaling-stroke; }
 .assistant-level { stroke: var(--accent-purple); stroke-opacity: .2; stroke-width: 1; stroke-dasharray: 3 5; }
@@ -242,8 +242,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .assistant-callout-line { stroke: var(--accent-purple); stroke-opacity: .4; stroke-width: 1; }
 .assistant-point-halo { fill: var(--accent-purple); fill-opacity: .1; }
 .assistant-point { fill: var(--accent-purple); }
-.assistant-previous-high { position: absolute; top: calc(57.8125% - 17px); left: 1%; color: var(--text-muted); font-size: 9px; }
-.assistant-volume-note { position: absolute; top: -12px; left: 58.8889%; translate: -50% 0; white-space: nowrap; color: var(--accent-purple); font-size: 9px; }
+.assistant-previous-high { position: absolute; top: calc(66.0714% - 17px); left: 1%; color: var(--text-muted); font-size: 9px; }
+.assistant-volume-note { position: absolute; top: -8px; left: 58.8889%; translate: -50% 0; white-space: nowrap; color: var(--accent-purple); font-size: 9px; }
 .journal-art, .builder-art { padding-top: 40px; }
 .journal-panel { border: 0.5px solid var(--border-detail); border-radius: 12px; background: var(--surface-inset); overflow: hidden; }
 .journal-balance { display: grid; grid-template-columns: 68fr 32fr; gap: 4px; padding: 14px 12px 4px; }
@@ -300,7 +300,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .feature-card { padding: 25px; border-radius: 22px; }
   .feature-copy h3 { font-size: 23px; }
   .feature-copy > p { font-size: 13px; }
-  .news-art, .assistant-art { margin-top: 12px; }
+  .news-art { margin-top: 12px; }
   .news-art .news-chart { margin-top: 71px; height: auto; }
   .news-headline { left: 0; top: 57px; max-width: 100%; padding: 12px; gap: 9px; }
   .news-headline p { font-size: 11px; }
