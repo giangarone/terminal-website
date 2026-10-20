@@ -134,16 +134,30 @@
           <article class="feature-card feature-xray">
             <div class="feature-copy"><h3>X-ray vision<br />for the market.</h3><p>Track whale activity and large trades. See where size is showing up and how liquidity is taking shape.</p></div>
             <div class="feature-art xray-art" aria-hidden="true">
-              <div class="feature-art-label"><span>BENEATH THE SURFACE</span><span class="feature-green">◉</span></div>
-              <svg class="xray-chart" viewBox="0 0 300 190" fill="none">
-                <path class="feature-gridline" d="M0 30H300M0 75H300M0 120H300M0 165H300"/>
-                <g fill="var(--positive)"><rect x="10" y="32" width="104" height="7" rx="2" opacity=".08"/><rect x="128" y="32" width="85" height="7" rx="2" opacity=".14"/><rect x="228" y="32" width="60" height="7" rx="2" opacity=".07"/><rect x="38" y="55" width="158" height="7" rx="2" opacity=".13"/><rect x="210" y="55" width="80" height="7" rx="2" opacity=".22"/><rect x="0" y="78" width="78" height="7" rx="2" opacity=".12"/><rect x="90" y="78" width="148" height="7" rx="2" opacity=".26"/><rect x="250" y="78" width="50" height="7" rx="2" opacity=".1"/><rect x="20" y="101" width="122" height="7" rx="2" opacity=".07"/><rect x="156" y="101" width="104" height="7" rx="2" opacity=".14"/><rect x="0" y="124" width="116" height="7" rx="2" opacity=".22"/><rect x="130" y="124" width="170" height="7" rx="2" opacity=".08"/><rect x="45" y="147" width="150" height="7" rx="2" opacity=".13"/><rect x="209" y="147" width="70" height="7" rx="2" opacity=".08"/></g>
-                <path data-feature-draw pathLength="1" stroke="var(--text-secondary)" stroke-width="1.5" d="M0 149L20 139L40 146L60 118L80 128L100 101L120 111L140 82L160 96L180 73L200 85L220 59L240 68L260 44L280 55L300 38"/>
-                <g data-feature-reveal style="--feature-delay: 850"><circle cx="60" cy="118" r="13" fill="var(--positive)" fill-opacity=".08" stroke="var(--positive)" stroke-opacity=".35"/><circle cx="60" cy="118" r="4" fill="var(--positive)"/></g>
-                <g data-feature-reveal style="--feature-delay: 1500"><circle cx="140" cy="82" r="21" fill="var(--positive)" fill-opacity=".1" stroke="var(--positive)" stroke-opacity=".45"/><circle cx="140" cy="82" r="6" fill="var(--positive)"/></g>
-                <g data-feature-reveal style="--feature-delay: 2100"><circle cx="260" cy="44" r="16" fill="var(--positive)" fill-opacity=".08" stroke="var(--positive)" stroke-opacity=".35"/><circle cx="260" cy="44" r="4" fill="var(--positive)"/></g>
-              </svg>
-              <div class="xray-legend"><span><i></i> Large trades</span><span><i></i> Liquidity</span></div>
+              <div class="xray-graphic">
+                <svg class="xray-chart" viewBox="0 0 320 218" fill="none">
+                  <defs>
+                    <linearGradient id="xray-depth-fill" x1="0" y1="0" x2="1" y2="1"><stop stop-color="var(--positive)" stop-opacity="0"/><stop offset=".55" stop-color="var(--positive)" stop-opacity=".06"/><stop offset="1" stop-color="var(--positive)" stop-opacity=".2"/></linearGradient>
+                    <linearGradient id="xray-depth-edge"><stop stop-color="var(--positive)" stop-opacity="0"/><stop offset=".55" stop-color="var(--positive)" stop-opacity=".12"/><stop offset="1" stop-color="var(--positive)" stop-opacity=".5"/></linearGradient>
+                    <linearGradient id="xray-price-stroke"><stop stop-color="var(--text-secondary)" stop-opacity=".55"/><stop offset=".55" stop-color="var(--text-soft)"/><stop offset="1" stop-color="var(--positive)"/></linearGradient>
+                    <linearGradient id="xray-depth-fade" gradientUnits="userSpaceOnUse" x1="0" y1="130" x2="0" y2="218"><stop offset=".35" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
+                    <mask id="xray-depth-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="320" height="218"><rect width="320" height="218" fill="url(#xray-depth-fade)"/></mask>
+                  </defs>
+                  <path class="feature-gridline" d="M4 76H316M4 140H316M4 204H316"/>
+                  <g class="xray-depth" mask="url(#xray-depth-mask)" data-feature-reveal style="--feature-delay: 400">
+                    <path fill="url(#xray-depth-fill)" d="M4 180C50 180 70 164 112 164H156C190 164 202 140 238 140H316V214H4Z"/>
+                    <path fill="url(#xray-depth-fill)" d="M4 194C62 194 84 177 127 177H168C204 177 220 154 253 154H316V214H4Z"/>
+                    <path fill="url(#xray-depth-fill)" d="M4 207C70 207 106 190 149 190H190C222 190 242 174 270 174H316V214H4Z"/>
+                    <path class="xray-depth-contour" d="M4 173C50 173 70 157 112 157H156C190 157 202 133 238 133H316M4 180C50 180 70 164 112 164H156C190 164 202 140 238 140H316M4 187C56 187 77 171 120 171H162C197 171 211 147 246 147H316M4 194C62 194 84 177 127 177H168C204 177 220 154 253 154H316M4 201C66 201 95 184 138 184H179C213 184 231 164 262 164H316M4 207C70 207 106 190 149 190H190C222 190 242 174 270 174H316"/>
+                  </g>
+                  <path class="xray-price" data-feature-draw pathLength="1" d="M4 130C22 130 29 114 44 119S64 135 82 116S101 92 119 100S144 113 158 92S178 65 194 67S215 84 233 66S255 47 271 51S297 34 316 39"/>
+                  <g class="xray-trade-small" data-feature-reveal style="--feature-delay: 950"><circle cx="82" cy="116" r="8"/><circle class="xray-trade-core" cx="82" cy="116" r="2.5"/></g>
+                  <g class="xray-trade-large" data-feature-reveal style="--feature-delay: 1450"><path class="xray-trade-guide" d="M194 28V45"/><circle class="xray-trade-ring" cx="194" cy="67" r="18"/><circle class="xray-trade-inner" cx="194" cy="67" r="10"/><circle class="xray-trade-core" cx="194" cy="67" r="4.5"/></g>
+                  <g class="xray-trade-small" data-feature-reveal style="--feature-delay: 1850"><circle cx="271" cy="51" r="10"/><circle class="xray-trade-core" cx="271" cy="51" r="3"/></g>
+                </svg>
+                <span class="xray-trade-label" data-feature-reveal style="--feature-delay: 1450">Large buy</span>
+              </div>
+              <div class="xray-legend"><span><i></i> Large trades</span><span><i></i> Resting liquidity</span></div>
             </div>
           </article>
         </div>
