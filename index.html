@@ -84,15 +84,22 @@
           <article class="feature-card feature-assistant">
             <div class="feature-copy"><h3>Ask your chart anything.</h3><p>Ask about any chart, asset, or market in plain language. Explore what’s happening and ask follow-up questions with AI.</p></div>
             <div class="feature-art assistant-art" aria-hidden="true">
-              <div class="assistant-question" data-feature-reveal>What’s happening at this level?</div>
-              <div class="assistant-response" data-feature-reveal style="--feature-delay: 650"><span class="assistant-spark">✦</span><div><span class="feature-micro-label">MARKETSTREAM AI</span><p>Price is testing the same area again. Watch how it responds here.</p></div>
-                <svg class="assistant-chart" viewBox="0 0 360 104" fill="none">
-                <path class="feature-gridline" d="M0 84H360"/>
-                <rect data-feature-reveal style="--feature-delay: 1600" x="16" y="24" width="328" height="23" rx="6" fill="var(--accent-purple)" fill-opacity=".09"/>
-                <path stroke="var(--accent-purple)" stroke-opacity=".4" stroke-dasharray="3 5" d="M0 35H360"/>
-                <path class="assistant-price" data-feature-draw pathLength="1" d="M0 87L20 80L40 88L60 66L80 75L100 37L120 55L140 72L160 64L180 80L200 58L220 36L240 53L260 63L280 48L300 54L320 35L340 42L360 31"/>
-                <circle data-feature-reveal style="--feature-delay: 1900" cx="320" cy="35" r="5" fill="var(--accent-purple)"/>
-              </svg></div>
+              <div class="assistant-question" data-feature-reveal>Why did price jump here?</div>
+              <div class="assistant-response" data-feature-reveal style="--feature-delay: 650">
+                <div class="assistant-response-heading"><span class="assistant-spark">✦</span><span class="feature-micro-label">MARKETSTREAM AI</span></div>
+                <p>Buying volume rose to <strong>3× its recent average</strong> as price broke above the previous high.</p>
+                <div class="assistant-chart-graphic">
+                  <svg class="assistant-chart" viewBox="0 0 360 128" fill="none">
+                    <defs><linearGradient id="assistant-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="var(--accent-purple)" stop-opacity=".15"/><stop offset="1" stop-color="var(--accent-purple)" stop-opacity="0"/></linearGradient></defs>
+                    <path class="assistant-level" d="M4 74H352"/>
+                    <path fill="url(#assistant-fill)" d="M4 105C20 105 23 94 40 98S62 88 78 92S101 80 117 85S139 77 153 84S174 91 185 75S197 39 212 34S236 44 254 34S278 25 294 29S325 16 346 22V128H4Z"/>
+                    <path class="assistant-price" data-feature-draw pathLength="1" d="M4 105C20 105 23 94 40 98S62 88 78 92S101 80 117 85S139 77 153 84S174 91 185 75S197 39 212 34S236 44 254 34S278 25 294 29S325 16 346 22"/>
+                    <g data-feature-reveal style="--feature-delay: 1600"><path class="assistant-callout-line" d="M212 10V25"/><circle class="assistant-point-halo" cx="212" cy="34" r="11"/><circle class="assistant-point" cx="212" cy="34" r="3.5"/></g>
+                  </svg>
+                  <span class="assistant-previous-high">Previous high</span>
+                  <span class="assistant-volume-note" data-feature-reveal style="--feature-delay: 1600">3× buying volume</span>
+                </div>
+              </div>
             </div>
           </article>
           <article class="feature-card feature-journal">
