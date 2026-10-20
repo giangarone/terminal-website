@@ -65,7 +65,7 @@ const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
   '.section-heading', '.split-heading', '.coverage-card',
-  '.platform-media', '.platform-caption', '.depth-feature', '.depth-visual',
+  '.platform-media', '.depth-feature', '.depth-visual',
   '.feature-card', '.pricing-card', '.pricing-note',
   '.faq-heading', '.faq-list details',
   '.indicator-track',
