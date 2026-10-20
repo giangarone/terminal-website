@@ -388,7 +388,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .site-footer nav a[aria-disabled='true'] { cursor: default; }
 .site-footer nav a { font-size: 13px; color: var(--text-secondary); }
 .footer-disclaimer { border-top: .5px solid var(--border); padding-block: 28px; }
-.footer-disclaimer h2 { font-size: 12px; font-weight: 500; color: var(--text-secondary); margin-bottom: 10px; }
 .footer-disclaimer p { max-width: 1050px; font-size: 12px; line-height: 1.85; color: var(--text-muted); }
 .footer-brand .footer-copyright { margin-top: 24px; font-size: 11px; color: var(--text-muted); }
 
