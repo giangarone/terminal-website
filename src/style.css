@@ -109,11 +109,24 @@ ul { margin: 0; padding: 0; list-style: none; }
 .split-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
 .split-heading > p { max-width: 365px; color: var(--text-secondary); font-size: 14px; padding-bottom: 3px; }
 .data-layout { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 80px; align-items: center; margin-top: 57px; }
-.depth-feature { display: flex; gap: 24px; padding-block: 25px; border-bottom: 0.5px solid var(--border); }
+.depth-feature { display: flex; align-items: flex-start; gap: 20px; padding-block: 25px; border-bottom: 0.5px solid var(--border); }
 .depth-feature:first-child { padding-top: 0; }
 .depth-feature:last-child { border-bottom: 0; padding-bottom: 0; }
-.depth-label { display: flex; width: 30px; height: 23px; flex-shrink: 0; border: 0.5px solid var(--border-strong); border-radius: 5px; align-items: center; justify-content: center; margin-top: 3px; font-size: 10px; color: var(--text-secondary); letter-spacing: 0.04em; }
-.depth-label-full { font-size: 8px; }
+.depth-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 28px;
+  height: 20px;
+  padding-inline: 6px;
+  border-radius: 5px;
+  background: var(--surface-inset);
+  color: var(--text-soft);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
 .depth-feature h3 { font-size: 17px; margin-bottom: 8px; }
 .depth-feature p { color: var(--text-secondary); font-size: 13px; line-height: 1.85; max-width: 380px; }
 .depth-media { aspect-ratio: 4 / 3; }
@@ -437,7 +450,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .split-heading { display: block; }
   .split-heading > p { margin-top: 23px; max-width: 480px; }
   .data-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
-  .depth-feature { gap: 15px; }
   .depth-feature h3 { font-size: 15px; }
   .depth-feature p { font-size: 12px; }
   .depth-media { aspect-ratio: 3 / 4; }
@@ -481,7 +493,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .caption-separator { margin-inline: 4px; }
   .split-heading > p { font-size: 13px; margin-top: 21px; }
   .data-layout { grid-template-columns: 1fr; gap: 33px; margin-top: 36px; }
-  .depth-feature { gap: 19px; padding-block: 21px; }
+  .depth-feature { padding-block: 21px; }
   .depth-feature h3 { font-size: 16px; }
   .depth-feature p { font-size: 12px; }
   .depth-media { aspect-ratio: 4 / 3; border-radius: 14px; }
