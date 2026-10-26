@@ -39,13 +39,15 @@ The collection supports touch swiping, trackpad scrolling, previous/next buttons
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
-Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream brand is plain text. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
+Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
 
 ### Feature showcase
 
 The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
 
 ## Asset provenance
+
+MarketStream logo: supplied by the site owner (`public/assets/marketstream-logo.svg`).
 
 Coin icons are local files provided for this site (`public/assets/btc.png`, `eth.png`, `sol.png`).
 Brand marks identify the illustrated assets; no partnership or endorsement is implied.
