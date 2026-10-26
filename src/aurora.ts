@@ -1,12 +1,14 @@
 // Aurora background behind the hero.
 const CONFIG = {
-  colorA: '#F59E0B',
-  colorB: '#F87171',
+  colorA: '#B8B8B8',
+  colorB: '#A4A4A4',
+  colorC: '#D6D6D6',
   brightness: 1,
-  speed: 0.55,
+  speed: 0.52,
   spread: 0.27,
   diag: -1,
   alpha: 2,
+  grain: 8 / 255,
 };
 
 const VERTEX_SHADER = `
@@ -23,48 +25,60 @@ precision highp float;
 varying vec2 vUv;
 uniform float uTime;
 uniform float uIntensity;
+uniform float uGrain;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
+uniform vec3 uColorC;
+uniform vec3 uBackground;
 uniform float uSpread;
 uniform float uDiag;
 uniform vec2 uEdgeFade;
 
 vec3 warp3d(vec3 pos, float t) {
-  float curv = 0.8;
-  float a = 1.9;
-  float b = 0.7;
-  pos *= 2.0;
-  pos.x += curv * sin(t + a * pos.y) + t * b;
-  pos.y += curv * cos(t + a * pos.x);
-  pos.y += curv * sin(t + a * pos.z) + t * b;
-  pos.z += curv * cos(t + a * pos.y);
-  pos.z += curv * sin(t + a * pos.x) + t * b;
-  pos.x += curv * cos(t + a * pos.z);
-  return 0.5 + 0.5 * cos(pos + vec3(1.0, 2.0, 4.0));
+  // Unequal fold widths and independent drift give the light its own rhythm.
+  pos *= vec3(1.9, 2.05, 1.85);
+  pos.x += 0.78 * sin(0.86 * t + 1.82 * pos.y + 0.35) + t * 0.54;
+  pos.y += 0.70 * cos(0.72 * t + 2.08 * pos.x);
+  pos.y += 0.82 * sin(0.94 * t + 1.74 * pos.z + 0.60) + t * 0.60;
+  pos.z += 0.66 * cos(0.78 * t + 1.96 * pos.y);
+  pos.z += 0.76 * sin(0.90 * t + 1.88 * pos.x) + t * 0.48;
+  pos.x += 0.72 * cos(0.82 * t + 1.80 * pos.z);
+  return 0.5 + 0.5 * cos(pos + vec3(0.8, 2.3, 4.25));
 }
 
 void main() {
   vec2 uv = 2.0 * vUv - 1.0;
+  // Bend the folds gently without moving the hero's outer fade boundaries.
+  vec2 flowUv = uv + vec2(
+    0.08 * sin(2.4 * uv.y + 0.33 * uTime),
+    0.045 * sin(2.0 * uv.x - 0.22 * uTime + 0.4)
+  );
   // GPU rounding can push cosine-derived values below zero; fractional pow
   // is undefined there and produces black specks. Keep its input in range.
-  vec3 wave = clamp(warp3d(vec3(uv.x, sin(uv.y), uv.y), uTime), 0.0, 1.0);
+  vec3 wave = clamp(warp3d(vec3(flowUv.x, sin(flowUv.y), flowUv.y), uTime), 0.0, 1.0);
   vec3 w = pow(wave, vec3(1.5));
-  vec3 col = 1.5 * uColorA * w.x;
-  col *= w.y;
-  col += uColorB * w.z;
-  col *= smoothstep(uSpread, 1.0, abs(uv.y));
+  vec3 tint = mix(uColorB, uColorA, smoothstep(0.1, 0.9, w.y));
+  tint = mix(tint, uColorC, 0.6 * smoothstep(0.25, 0.9, w.z));
+  float density = 0.9 * w.x * w.y + 0.65 * w.z;
+  density *= smoothstep(uSpread, 1.0, abs(uv.y));
   float m = smoothstep(uDiag, 1.0, -uv.y * uv.x);
-  col *= m * m;
+  density *= m * m;
   float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
-  col *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
-  col *= uIntensity;
-  // Keep the wave brightness while rendering every channel in monochrome.
-  col = vec3(dot(col, vec3(0.299, 0.587, 0.114)));
-  float n = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453);
-  col += (n - 0.5) / 255.0;
-  // Base opacity on luminance so every hue fades into the page background.
-  float opacity = clamp(dot(col, vec3(0.299, 0.587, 0.114)), 0.0, 1.0);
-  gl_FragColor = vec4(col, opacity);
+  density *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
+  // Compress bright folds smoothly to keep the monochrome glow soft.
+  float glow = 1.0 - exp(-density * uIntensity);
+  // Compose the screen-style glow against the page color before quantizing.
+  vec3 col = uBackground + (1.0 - uBackground) * tint * glow;
+  // Uncorrelated, static grain avoids visible diagonal patterns. Give it
+  // several 8-bit levels of headroom so it survives browser compositing.
+  vec3 noise = fract(gl_FragCoord.xyx * vec3(0.1031, 0.1030, 0.0973));
+  noise += dot(noise, noise.yzx + 33.33);
+  float n = fract((noise.x + noise.y) * noise.z);
+  float grainMask = smoothstep(0.0, 0.02, glow);
+  col = clamp(col + (n - 0.5) * uGrain * grainMask, 0.0, 1.0);
+  // The opaque result already matches the page at the edges, avoiding a
+  // second gradient in alpha and another CSS blending/quantization step.
+  gl_FragColor = vec4(col, 1.0);
 }`;
 
 function hexToRgb(hex: string): Float32Array {
@@ -126,9 +140,13 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
 
   gl.uniform3fv(gl.getUniformLocation(program, 'uColorA'), hexToRgb(CONFIG.colorA));
   gl.uniform3fv(gl.getUniformLocation(program, 'uColorB'), hexToRgb(CONFIG.colorB));
+  gl.uniform3fv(gl.getUniformLocation(program, 'uColorC'), hexToRgb(CONFIG.colorC));
+  const background = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
+  gl.uniform3fv(gl.getUniformLocation(program, 'uBackground'), hexToRgb(background));
   gl.uniform1f(gl.getUniformLocation(program, 'uSpread'), CONFIG.spread);
   gl.uniform1f(gl.getUniformLocation(program, 'uDiag'), CONFIG.diag);
   gl.uniform2f(gl.getUniformLocation(program, 'uEdgeFade'), 0.2, 0.32);
+  gl.uniform1f(gl.getUniformLocation(program, 'uGrain'), CONFIG.grain);
 
   return {
     program,
@@ -140,7 +158,7 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
 
 export function initAurora(canvas: HTMLCanvasElement): () => void {
   const gl = canvas.getContext('webgl', {
-    alpha: true,
+    alpha: false,
     depth: false,
     stencil: false,
     antialias: false,
@@ -157,11 +175,14 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
   let running = false;
   let queued = false;
   let frame = 0;
+  let inView = false;
+  let contextLost = false;
 
   const draw = (now: number) => {
-    if (!startTime) startTime = now;
+    if (!startTime && !reducedMotion.matches) startTime = now;
     const elapsed = now - startTime;
-    gl.uniform1f(state.uTime, (now / 1000) * CONFIG.speed);
+    const animationTime = reducedMotion.matches ? 12000 : now;
+    gl.uniform1f(state.uTime, (animationTime / 1000) * CONFIG.speed);
     const fade = reducedMotion.matches ? 1 : Math.max(0, Math.min(1, (elapsed - 200) / 1500));
     gl.uniform1f(state.uIntensity, CONFIG.brightness * CONFIG.alpha * fade);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -171,14 +192,16 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
     if (!width || !height) return;
-    const scale = Math.min(0.5, 1536 / width);
+    // Render at CSS-pixel resolution so upscaling does not blur the dither.
+    // Cap wide-screen buffers to keep the decorative effect lightweight.
+    const scale = Math.min(1, 1536 / width);
     const nextWidth = Math.max(1, Math.round(width * scale));
     const nextHeight = Math.max(1, Math.round(height * scale));
     if (canvas.width === nextWidth && canvas.height === nextHeight) return;
     canvas.width = nextWidth;
     canvas.height = nextHeight;
     gl.viewport(0, 0, nextWidth, nextHeight);
-    if (reducedMotion.matches) draw(12000);
+    if (reducedMotion.matches && !contextLost) draw(12000);
   };
 
   const resizeObserver = new ResizeObserver(resize);
@@ -197,21 +220,37 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     }
   };
 
+  const updateMotion = () => {
+    running = inView && !document.hidden && !reducedMotion.matches && !contextLost;
+    if (running) kick();
+    else {
+      cancelAnimationFrame(frame);
+      queued = false;
+      if (reducedMotion.matches && inView && !document.hidden && !contextLost) draw(12000);
+    }
+  };
   const observer = new IntersectionObserver(entries => {
-    running = entries[0].isIntersecting;
-    kick();
+    inView = entries[0].isIntersecting;
+    updateMotion();
   });
   observer.observe(canvas);
+  reducedMotion.addEventListener('change', updateMotion);
+  document.addEventListener('visibilitychange', updateMotion);
 
   if (reducedMotion.matches) draw(12000);
 
   const onContextLost = (event: Event) => {
     event.preventDefault();
-    cancelAnimationFrame(frame);
+    contextLost = true;
+    updateMotion();
   };
   const onContextRestored = () => {
     const next = setup(gl);
-    if (next) state = next;
+    if (!next) return;
+    state = next;
+    contextLost = false;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    updateMotion();
   };
   canvas.addEventListener('webglcontextlost', onContextLost);
   canvas.addEventListener('webglcontextrestored', onContextRestored);
@@ -220,6 +259,8 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     observer.disconnect();
     resizeObserver.disconnect();
     cancelAnimationFrame(frame);
+    reducedMotion.removeEventListener('change', updateMotion);
+    document.removeEventListener('visibilitychange', updateMotion);
     canvas.removeEventListener('webglcontextlost', onContextLost);
     canvas.removeEventListener('webglcontextrestored', onContextRestored);
     gl.deleteBuffer(state.buffer);

@@ -39,7 +39,7 @@ The collection supports touch swiping, trackpad scrolling, previous/next buttons
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
-Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`. Decorative hero lighting is CSS only and stops off-screen, in hidden tabs, or when reduced motion is preferred.
+Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`. The decorative hero aurora is rendered with WebGL in `src/aurora.ts`, using a soft monochrome palette with asymmetric folds and independent drift speeds. Fine, static grain reduces banding through the dark fades; the canvas renders at CSS-pixel resolution, capped at 1536 pixels wide. Animation stops off-screen and in hidden tabs; reduced-motion preferences show a still frame.
 
 ### Feature showcase
 
