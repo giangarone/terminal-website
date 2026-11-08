@@ -43,13 +43,13 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
-The pricing section uses the WebGL aurora from `src/aurora.ts` as a full-section decorative background. Its light also brightens the matching grid lines as the aurora moves. Both layers stay behind the heading, plan cards, and checkout reassurance.
+The FAQ section uses the ocean-blue WebGL aurora from `src/aurora.ts` as a full-section decorative background behind the heading and questions, without a grid. Deep blues and soft cyan highlights give the moving folds an ocean-wave feel. Fine, static grain softens gradient banding and fades with the glow at the edges. Pricing and checkout follow the hero's platform media, with a quiet grid background.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 
 ### Feature showcase
 
-The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
+The five-card section at `#features` sits immediately after pricing and checkout. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
 
 ## Asset provenance
 

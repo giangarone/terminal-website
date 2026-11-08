@@ -412,20 +412,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Editable pricing. */
-/* Keep both decorative layers behind the content, with the grid above the opaque aurora. */
 .pricing-section {
-  --pricing-grid-mask-radius: 60% 65%;
-  --pricing-grid-mask-center: 50% 45%;
   position: relative;
   isolation: isolate;
 }
 .pricing-section::before {
   inset: 0 calc(50% - 50vw);
-  -webkit-mask-image: radial-gradient(ellipse var(--pricing-grid-mask-radius) at var(--pricing-grid-mask-center), #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
-  mask-image: radial-gradient(ellipse var(--pricing-grid-mask-radius) at var(--pricing-grid-mask-center), #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+  mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
 }
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
-.pricing-section > .aurora-canvas { z-index: -2; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
 @property --plan-stroke-angle {
   syntax: '<angle>';
@@ -501,7 +497,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Two identical groups keep the reviews moving at a constant, seamless pace. */
-.reviews-section { --review-gap: 20px; position: relative; isolation: isolate; }
+.reviews-section {
+  --review-gap: 20px;
+  position: relative;
+  isolation: isolate;
+}
 .reviews-section::before {
   inset: 0;
   -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
@@ -540,7 +540,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Native disclosure elements keep FAQs usable without JavaScript. */
-.faq-section { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 100px; }
+.faq-section {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 100px;
+}
+/* Keep the aurora behind the FAQ content. */
+.faq-section > .aurora-canvas { z-index: -1; }
 .faq-heading h2 { margin-top: 23px; font-size: clamp(36px, 3.5vw, 46px); }
 .faq-list details { border-bottom: 0.5px solid var(--border); }
 .faq-list details:first-child { border-top: 0.5px solid var(--border); }

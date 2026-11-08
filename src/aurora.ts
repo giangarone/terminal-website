@@ -1,8 +1,8 @@
-// Ocean-blue aurora and illuminated grid behind the pricing content.
+// Ocean-blue aurora behind the FAQ.
 const CONFIG = {
-  colorA: '#0987FF',
-  colorB: '#064DB8',
-  colorC: '#07BCFA',
+  colorA: '#168bdf',
+  colorB: '#063a78',
+  colorC: '#23b7d5',
   brightness: 1,
   speed: 0.52,
   spread: 0.27,
@@ -31,11 +31,6 @@ uniform vec3 uBackground;
 uniform float uSpread;
 uniform float uDiag;
 uniform vec2 uEdgeFade;
-uniform vec2 uCanvasSize;
-uniform vec2 uPixelSize;
-uniform vec2 uGridSize;
-uniform vec2 uGridOffset;
-uniform vec4 uGridMask;
 
 vec3 warp3d(vec3 pos, float t) {
   // Unequal fold widths and independent drift give the light its own rhythm.
@@ -51,7 +46,7 @@ vec3 warp3d(vec3 pos, float t) {
 
 void main() {
   vec2 uv = 2.0 * vUv - 1.0;
-  // Bend the folds gently without moving the hero's outer fade boundaries.
+  // Bend the folds gently without moving the section's outer fade boundaries.
   vec2 flowUv = uv + vec2(
     0.08 * sin(2.4 * uv.y + 0.33 * uTime),
     0.045 * sin(2.0 * uv.x - 0.22 * uTime + 0.4)
@@ -68,27 +63,14 @@ void main() {
   density *= m * m;
   float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
   density *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
-  // Compress bright folds smoothly to keep the blue glow soft.
+  // Compress bright folds smoothly to keep the glow soft.
   float glow = 1.0 - exp(-density * uIntensity);
   // Compose the smooth screen-style glow directly against the page color.
   vec3 col = uBackground + (1.0 - uBackground) * tint * glow;
-  if (uGridSize.x > 0.0 && uGridSize.y > 0.0) {
-    // Match the CSS grid in top-down CSS pixels, including its 1px lines.
-    vec2 position = vec2(vUv.x, 1.0 - vUv.y);
-    vec2 pixel = position * uCanvasSize;
-    vec2 cell = mod(pixel + uGridOffset - 0.5, uGridSize);
-    vec2 distance = min(cell, uGridSize - cell);
-    vec2 line = 1.0 - smoothstep(0.5 - 0.5 * uPixelSize, 0.5 + 0.5 * uPixelSize, distance);
-    // Match the CSS mask's ellipse and its three linear opacity stops.
-    float radius = length((position - uGridMask.zw) / uGridMask.xy);
-    float mask = mix(1.0, 0.65, clamp((radius - 0.15) / 0.30, 0.0, 1.0));
-    mask *= 1.0 - clamp((radius - 0.45) / 0.35, 0.0, 1.0);
-    // Use the same light field as the aurora, so the illumination moves with it.
-    float light = smoothstep(0.015, 0.35, glow);
-    float illumination = light * 0.20 * max(line.x, line.y) * mask;
-    vec3 reflection = mix(tint, vec3(0.45, 0.90, 1.0), 0.45);
-    col += (1.0 - col) * reflection * illumination;
-  }
+  // Static, neutral grain breaks up 8-bit bands without flickering. Fade it
+  // with the glow so the section still blends into the plain page background.
+  float grain = fract(52.9829189 * fract(dot(gl_FragCoord.xy, vec2(0.06711056, 0.00583715)))) - 0.5;
+  col += vec3(grain * (2.0 / 255.0) * smoothstep(0.0, 0.02, glow));
   // The opaque result already matches the page at the edges, avoiding a
   // second gradient in alpha and another CSS blending/quantization step.
   gl_FragColor = vec4(col, 1.0);
@@ -135,11 +117,6 @@ interface AuroraState {
   buffer: WebGLBuffer;
   uTime: WebGLUniformLocation | null;
   uIntensity: WebGLUniformLocation | null;
-  uCanvasSize: WebGLUniformLocation | null;
-  uPixelSize: WebGLUniformLocation | null;
-  uGridSize: WebGLUniformLocation | null;
-  uGridOffset: WebGLUniformLocation | null;
-  uGridMask: WebGLUniformLocation | null;
 }
 
 function setup(gl: WebGLRenderingContext): AuroraState | null {
@@ -170,11 +147,6 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
     buffer,
     uTime: gl.getUniformLocation(program, 'uTime'),
     uIntensity: gl.getUniformLocation(program, 'uIntensity'),
-    uCanvasSize: gl.getUniformLocation(program, 'uCanvasSize'),
-    uPixelSize: gl.getUniformLocation(program, 'uPixelSize'),
-    uGridSize: gl.getUniformLocation(program, 'uGridSize'),
-    uGridOffset: gl.getUniformLocation(program, 'uGridOffset'),
-    uGridMask: gl.getUniformLocation(program, 'uGridMask'),
   };
 }
 
@@ -199,23 +171,6 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
   let frame = 0;
   let inView = false;
   let contextLost = false;
-  const gridHost = canvas.closest<HTMLElement>('.pricing-section');
-
-  const alignGrid = (bounds: DOMRect) => {
-    if (!gridHost) return;
-    const grid = getComputedStyle(gridHost, '::before');
-    const [sizeX, sizeY = sizeX] = grid.backgroundSize.split(',')[0].trim().split(/\s+/).map(Number.parseFloat);
-    if (!(sizeX > 0 && sizeY > 0)) return;
-    const host = gridHost.getBoundingClientRect();
-    // CSS centers each repeating tile in the pseudo-element's positioning area.
-    const originX = host.left + gridHost.clientLeft + parseFloat(grid.left) + (parseFloat(grid.width) - sizeX) / 2;
-    const originY = host.top + gridHost.clientTop + parseFloat(grid.top) + (parseFloat(grid.height) - sizeY) / 2;
-    const [radiusX, radiusY] = grid.getPropertyValue('--pricing-grid-mask-radius').trim().split(/\s+/).map(value => parseFloat(value) / 100);
-    const [centerX, centerY] = grid.getPropertyValue('--pricing-grid-mask-center').trim().split(/\s+/).map(value => parseFloat(value) / 100);
-    gl.uniform2f(state.uGridSize, sizeX, sizeY);
-    gl.uniform2f(state.uGridOffset, bounds.left - originX, bounds.top - originY);
-    gl.uniform4f(state.uGridMask, radiusX, radiusY, centerX, centerY);
-  };
 
   const draw = (now: number) => {
     if (!startTime && !reducedMotion.matches) startTime = now;
@@ -241,15 +196,11 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
       canvas.height = nextHeight;
     }
     gl.viewport(0, 0, nextWidth, nextHeight);
-    gl.uniform2f(state.uCanvasSize, width, height);
-    gl.uniform2f(state.uPixelSize, width / nextWidth, height / nextHeight);
-    alignGrid(bounds);
     if (reducedMotion.matches) draw(12000);
   };
 
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(canvas);
-  if (gridHost) resizeObserver.observe(gridHost);
   resize();
 
   const renderFrame = (now: number) => {
