@@ -470,16 +470,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-heading h3 { font-size: 18px; }
 .plan-badge { flex-shrink: 0; border: 0.5px solid #3983f7; border-radius: 8px; background: #3983f780; padding: 3px 9px; font-size: 10px; font-weight: 550; white-space: nowrap; }
 .plan-description { margin-top: 8px; color: var(--text-secondary); font-size: 11px; }
-.plan-price { font-size: 60px; font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
+.plan-price { font-size: 52px; font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
 .plan-price > span { color: var(--text-muted); font-size: 12px; font-weight: 400; letter-spacing: 0; margin-left: 8px; }
-.plan-billing { font-size: 10px; color: var(--text-muted); margin-top: 9px; }
+.plan-billing { font-size: 13px; color: var(--text-muted); margin-top: 9px; }
 .button-plan { background: transparent; border-color: var(--border-strong); width: 100%; margin-top: 25px; min-height: 45px; font-size: 12px; gap: 8px; }
 .button-plan.button-primary { background: var(--button); color: var(--button-text); border-color: var(--button); }
 .featured-plan .button-plan { background: var(--pro-button); border-color: var(--pro-button); color: var(--light); }
 .featured-plan .button-plan:hover { background: var(--pro-button-hover); border-color: var(--pro-button-hover); }
 .featured-plan .button-plan:focus-visible { outline-color: var(--accent-blue); }
 .plan-features { border-top: 0.5px solid var(--border); margin-top: 30px; padding-top: 25px; }
-.plan-features > p { font-size: 11px; color: var(--text-muted); margin-bottom: 18px; }
+.plan-features > p { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
 .plan-features li { position: relative; padding-left: 22px; color: var(--text-secondary); font-size: 12px; margin-bottom: 13px; }
 .plan-features li::before { content: ''; position: absolute; top: 7px; left: 2px; width: 8px; height: 4px; border-left: 0.5px solid var(--text-muted); border-bottom: 0.5px solid var(--text-muted); transform: rotate(-45deg); }
 .featured-plan .plan-features li::before { border-color: var(--accent-blue); }
@@ -620,7 +620,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-heading { flex-wrap: wrap; gap: 4px; align-content: start; min-height: 59px; }
   .plan-heading h3 { width: 100%; }
   .plan-description { min-height: 36px; }
-  .plan-price { font-size: 50px; margin-top: 20px; }
+  .plan-price { margin-top: 20px; }
   .plan-price > span { font-size: 10px; }
   .plan-features li { font-size: 11px; padding-left: 18px; }
   .faq-section { grid-template-columns: 0.8fr 1.2fr; gap: 35px; }
@@ -665,12 +665,10 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-heading h3 { width: auto; font-size: 20px; }
   .plan-badge { padding: 3px 9px; }
   .plan-description { min-height: 0; font-size: 12px; }
-  .plan-price { font-size: 62px; margin-top: 25px; }
+  .plan-price { margin-top: 25px; }
   .plan-price > span { font-size: 13px; }
   .button-plan { min-height: 46px; }
   .plan-features li { font-size: 13px; margin-bottom: 14px; padding-left: 23px; }
-  .plan-features > p { font-size: 12px; }
-  .plan-billing { font-size: 11px; }
   .faq-section { grid-template-columns: 1fr; gap: 35px; }
   .faq-list summary { font-size: 13px; gap: 15px; padding-block: 22px; }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
