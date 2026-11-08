@@ -100,11 +100,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
 }
-/* A quiet backdrop beneath the animated cells, fading before the stage edges. */
-.hero-stage::before {
+/* The same quiet grid connects the animated stage and the media surround. */
+.hero-stage::before,
+.hero-content::after {
   content: '';
   position: absolute;
-  inset: 0;
   z-index: -1;
   pointer-events: none;
   background-image:
@@ -112,8 +112,16 @@ ul { margin: 0; padding: 0; list-style: none; }
     linear-gradient(90deg, rgb(140 175 205 / 7%) 1px, transparent 1px);
   background-size: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 56px);
   background-position: center;
+}
+.hero-stage::before {
+  inset: 0;
   -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
   mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+}
+.hero-content::after {
+  inset: -100px calc(50% - 50vw) -220px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
 }
 .hero-stage .centered-heading { position: relative; z-index: 1; }
 .hero-cells {
@@ -132,7 +140,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .media-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; background: var(--surface-raised); }
+.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; background: var(--surface); }
+.platform-media::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 12%;
+  width: 76%;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(166 244 255 / 28%), transparent);
+}
 
 .caption-separator { color: var(--border-strong); margin-inline: 13px; }
 .split-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
@@ -584,6 +603,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 
   .section-heading > p:last-child { font-size: 13px; max-width: 300px; margin-inline: auto; }
   .platform-media { margin-top: 0; aspect-ratio: 1.8; border-radius: 20px; }
+  .hero-content::after { inset-block: -64px -128px; }
 
   .caption-separator { margin-inline: 4px; }
   .split-heading > p { font-size: 13px; margin-top: 21px; }
