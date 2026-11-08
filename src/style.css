@@ -495,7 +495,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .review-card h3 { color: var(--light); font-size: 18px; line-height: 1.4; }
 .review-copy { margin-top: 14px; color: var(--text-secondary); font-size: 13px; line-height: 1.85; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
 .review-stars { margin-top: auto; padding-top: 23px; color: var(--accent-gold); filter: saturate(1.2); font-size: 17px; line-height: 1; }
-.review-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 0.5px solid var(--border); font-size: 12px; font-weight: 500; }
+.review-author { display: flex; align-items: center; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 0.5px solid var(--border); font-size: 13px; font-weight: 500; }
 .review-avatar { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; background: var(--surface-hover); border: 0.5px solid var(--border-strong); color: var(--text-secondary); font-size: 11px; letter-spacing: 0.03em; }
 @keyframes review-scroll { to { transform: translateX(-50%); } }
 @media (max-width: 640px) {
