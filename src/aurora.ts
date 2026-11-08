@@ -1,4 +1,4 @@
-// Ocean-blue aurora behind the hero, with deeper folds and cyan highlights.
+// Ocean-blue aurora and illuminated grid behind the pricing content.
 const CONFIG = {
   colorA: '#0987FF',
   colorB: '#064DB8',
@@ -31,6 +31,11 @@ uniform vec3 uBackground;
 uniform float uSpread;
 uniform float uDiag;
 uniform vec2 uEdgeFade;
+uniform vec2 uCanvasSize;
+uniform vec2 uPixelSize;
+uniform vec2 uGridSize;
+uniform vec2 uGridOffset;
+uniform vec4 uGridMask;
 
 vec3 warp3d(vec3 pos, float t) {
   // Unequal fold widths and independent drift give the light its own rhythm.
@@ -67,6 +72,23 @@ void main() {
   float glow = 1.0 - exp(-density * uIntensity);
   // Compose the smooth screen-style glow directly against the page color.
   vec3 col = uBackground + (1.0 - uBackground) * tint * glow;
+  if (uGridSize.x > 0.0 && uGridSize.y > 0.0) {
+    // Match the CSS grid in top-down CSS pixels, including its 1px lines.
+    vec2 position = vec2(vUv.x, 1.0 - vUv.y);
+    vec2 pixel = position * uCanvasSize;
+    vec2 cell = mod(pixel + uGridOffset - 0.5, uGridSize);
+    vec2 distance = min(cell, uGridSize - cell);
+    vec2 line = 1.0 - smoothstep(0.5 - 0.5 * uPixelSize, 0.5 + 0.5 * uPixelSize, distance);
+    // Match the CSS mask's ellipse and its three linear opacity stops.
+    float radius = length((position - uGridMask.zw) / uGridMask.xy);
+    float mask = mix(1.0, 0.65, clamp((radius - 0.15) / 0.30, 0.0, 1.0));
+    mask *= 1.0 - clamp((radius - 0.45) / 0.35, 0.0, 1.0);
+    // Use the same light field as the aurora, so the illumination moves with it.
+    float light = smoothstep(0.015, 0.35, glow);
+    float illumination = light * 0.20 * max(line.x, line.y) * mask;
+    vec3 reflection = mix(tint, vec3(0.45, 0.90, 1.0), 0.45);
+    col += (1.0 - col) * reflection * illumination;
+  }
   // The opaque result already matches the page at the edges, avoiding a
   // second gradient in alpha and another CSS blending/quantization step.
   gl_FragColor = vec4(col, 1.0);
@@ -113,6 +135,11 @@ interface AuroraState {
   buffer: WebGLBuffer;
   uTime: WebGLUniformLocation | null;
   uIntensity: WebGLUniformLocation | null;
+  uCanvasSize: WebGLUniformLocation | null;
+  uPixelSize: WebGLUniformLocation | null;
+  uGridSize: WebGLUniformLocation | null;
+  uGridOffset: WebGLUniformLocation | null;
+  uGridMask: WebGLUniformLocation | null;
 }
 
 function setup(gl: WebGLRenderingContext): AuroraState | null {
@@ -143,6 +170,11 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
     buffer,
     uTime: gl.getUniformLocation(program, 'uTime'),
     uIntensity: gl.getUniformLocation(program, 'uIntensity'),
+    uCanvasSize: gl.getUniformLocation(program, 'uCanvasSize'),
+    uPixelSize: gl.getUniformLocation(program, 'uPixelSize'),
+    uGridSize: gl.getUniformLocation(program, 'uGridSize'),
+    uGridOffset: gl.getUniformLocation(program, 'uGridOffset'),
+    uGridMask: gl.getUniformLocation(program, 'uGridMask'),
   };
 }
 
@@ -167,6 +199,23 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
   let frame = 0;
   let inView = false;
   let contextLost = false;
+  const gridHost = canvas.closest<HTMLElement>('.pricing-section');
+
+  const alignGrid = (bounds: DOMRect) => {
+    if (!gridHost) return;
+    const grid = getComputedStyle(gridHost, '::before');
+    const [sizeX, sizeY = sizeX] = grid.backgroundSize.split(',')[0].trim().split(/\s+/).map(Number.parseFloat);
+    if (!(sizeX > 0 && sizeY > 0)) return;
+    const host = gridHost.getBoundingClientRect();
+    // CSS centers each repeating tile in the pseudo-element's positioning area.
+    const originX = host.left + gridHost.clientLeft + parseFloat(grid.left) + (parseFloat(grid.width) - sizeX) / 2;
+    const originY = host.top + gridHost.clientTop + parseFloat(grid.top) + (parseFloat(grid.height) - sizeY) / 2;
+    const [radiusX, radiusY] = grid.getPropertyValue('--pricing-grid-mask-radius').trim().split(/\s+/).map(value => parseFloat(value) / 100);
+    const [centerX, centerY] = grid.getPropertyValue('--pricing-grid-mask-center').trim().split(/\s+/).map(value => parseFloat(value) / 100);
+    gl.uniform2f(state.uGridSize, sizeX, sizeY);
+    gl.uniform2f(state.uGridOffset, bounds.left - originX, bounds.top - originY);
+    gl.uniform4f(state.uGridMask, radiusX, radiusY, centerX, centerY);
+  };
 
   const draw = (now: number) => {
     if (!startTime && !reducedMotion.matches) startTime = now;
@@ -179,23 +228,28 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
   };
 
   const resize = () => {
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    if (!width || !height) return;
+    const bounds = canvas.getBoundingClientRect();
+    const { width, height } = bounds;
+    if (!width || !height || contextLost) return;
     // Render at CSS-pixel resolution and cap wide-screen buffers to keep
     // the decorative effect lightweight.
     const scale = Math.min(1, 1536 / width);
     const nextWidth = Math.max(1, Math.round(width * scale));
     const nextHeight = Math.max(1, Math.round(height * scale));
-    if (canvas.width === nextWidth && canvas.height === nextHeight) return;
-    canvas.width = nextWidth;
-    canvas.height = nextHeight;
+    if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+      canvas.width = nextWidth;
+      canvas.height = nextHeight;
+    }
     gl.viewport(0, 0, nextWidth, nextHeight);
-    if (reducedMotion.matches && !contextLost) draw(12000);
+    gl.uniform2f(state.uCanvasSize, width, height);
+    gl.uniform2f(state.uPixelSize, width / nextWidth, height / nextHeight);
+    alignGrid(bounds);
+    if (reducedMotion.matches) draw(12000);
   };
 
   const resizeObserver = new ResizeObserver(resize);
   resizeObserver.observe(canvas);
+  if (gridHost) resizeObserver.observe(gridHost);
   resize();
 
   const renderFrame = (now: number) => {
@@ -239,7 +293,7 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     if (!next) return;
     state = next;
     contextLost = false;
-    gl.viewport(0, 0, canvas.width, canvas.height);
+    resize();
     updateMotion();
   };
   canvas.addEventListener('webglcontextlost', onContextLost);

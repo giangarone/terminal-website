@@ -43,7 +43,7 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
-The pricing grid uses the original WebGL aurora from `src/aurora.ts` as a decorative background behind the plan cards.
+The pricing section uses the WebGL aurora from `src/aurora.ts` as a full-section decorative background. Its light also brightens the matching grid lines as the aurora moves. Both layers stay behind the heading, plan cards, and checkout reassurance.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 
