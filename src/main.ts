@@ -1,6 +1,6 @@
 import { productImages } from './content.ts';
 import { setupIndicators } from './indicators.ts';
-import { initAurora } from './aurora.ts';
+import { initHeroCells } from './hero-cells.ts';
 
 setupIndicators();
 
@@ -15,23 +15,8 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
   reviewTrack.classList.add('is-looping');
 }
 
-const auroraCleanups = Array.from(document.querySelectorAll<HTMLCanvasElement>('.aurora-canvas')).map(canvas => initAurora(canvas));
-const stopAurora = () => auroraCleanups.forEach(cleanup => cleanup());
-
-// Let the cells rest whenever the hero or the browser tab is out of view.
-const heroGrid = document.querySelector<HTMLElement>('.hero-grid');
-if (heroGrid) {
-  let inView = false;
-  const updateGridMotion = () => heroGrid.classList.toggle('is-animating', inView && !document.hidden);
-  const gridObserver = new IntersectionObserver(entries => {
-    inView = entries[0].isIntersecting;
-    updateGridMotion();
-  });
-  gridObserver.observe(heroGrid);
-  document.addEventListener('visibilitychange', updateGridMotion);
-  window.addEventListener('pagehide', () => heroGrid.classList.remove('is-animating'));
-  window.addEventListener('pageshow', updateGridMotion);
-}
+const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
+if (heroCells) initHeroCells(heroCells);
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
@@ -145,7 +130,5 @@ motionPreference.addEventListener('change', event => {
   entranceObserver?.disconnect();
   entranceElements.forEach(showImmediately);
 });
-
-window.addEventListener('pagehide', stopAurora);
 
 document.querySelector('#copyright-year')!.textContent = String(new Date().getFullYear());

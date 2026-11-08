@@ -91,62 +91,23 @@ ul { margin: 0; padding: 0; list-style: none; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
 
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
-.hero { position: relative; isolation: isolate; text-align: center; padding-block: 107px 58px; }
+.hero { position: relative; isolation: isolate; text-align: center; padding: 0 0 58px; --hero-inset: 107px; }
 .hero-content { position: relative; z-index: 2; }
 .hero-description { margin-top: 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 
-/* A quiet 64px grid above the aurora, softened behind the headline. */
-.hero-grid {
+.hero-stage {
+  isolation: isolate;
+  position: relative;
+  padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
+}
+.hero-stage .centered-heading { position: relative; z-index: 1; }
+.hero-cells {
   position: absolute;
   inset: 0;
-  z-index: 1;
-  overflow: hidden;
+  width: 100%;
+  height: clamp(340px, 34vw, 510px);
   pointer-events: none;
-  mask-image:
-    linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent),
-    linear-gradient(180deg, transparent, #000 48px, #000 65%, transparent);
-  mask-composite: intersect;
-}
-.hero-grid-field {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(90deg, rgb(119 183 255 / 8%) 1px, transparent 1px),
-    linear-gradient(180deg, rgb(119 183 255 / 8%) 1px, transparent 1px);
-  background-size: 64px 64px;
-  background-position: center top;
-  mask-image: radial-gradient(ellipse 340px 180px at 50% 190px, rgb(0 0 0 / 10%), rgb(0 0 0 / 35%) 55%, #000);
-}
-/* Stationary cells brighten for five seconds, staggered across a quiet cycle. */
-.hero-grid-cell {
-  position: absolute;
-  left: calc(50% - 31px + var(--cell-column) * 64px);
-  top: calc(var(--cell-row) * 64px + 1px);
-  width: 63px;
-  height: 63px;
-  background: linear-gradient(135deg, rgb(9 135 255 / 12%), rgb(7 188 250 / 4%));
-  opacity: 0;
-  animation: hero-grid-cell-glow 12s ease-in-out infinite both;
-  animation-delay: var(--cell-delay);
-  animation-play-state: paused;
-}
-.hero-grid.is-animating .hero-grid-cell { animation-play-state: running; }
-.hero-grid-cell:nth-child(1) { --cell-column: -7; --cell-row: 1; --cell-delay: -0.5s; }
-.hero-grid-cell:nth-child(2) { --cell-column: 5; --cell-row: 2; --cell-delay: -1.5s; }
-.hero-grid-cell:nth-child(3) { --cell-column: -5; --cell-row: 3; --cell-delay: -2.5s; }
-.hero-grid-cell:nth-child(4) { --cell-column: 7; --cell-row: 4; --cell-delay: -3.5s; }
-.hero-grid-cell:nth-child(5) { --cell-column: -3; --cell-row: 5; --cell-delay: -4.5s; }
-.hero-grid-cell:nth-child(6) { --cell-column: 3; --cell-row: 1; --cell-delay: -5.5s; }
-.hero-grid-cell:nth-child(7) { --cell-column: -8; --cell-row: 2; --cell-delay: -6.5s; }
-.hero-grid-cell:nth-child(8) { --cell-column: 8; --cell-row: 1; --cell-delay: -7.5s; }
-.hero-grid-cell:nth-child(9) { --cell-column: -6; --cell-row: 4; --cell-delay: -8.5s; }
-.hero-grid-cell:nth-child(10) { --cell-column: 6; --cell-row: 5; --cell-delay: -9.5s; }
-.hero-grid-cell:nth-child(11) { --cell-column: -4; --cell-row: 1; --cell-delay: -10.5s; }
-.hero-grid-cell:nth-child(12) { --cell-column: 4; --cell-row: 3; --cell-delay: -11.5s; }
-@keyframes hero-grid-cell-glow {
-  0%, 42%, 100% { opacity: 0; }
-  21% { opacity: 0.75; }
 }
 
 .no-script-note { font-size: 12px; margin-top: 8px; color: var(--text-secondary); }
@@ -157,7 +118,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .media-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.platform-media { aspect-ratio: 1.8; margin-top: 52px; border-radius: 32px; box-shadow: 0 -1px 0 var(--light-medium), 0 28px 65px var(--shadow); background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
+.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; box-shadow: 0 -1px 0 var(--light-medium), 0 28px 65px var(--shadow); background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
 
 .caption-separator { color: var(--border-strong); margin-inline: 13px; }
 .split-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
@@ -443,7 +404,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .faq-indicator::before, .faq-indicator::after { content: ''; position: absolute; background: var(--text-muted); left: 0; top: 5px; width: 12px; height: 1px; }
 .faq-indicator::after { transform: rotate(90deg); }
 details[open] .faq-indicator::after { transform: rotate(0); }
-/* Full-width aurora, contained vertically within the hero. */
+/* Reusable aurora canvas for a positioned section. */
 .aurora-canvas { position: absolute; top: 0; left: calc(50% - 50vw); width: 100vw; height: 100%; pointer-events: none; z-index: 0; }
 .site-footer { position: relative; z-index: 1; border-top: .5px solid var(--border); padding-block: 64px 28px; background: var(--footer-background); backdrop-filter: blur(12px); }
 .footer-main { display: grid; grid-template-columns: 2fr repeat(3, minmax(0, 1fr)); gap: 32px; padding-bottom: 48px; }
@@ -474,7 +435,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .desktop-nav a { font-size: 14px; }
 }
 @media (min-width: 1600px) {
-  .hero { padding-block: 110px 95px; }
+  .hero { padding: 0 0 95px; --hero-inset: 110px; }
   .hero-description { font-size: 16px; }
 }
 @media (max-width: 1100px) {
@@ -500,7 +461,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .wordmark { width: 150px; }
   .desktop-nav { display: none; }
   .menu-toggle { display: block; }
-  .hero { padding-block: 82px 72px; }
+  .hero { padding: 0 0 72px; --hero-inset: 82px; }
   .split-heading { display: block; }
   .split-heading > p { margin-top: 23px; max-width: 480px; }
   .data-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -535,24 +496,14 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 12px; }
   .header-actions .button-small span { display: none; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
-  .hero { padding-block: 67px 40px; }
-  .hero-grid-field { mask-image: radial-gradient(ellipse 170px 160px at 50% 160px, rgb(0 0 0 / 10%), #000); }
-  .hero-grid-cell:nth-child(1) { --cell-column: -2; --cell-row: 1; }
-  .hero-grid-cell:nth-child(2) { --cell-column: 2; --cell-row: 2; --cell-delay: -2s; }
-  .hero-grid-cell:nth-child(3) { --cell-column: -2; --cell-row: 4; --cell-delay: -3.5s; }
-  .hero-grid-cell:nth-child(4) { --cell-column: 2; --cell-row: 5; --cell-delay: -5s; }
-  .hero-grid-cell:nth-child(5) { --cell-column: -1; --cell-row: 1; --cell-delay: -6.5s; }
-  .hero-grid-cell:nth-child(6) { --cell-column: 1; --cell-row: 0; --cell-delay: -8s; }
-  .hero-grid-cell:nth-child(7) { --cell-column: -2; --cell-row: 3; --cell-delay: -9.5s; }
-  .hero-grid-cell:nth-child(8) { --cell-column: 2; --cell-row: 4; --cell-delay: -11s; }
-  .hero-grid-cell:nth-child(n + 9) { display: none; }
+  .hero { padding: 0 0 40px; --hero-inset: 67px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
   .desktop-break { display: none; }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
 
   .section-heading > p:last-child { font-size: 13px; max-width: 300px; margin-inline: auto; }
-  .platform-media { margin-top: 32px; aspect-ratio: 1.8; border-radius: 20px; }
+  .platform-media { margin-top: 0; aspect-ratio: 1.8; border-radius: 20px; }
 
   .caption-separator { margin-inline: 4px; }
   .split-heading > p { font-size: 13px; margin-top: 21px; }
@@ -596,7 +547,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-grid-cell { display: none; }
   [data-entrance-pending] { opacity: 1; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

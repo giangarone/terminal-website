@@ -48,31 +48,17 @@
 
     <main id="main">
       <section class="hero platform-section section" id="platform" aria-labelledby="platform-title">
-        <canvas class="aurora-canvas" aria-hidden="true"></canvas>
-        <div class="hero-grid" aria-hidden="true">
-          <div class="hero-grid-field">
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-            <span class="hero-grid-cell"></span>
-          </div>
-        </div>
-        <div class="container hero-content">
-          <div class="centered-heading">
+        <div class="hero-stage">
+          <canvas class="hero-cells" aria-hidden="true"></canvas>
+          <div class="container centered-heading">
             <h1 id="platform-title">All your markets.<br /><span class="muted">One powerful workspace.</span></h1>
             <p class="hero-description">Live NASDAQ and CME futures. L1, L2, and full market depth.<br class="desktop-break" /> Powerful AI. Precision execution. All in one terminal.</p>
             <div class="hero-actions">
               <button class="button button-primary" type="button" aria-disabled="true">Get started for free <span aria-hidden="true">→</span></button>
             </div>
           </div>
+        </div>
+        <div class="container hero-content">
           <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
           <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
 
