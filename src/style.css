@@ -427,18 +427,48 @@ ul { margin: 0; padding: 0; list-style: none; }
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
 .pricing-section > .aurora-canvas { z-index: -2; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
+@property --plan-stroke-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 .featured-plan {
   --text-secondary: #b8c6dc;
   --text-muted: #9fb1ca;
   --border: #283f61;
   --pro-button: #2563eb;
   --pro-button-hover: #1d4ed8;
-  background: linear-gradient(155deg, #152d50, #0e1a2f 52%, #0c1423);
+  position: relative;
+  isolation: isolate;
+  background: #13233c;
   border-color: var(--accent-blue);
+}
+/* Only the border carries the moving light; the card surface stays solid. */
+.featured-plan::before,
+.featured-plan::after {
+  content: '';
+  position: absolute;
+  inset: -0.5px;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(from var(--plan-stroke-angle), transparent 0deg 270deg, #2563eb 310deg, #60a5fa 335deg, #eff8ff 352deg, transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: plan-stroke-orbit 6s linear infinite;
+}
+.featured-plan::after {
+  filter: blur(2px);
+  opacity: 0.45;
+}
+@keyframes plan-stroke-orbit {
+  to { --plan-stroke-angle: 360deg; }
 }
 .plan-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 30px; }
 .plan-heading h3 { font-size: 18px; }
-.plan-badge { flex-shrink: 0; border: 0.5px solid rgb(96 165 250 / 35%); border-radius: 100px; background: rgb(59 130 246 / 16%); color: #bfdbfe; padding: 3px 9px; font-size: 9px; font-weight: 550; white-space: nowrap; }
+.plan-badge { flex-shrink: 0; border: 0.5px solid #3983f7; border-radius: 8px; background: #3983f780; padding: 3px 9px; font-size: 10px; font-weight: 550; white-space: nowrap; }
 .plan-description { margin-top: 8px; color: var(--text-secondary); font-size: 11px; }
 .plan-price { font-size: 60px; font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
 .plan-price > span { color: var(--text-muted); font-size: 12px; font-weight: 400; letter-spacing: 0; margin-left: 8px; }
@@ -566,7 +596,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .split-heading > p { max-width: 310px; }
   .pricing-card { padding: 24px; }
   .faq-section { gap: 60px; }
-  .plan-badge { font-size: 8px; padding-inline: 7px; }
+  .plan-badge { padding-inline: 7px; }
 }
 @media (max-width: 850px) {
   .footer-main { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 36px 24px; }
@@ -633,7 +663,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .pricing-card { padding: 28px; border-radius: 16px; }
   .plan-heading { min-height: 30px; flex-wrap: nowrap; align-items: center; }
   .plan-heading h3 { width: auto; font-size: 20px; }
-  .plan-badge { font-size: 9px; padding: 3px 9px; }
+  .plan-badge { padding: 3px 9px; }
   .plan-description { min-height: 0; font-size: 12px; }
   .plan-price { font-size: 62px; margin-top: 25px; }
   .plan-price > span { font-size: 13px; }
