@@ -1,14 +1,13 @@
-// Aurora background behind the hero.
+// Ocean-blue aurora behind the hero, with deeper folds and cyan highlights.
 const CONFIG = {
-  colorA: '#B8B8B8',
-  colorB: '#A4A4A4',
-  colorC: '#D6D6D6',
+  colorA: '#0987FF',
+  colorB: '#064DB8',
+  colorC: '#07BCFA',
   brightness: 1,
   speed: 0.52,
   spread: 0.27,
   diag: -1,
   alpha: 2,
-  grain: 8 / 255,
 };
 
 const VERTEX_SHADER = `
@@ -25,7 +24,6 @@ precision highp float;
 varying vec2 vUv;
 uniform float uTime;
 uniform float uIntensity;
-uniform float uGrain;
 uniform vec3 uColorA;
 uniform vec3 uColorB;
 uniform vec3 uColorC;
@@ -65,17 +63,10 @@ void main() {
   density *= m * m;
   float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
   density *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
-  // Compress bright folds smoothly to keep the monochrome glow soft.
+  // Compress bright folds smoothly to keep the blue glow soft.
   float glow = 1.0 - exp(-density * uIntensity);
-  // Compose the screen-style glow against the page color before quantizing.
+  // Compose the smooth screen-style glow directly against the page color.
   vec3 col = uBackground + (1.0 - uBackground) * tint * glow;
-  // Uncorrelated, static grain avoids visible diagonal patterns. Give it
-  // several 8-bit levels of headroom so it survives browser compositing.
-  vec3 noise = fract(gl_FragCoord.xyx * vec3(0.1031, 0.1030, 0.0973));
-  noise += dot(noise, noise.yzx + 33.33);
-  float n = fract((noise.x + noise.y) * noise.z);
-  float grainMask = smoothstep(0.0, 0.02, glow);
-  col = clamp(col + (n - 0.5) * uGrain * grainMask, 0.0, 1.0);
   // The opaque result already matches the page at the edges, avoiding a
   // second gradient in alpha and another CSS blending/quantization step.
   gl_FragColor = vec4(col, 1.0);
@@ -146,7 +137,6 @@ function setup(gl: WebGLRenderingContext): AuroraState | null {
   gl.uniform1f(gl.getUniformLocation(program, 'uSpread'), CONFIG.spread);
   gl.uniform1f(gl.getUniformLocation(program, 'uDiag'), CONFIG.diag);
   gl.uniform2f(gl.getUniformLocation(program, 'uEdgeFade'), 0.2, 0.32);
-  gl.uniform1f(gl.getUniformLocation(program, 'uGrain'), CONFIG.grain);
 
   return {
     program,
@@ -192,8 +182,8 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
     if (!width || !height) return;
-    // Render at CSS-pixel resolution so upscaling does not blur the dither.
-    // Cap wide-screen buffers to keep the decorative effect lightweight.
+    // Render at CSS-pixel resolution and cap wide-screen buffers to keep
+    // the decorative effect lightweight.
     const scale = Math.min(1, 1536 / width);
     const nextWidth = Math.max(1, Math.round(width * scale));
     const nextHeight = Math.max(1, Math.round(height * scale));

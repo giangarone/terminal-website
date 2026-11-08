@@ -68,7 +68,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .skip-link:focus { transform: translateY(0); }
 
 /* Navigation */
-.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-background); backdrop-filter: blur(12px); }
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--header-background); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); }
 .header-inner { display: flex; align-items: center; justify-content: space-between; height: 80px; gap: 32px; }
 .wordmark { display: inline-flex; align-items: center; flex-shrink: 0; width: 175px; max-width: 100%; }
 .wordmark img { width: 100%; height: auto; }
@@ -80,7 +80,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .button span[aria-hidden] { font-size: 18px; line-height: 1; font-weight: 400; }
 .button-primary { background: var(--button); color: var(--button-text); }
 .button-primary:hover { background: var(--button-hover); }
-.button-small { min-height: 39px; font-size: 11px; padding: 8px 17px; gap: 8px; }
+.button-small { min-height: 39px; font-size: 13px; padding: 8px 17px; gap: 8px; }
 .button-small span[aria-hidden] { font-size: 15px; }
 .menu-toggle { display: none; background: none; border: 0.5px solid var(--border); border-radius: 50%; width: 42px; height: 42px; padding: 12px; }
 .menu-toggle span { width: 16px; height: 1px; background: var(--text); display: block; margin-block: 5px; }
@@ -478,7 +478,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .section h2, .hero h1 { font-size: 37px; letter-spacing: -0.05em; }
   .header-inner { height: 72px; gap: 12px; }
   .header-actions { gap: 8px; }
-  .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 10px; }
+  .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 12px; }
   .header-actions .button-small span { display: none; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
   .hero { padding-block: 67px 40px; }
