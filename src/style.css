@@ -152,7 +152,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   width: 76%;
   height: 1px;
   pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgb(166 244 255 / 28%), transparent);
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 28%), transparent);
 }
 
 .caption-separator { color: var(--border-strong); margin-inline: 13px; }
