@@ -54,6 +54,8 @@ export function setupIndicators() {
   function updateNavigation() {
     previous.disabled = track.scrollLeft <= 2;
     next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    track.classList.toggle('can-scroll-left', !previous.disabled);
+    track.classList.toggle('can-scroll-right', !next.disabled);
   }
 
   function move(direction: number) {

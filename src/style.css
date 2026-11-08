@@ -147,11 +147,50 @@ ul { margin: 0; padding: 0; list-style: none; }
 .visual-caption { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted); margin-top: 14px; gap: 20px; }
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
+/* Typed strengths let the gradient fade in and out instead of switching images. */
+@property --indicator-fade-left {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@property --indicator-fade-right {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
 .indicators-heading h2 { margin-top: 21px; }
 .indicators-heading > p { max-width: 360px; }
-.indicator-track { margin-top: 48px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 14px; }
+.indicator-track {
+  --indicator-fade-size: clamp(16px, 3vw, 48px);
+  --indicator-edge-mask: linear-gradient(90deg,
+    rgb(0 0 0 / calc(1 - var(--indicator-fade-left, 0))) 0%,
+    rgb(0 0 0 / calc(1 - 0.9 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.2),
+    rgb(0 0 0 / calc(1 - 0.65 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.4),
+    rgb(0 0 0 / calc(1 - 0.35 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.6),
+    rgb(0 0 0 / calc(1 - 0.1 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.8),
+    #000 var(--indicator-fade-size),
+    #000 calc(100% - var(--indicator-fade-size)),
+    rgb(0 0 0 / calc(1 - 0.1 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.8),
+    rgb(0 0 0 / calc(1 - 0.35 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.6),
+    rgb(0 0 0 / calc(1 - 0.65 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.4),
+    rgb(0 0 0 / calc(1 - 0.9 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.2),
+    rgb(0 0 0 / calc(1 - var(--indicator-fade-right, 0))) 100%
+  );
+  margin-top: 48px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 14px;
+  -webkit-mask-image: var(--indicator-edge-mask);
+  mask-image: var(--indicator-edge-mask);
+  transition: --indicator-fade-left 450ms ease-in-out, --indicator-fade-right 450ms ease-in-out;
+}
+/* Keep the fade at the viewport edge, only where more cards are offscreen. */
+.indicator-track.can-scroll-left { --indicator-fade-left: 1; }
+.indicator-track.can-scroll-right { --indicator-fade-right: 1; }
 .indicator-track::-webkit-scrollbar { display: none; }
-.indicator-track:focus-visible { outline-offset: 4px; }
+.indicator-track:focus-visible { outline-offset: 4px; -webkit-mask-image: none; mask-image: none; }
 .indicator-list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 68px) / 3.2); gap: 20px; }
 .indicator-item { min-width: 0; scroll-snap-align: start; }
 .indicator-card { display: flex; flex-direction: column; height: 100%; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); transition: border-color 180ms ease; }
