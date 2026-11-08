@@ -45,6 +45,8 @@ The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. Th
 
 The pricing grid uses the original WebGL aurora from `src/aurora.ts` as a decorative background behind the plan cards.
 
+The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
+
 ### Feature showcase
 
 The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
@@ -57,6 +59,7 @@ Coin icons are local files provided for this site (`public/assets/btc.png`, `eth
 Brand marks identify the illustrated assets; no partnership or endorsement is implied.
 
 - Inter variable font: https://github.com/rsms/inter — SIL Open Font License is included at `public/fonts/OFL.txt`.
+- Checkout security and payment SVGs: original assets from https://v1-7.webflow.io/blackfriday, copied locally at the site owner's request.
 
 ## Publishing
 

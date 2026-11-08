@@ -370,6 +370,21 @@ ul { margin: 0; padding: 0; list-style: none; }
 .featured-plan .plan-features li::before { border-color: var(--accent-blue); }
 .plan-features li:last-child { margin-bottom: 0; }
 
+/* Checkout reassurance: site typography with the original icons and layout. */
+.n-safe-div { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; width: 100%; margin: 60px auto 0; }
+.n-safe-div .n-ssc-text { color: #f7f7f7; font-size: 40px; font-weight: 600; line-height: 1; letter-spacing: normal; }
+.n-safe-div ._w-safe-secure-imgs-copy { display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 12px; max-width: 60%; }
+.n-safe-div .bf-safe-icon { width: auto; height: 40px; }
+@media (max-width: 991px) {
+  .n-safe-div { flex-direction: column; }
+  .n-safe-div ._w-safe-secure-imgs-copy { justify-content: flex-start; max-width: 100%; }
+}
+@media (max-width: 479px) {
+  .n-safe-div { align-items: center; }
+  .n-safe-div .n-ssc-text { text-align: center; font-size: 32px; }
+  .n-safe-div ._w-safe-secure-imgs-copy { justify-content: center; }
+}
+
 /* Two identical groups keep the reviews moving at a constant, seamless pace. */
 .reviews-section { --review-gap: 20px; }
 .reviews-heading { text-align: center; }
