@@ -41,7 +41,7 @@ Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are U
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`. The decorative hero aurora is rendered with WebGL in `src/aurora.ts`, using the logo blues (`#0987FF` and `#07BCFA`) with deeper ocean-blue folds (`#064DB8`) and independent drift speeds. The glow is smooth, without added grain; the canvas renders at CSS-pixel resolution, capped at 1536 pixels wide. Animation stops off-screen and in hidden tabs; reduced-motion preferences show a still frame.
 
-A faint, static 64px grid overlays the animated aurora. It fades near the edges and behind the headline, with a narrower headline fade on mobile. Its markup lives in `index.html` and its styling is in `src/style.css`.
+A faint 64px grid overlays the animated aurora. Twelve stationary cells gently brighten to translucent blue and fade over five seconds, staggered across a 12-second cycle. The grid fades near the edges and behind the headline, with eight cells and a narrower headline fade on mobile. Cell animations pause off-screen and in hidden tabs; reduced-motion preferences show only the static grid. Its markup lives in `index.html`, its styling and cell positions are in `src/style.css`, and its visibility handling is in `src/main.ts`.
 
 ### Feature showcase
 
