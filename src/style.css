@@ -100,6 +100,21 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
 }
+/* A quiet backdrop beneath the animated cells, fading before the stage edges. */
+.hero-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(140 175 205 / 7%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(140 175 205 / 7%) 1px, transparent 1px);
+  background-size: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 56px);
+  background-position: center;
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+}
 .hero-stage .centered-heading { position: relative; z-index: 1; }
 .hero-cells {
   position: absolute;
@@ -117,7 +132,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .media-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; box-shadow: 0 -1px 0 var(--light-medium), 0 28px 65px var(--shadow); background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
+.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
 
 .caption-separator { color: var(--border-strong); margin-inline: 13px; }
 .split-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
