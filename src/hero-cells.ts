@@ -35,13 +35,17 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
           const light = crest ** 6;
           const depth = (1 - Math.abs(across) * 0.85) * taper;
           const size = (compact ? 2.2 : 3.1) * (1.05 + 0.52 * light + across * 0.34);
-          ctx.globalAlpha = depth * (0.18 + 0.78 * light);
-          ctx.fillStyle = light > 0.82 ? '#9be9ff' : light > 0.32 ? '#45beff' : '#338ad7';
+          ctx.globalAlpha = Math.min(1, depth * (0.18 + 0.94 * light));
+          ctx.fillStyle = light > 0.82 ? '#a6f4ff' : light > 0.32 ? '#16baff' : '#188cff';
+          // A small halo on the crests keeps the dimmer cells crisp.
+          ctx.shadowColor = '#16baff80';
+          ctx.shadowBlur = light > 0.65 ? (compact ? 4 : 7) * light : 0;
           ctx.fillRect(x - size / 2, y - size / 2, size, size);
         }
       }
     }
     ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
   }
 
   function tick(now: number) {
