@@ -50,45 +50,7 @@
       <section class="hero platform-section section" id="platform" aria-labelledby="platform-title">
         <canvas class="aurora-canvas" aria-hidden="true"></canvas>
         <div class="hero-grid" aria-hidden="true">
-          <div class="hero-grid-field">
-            <svg class="hero-grid-energy" width="1536" height="100%" focusable="false">
-              <defs>
-                <!-- X coordinates follow the centered 64px grid, offset by half a cell. -->
-                <path id="hero-grid-route-left" d="M96 320H288V128H544" pathLength="1" />
-                <path id="hero-grid-route-right" d="M1440 64H1248V256H1120V384H992" pathLength="1" />
-                <path id="hero-grid-route-center" d="M352 64H544V384H672" pathLength="1" />
-                <path id="hero-grid-route-mobile-left" d="M608 384V256H672V64H800" pathLength="1" />
-                <path id="hero-grid-route-mobile-right" d="M928 64V320H864V384H800" pathLength="1" />
-                <filter id="hero-grid-glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="3" />
-                </filter>
-              </defs>
-              <g class="hero-grid-desktop-routes">
-                <g class="hero-grid-pulse" style="--pulse-delay: -1s">
-                  <use class="hero-grid-halo" href="#hero-grid-route-left" />
-                  <use class="hero-grid-core" href="#hero-grid-route-left" />
-                </g>
-                <g class="hero-grid-pulse" style="--pulse-delay: -5s">
-                  <use class="hero-grid-halo" href="#hero-grid-route-right" />
-                  <use class="hero-grid-core" href="#hero-grid-route-right" />
-                </g>
-                <g class="hero-grid-pulse" style="--pulse-delay: -9s">
-                  <use class="hero-grid-halo" href="#hero-grid-route-center" />
-                  <use class="hero-grid-core" href="#hero-grid-route-center" />
-                </g>
-              </g>
-              <g class="hero-grid-mobile-routes">
-                <g class="hero-grid-pulse" style="--pulse-delay: -1s">
-                  <use class="hero-grid-halo" href="#hero-grid-route-mobile-left" />
-                  <use class="hero-grid-core" href="#hero-grid-route-mobile-left" />
-                </g>
-                <g class="hero-grid-pulse" style="--pulse-delay: -7s">
-                  <use class="hero-grid-halo" href="#hero-grid-route-mobile-right" />
-                  <use class="hero-grid-core" href="#hero-grid-route-mobile-right" />
-                </g>
-              </g>
-            </svg>
-          </div>
+          <div class="hero-grid-field"></div>
         </div>
         <div class="container hero-content">
           <div class="centered-heading">
