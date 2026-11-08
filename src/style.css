@@ -100,9 +100,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
 }
-/* The same quiet grid connects the animated stage and the media surround. */
+/* The same quiet grid connects the hero, media surround, and pricing. */
 .hero-stage::before,
-.hero-content::after {
+.hero-content::after,
+.pricing-section::before {
   content: '';
   position: absolute;
   z-index: -1;
@@ -410,10 +411,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Editable pricing. */
-/* Keep the aurora behind the whole section, including animated headings. */
+/* Keep both decorative layers behind the content, with the grid above the opaque aurora. */
 .pricing-section { position: relative; isolation: isolate; }
+.pricing-section::before {
+  inset: 0 calc(50% - 50vw);
+  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
+  mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
+}
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
-.pricing-grid > .aurora-canvas { top: -48px; height: calc(100% + 96px); z-index: -1; }
+.pricing-grid > .aurora-canvas { top: -48px; height: calc(100% + 96px); z-index: -2; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
 .featured-plan {
   --text-secondary: #b8c6dc;
