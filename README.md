@@ -41,6 +41,8 @@ Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are U
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`. The decorative hero aurora is rendered with WebGL in `src/aurora.ts`, using the logo blues (`#0987FF` and `#07BCFA`) with deeper ocean-blue folds (`#064DB8`) and independent drift speeds. The glow is smooth, without added grain; the canvas renders at CSS-pixel resolution, capped at 1536 pixels wide. Animation stops off-screen and in hidden tabs; reduced-motion preferences show a still frame.
 
+A faint 64px grid overlays the aurora, with short blue pulses following its lines and turning at intersections. The grid fades near the edges and behind the headline. Inline SVG routes live in `index.html`, with separate paths for mobile; styling and pulse timing are in `src/style.css`. Pulses pause off-screen and in hidden tabs, and reduced-motion preferences show only the static grid.
+
 ### Feature showcase
 
 The five-card section at `#features` sits immediately before pricing. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.

@@ -18,6 +18,24 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 const auroraCleanups = Array.from(document.querySelectorAll<HTMLCanvasElement>('.aurora-canvas')).map(canvas => initAurora(canvas));
 const stopAurora = () => auroraCleanups.forEach(cleanup => cleanup());
 
+// Pause the decorative grid when the hero or browser tab is out of view.
+const heroGrid = document.querySelector<HTMLElement>('.hero-grid');
+if (heroGrid) {
+  let inView = false;
+  const updateGridMotion = () => heroGrid.classList.toggle('is-animating', inView && !document.hidden);
+  const gridObserver = new IntersectionObserver(entries => {
+    inView = entries[0].isIntersecting;
+    updateGridMotion();
+  });
+  gridObserver.observe(heroGrid);
+  document.addEventListener('visibilitychange', updateGridMotion);
+  window.addEventListener('pagehide', () => {
+    gridObserver.disconnect();
+    document.removeEventListener('visibilitychange', updateGridMotion);
+    heroGrid.classList.remove('is-animating');
+  }, { once: true });
+}
+
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
 
