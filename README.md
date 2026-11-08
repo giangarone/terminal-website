@@ -43,7 +43,7 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
-The original WebGL aurora is preserved in `src/aurora.ts`. To use it in another positioned section, add a decorative canvas with the existing `aurora-canvas` class and call `initAurora(canvas)`. Its return value cleans up the renderer.
+The pricing grid uses the original WebGL aurora from `src/aurora.ts` as a decorative background behind the plan cards.
 
 ### Feature showcase
 

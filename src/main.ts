@@ -1,6 +1,7 @@
 import { productImages } from './content.ts';
 import { setupIndicators } from './indicators.ts';
 import { initHeroCells } from './hero-cells.ts';
+import { initAurora } from './aurora.ts';
 
 setupIndicators();
 
@@ -17,6 +18,9 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 
 const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
 if (heroCells) initHeroCells(heroCells);
+
+const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
+if (pricingAurora) initAurora(pricingAurora);
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
