@@ -132,7 +132,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .media-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
-.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; background: linear-gradient(150deg, var(--surface-raised), var(--surface) 65%); }
+.platform-media { aspect-ratio: 1.8; margin-top: 0; border-radius: 32px; background: var(--surface-raised); }
 
 .caption-separator { color: var(--border-strong); margin-inline: 13px; }
 .split-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 70px; }
@@ -159,7 +159,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .depth-feature h3 { font-size: 17px; margin-bottom: 8px; }
 .depth-feature p { color: var(--text-secondary); font-size: 13px; line-height: 1.85; max-width: 380px; }
 .depth-media { aspect-ratio: 4 / 3; }
-.visual-caption { display: flex; justify-content: space-between; font-size: 9px; color: var(--text-muted); margin-top: 14px; gap: 20px; }
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
 /* Typed strengths let the gradient fade in and out instead of switching images. */
@@ -209,7 +208,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .indicator-list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 68px) / 3.2); gap: 20px; }
 .indicator-item { min-width: 0; scroll-snap-align: start; }
 .indicator-card { display: flex; flex-direction: column; height: 100%; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); transition: border-color 180ms ease; }
-.indicator-image { position: relative; aspect-ratio: 1.8; background: linear-gradient(145deg, var(--surface-raised), var(--surface) 90%); border-bottom: 0.5px solid var(--border); }
+.indicator-image { position: relative; aspect-ratio: 1.8; border-bottom: 0.5px solid var(--border); }
 .indicator-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .indicator-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
 .indicator-card h3 { font-size: 18px; line-height: 1.4; }
@@ -392,7 +391,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 /* Editable pricing. */
-.pricing-grid { position: relative; isolation: isolate; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
+/* Keep the aurora behind the whole section, including animated headings. */
+.pricing-section { position: relative; isolation: isolate; }
+.pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
 .pricing-grid > .aurora-canvas { top: -48px; height: calc(100% + 96px); z-index: -1; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
 .featured-plan {
@@ -548,7 +549,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .depth-feature h3 { font-size: 15px; }
   .depth-feature p { font-size: 12px; }
   .depth-media { aspect-ratio: 3 / 4; }
-  .visual-caption span:last-child { display: none; }
   .pricing-grid { gap: 12px; }
   .pricing-card { padding: 24px 18px; }
   .plan-heading { flex-wrap: wrap; gap: 4px; align-content: start; min-height: 59px; }
@@ -592,8 +592,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .depth-feature h3 { font-size: 16px; }
   .depth-feature p { font-size: 12px; }
   .depth-media { aspect-ratio: 4 / 3; border-radius: 14px; }
-  .visual-caption { font-size: 8px; }
-  .visual-caption span:last-child { display: inline; }
   .pricing-grid { grid-template-columns: 1fr; gap: 18px; margin-top: 35px; }
   .pricing-card { padding: 28px; border-radius: 16px; }
   .plan-heading { min-height: 30px; flex-wrap: nowrap; align-items: center; }
