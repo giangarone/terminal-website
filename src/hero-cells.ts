@@ -4,14 +4,14 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const cellSize = 6;
   const cellPitch = 8;
-  // Blend ice blue through cyan into deeper blue as each illuminated cell fades.
+  // Carry the logo's cyan and azure from a pale highlight into a deep blue fade.
   const colorStops = [
-    { at: 0, rgb: [213, 251, 255] },
-    { at: 0.08, rgb: [157, 239, 255] },
-    { at: 0.18, rgb: [93, 225, 255] },
-    { at: 0.35, rgb: [53, 213, 255] },
-    { at: 0.65, rgb: [22, 171, 255] },
-    { at: 1, rgb: [32, 100, 235] },
+    { at: 0, rgb: [186, 234, 255] },
+    { at: 0.08, rgb: [99, 217, 255] },
+    { at: 0.18, rgb: [7, 188, 250] }, // Logo cyan: #07BCFA.
+    { at: 0.35, rgb: [8, 167, 252] },
+    { at: 0.65, rgb: [9, 135, 255] }, // Logo azure: #0987FF.
+    { at: 1, rgb: [7, 84, 191] },
   ];
   // Prepare the shades once so per-frame drawing only needs a palette lookup.
   const palette = Array.from({ length: 256 }, (_, index) => {
@@ -34,7 +34,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   function paint() {
     if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
-    ctx.shadowColor = '#24c8ff';
+    ctx.shadowColor = '#07bcfa';
     const compact = width < 640;
     const columns = Math.floor(width / cellPitch);
     const rows = Math.floor(height / cellPitch);
