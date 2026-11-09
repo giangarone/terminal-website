@@ -4,18 +4,19 @@ export function initCellWave(canvas: HTMLCanvasElement) {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const cellSize = 6;
   const cellPitch = 8;
-  // These modes deform ONE water surface. Space and time oscillate separately:
-  // each column rises and settles instead of sliding a fixed silhouette sideways.
-  // Shorter swells oscillate faster, with randomized phases chosen once per visit.
+  // These modes deform one surface as it travels left to right. Different speeds
+  // and gently changing amplitudes keep it rising and falling as it moves.
+  // Choose random phases once per visit so the motion stays continuous.
   const modes = [
-    { amplitude: 0.115, frequency: 0.7 },
-    { amplitude: 0.05, frequency: 1.25 },
-    { amplitude: 0.018, frequency: 2.1 },
+    { amplitude: 0.17, frequency: 1.75 },
+    { amplitude: 0.072, frequency: 3.125 },
+    { amplitude: 0.026, frequency: 5.25 },
   ].map((mode) => ({
     ...mode,
     spatialPhase: Math.random() * Math.PI * 2,
     temporalPhase: Math.random() * Math.PI * 2,
-    speed: 1.4 * Math.sqrt(mode.frequency),
+    // Keep the shorter swells moving at a gentle, steady pace.
+    speed: 2.1 * Math.sqrt(mode.frequency),
   }));
   // Carry the logo's cyan and azure from a pale highlight into a deep blue fade.
   const colorStops = [
@@ -56,7 +57,7 @@ export function initCellWave(canvas: HTMLCanvasElement) {
     const trailLength = height * 0.28;
     const leadingEdge = compact ? 7 : 10;
     const displacements = modes.map((mode) =>
-      mode.amplitude * Math.cos(time * mode.speed + mode.temporalPhase),
+      mode.amplitude * (0.82 + 0.18 * Math.cos(time * mode.speed * 0.55 + mode.temporalPhase)),
     );
 
     // This lattice only changes on resize. Time affects light, never geometry.
@@ -64,10 +65,11 @@ export function initCellWave(canvas: HTMLCanvasElement) {
       const x = offsetX + column * cellPitch;
       const centerX = x + cellSize / 2;
       const position = (centerX - width / 2) / Math.max(width, 760);
-      // Interference changes the surface's height, slope, and curvature in place.
+      // Subtracting time from each phase moves every swell to the right.
+      // Interference also changes the surface's height, slope, and curvature.
       // Evaluate it once per column; all illuminated cells belong to this surface.
       const elevation = modes.reduce((sum, mode, index) => sum
-        + displacements[index] * Math.sin(position * Math.PI * 2 * mode.frequency + mode.spatialPhase), 0);
+        + displacements[index] * Math.sin(position * Math.PI * 2 * mode.frequency + mode.spatialPhase - time * mode.speed), 0);
       const surface = height * (0.68 + elevation);
       for (let row = 0; row < rows; row++) {
         const y = offsetY + row * cellPitch;
@@ -75,20 +77,16 @@ export function initCellWave(canvas: HTMLCanvasElement) {
         const behind = centerY - surface;
         if (behind < -leadingEdge * 2) continue;
         const trailProgress = Math.min(1, Math.max(0, behind) / trailLength);
-        const glow = Math.exp(-((behind / leadingEdge) ** 2));
+        // A full-bright band at least one grid pitch wide always catches a row
+        // of cells, avoiding brightness pulses as the crest crosses the lattice.
+        const crestDistance = Math.max(0, Math.abs(behind) - cellPitch / 2);
+        const glow = Math.exp(-((crestDistance / leadingEdge) ** 2));
         // Blend across the surface so cells fade smoothly as the water lifts.
         const blend = Math.max(0, Math.min(1, (behind + leadingEdge) / (leadingEdge * 2)));
         const submerged = blend * blend * (3 - 2 * blend);
         const trail = (0.18 + 0.6 * (1 - trailProgress) ** 2) * submerged;
-        const light = Math.min(1, 0.65 * trail + 0.55 * glow);
-        const shade = Math.min(0.85, trailProgress);
-        // Soften illumination behind the central heading and description.
-        const focus = Math.min(1, Math.hypot(
-          (centerX - width / 2) / (width * 0.38),
-          (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
-        ));
-        const contentFade = 0.16 + 0.84 * focus * focus;
-        const opacity = light * contentFade;
+        const opacity = Math.max(glow, 0.65 * trail);
+        const shade = Math.min(0.85, Math.max(0, behind - cellPitch / 2) / trailLength);
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
