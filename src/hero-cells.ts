@@ -2,9 +2,8 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const tau = Math.PI * 2;
   const cellSize = 4;
-  const cellPitch = 10;
+  const cellPitch = 8;
   let width = 0;
   let height = 0;
   let time = 0;
@@ -15,44 +14,54 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   function paint() {
     if (!ctx) return;
     ctx.clearRect(0, 0, width, height);
+    ctx.shadowColor = '#24c8ff';
     const compact = width < 640;
-    const reach = width * (compact ? 0.48 : 0.44);
     const columns = Math.floor(width / cellPitch);
     const rows = Math.floor(height / cellPitch);
     const offsetX = Math.round((width - (columns - 1) * cellPitch - cellSize) / 2);
     const offsetY = Math.round((height - (rows - 1) * cellPitch - cellSize) / 2);
-    const bandWidth = height * (compact ? 0.12 : 0.15);
+    const originX = width / 2;
+    const originY = height * 1.05;
+    const horizontalSpread = compact ? 1.05 : 1.5;
+    const maxRadius = Math.hypot(width / (2 * horizontalSpread), originY);
+    const ringSpacing = maxRadius * 0.36;
+    const trailLength = Math.min(ringSpacing * 0.52, compact ? 72 : 110);
+    const leadingEdge = compact ? 7 : 10;
+    const pulseRadius = ringSpacing * (0.72 + time / 4.8);
 
     // This lattice only changes on resize. Time affects light, never geometry.
     for (let column = 0; column < columns; column++) {
       const x = offsetX + column * cellPitch;
       const centerX = x + cellSize / 2;
-      const side = centerX < width / 2 ? 0 : 1;
-      const u = (side ? width - centerX : centerX) / reach;
-      if (u >= 1) continue;
-
-      const bend = u * 5.6 - time * 0.55 + side * 1.7;
-      const midline = height * (0.48 + 0.20 * Math.cos(bend));
-      const taper = (1 - u * u) ** 1.6;
       for (let row = 0; row < rows; row++) {
         const y = offsetY + row * cellPitch;
         const centerY = y + cellSize / 2;
-        const across = (centerY - midline) / bandWidth;
-        if (Math.abs(across) >= 1) continue;
+        // Expanding rings illuminate fixed cells outward from below the hero.
+        const radius = Math.hypot((centerX - originX) / horizontalSpread, centerY - originY);
+        const behind = ((pulseRadius - radius) % ringSpacing + ringSpacing) % ringSpacing;
+        if (behind >= trailLength) continue;
 
-        const band = (1 - across * across) ** 2;
-        const phase = u * 2.1 + across * 0.24 - time * 0.47 + side * 0.36;
-        const light = ((1 + Math.cos(tau * phase)) / 2) ** 4;
-        const edge = Math.min(1, centerY / 40, (height - centerY) / 40);
-        const opacity = band * taper * edge * (0.14 + 0.86 * light);
+        const trail = (1 - behind / trailLength) ** 2;
+        const head = Math.exp(-((behind / leadingEdge) ** 2));
+        const edge = Math.min(1, centerY / 48, (height - centerY) / 48, centerX / 32, (width - centerX) / 32);
+        // Soften illumination behind the central heading and description.
+        const focus = Math.min(1, Math.hypot(
+          (centerX - width / 2) / (width * 0.38),
+          (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
+        ));
+        const contentFade = 0.16 + 0.84 * focus * focus;
+        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade;
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
-        ctx.fillStyle = light > 0.82 ? '#a6f4ff' : light > 0.32 ? '#16baff' : '#188cff';
+        ctx.fillStyle = head > 0.55 ? '#d5fbff' : behind < trailLength * 0.3 ? '#35d5ff' : '#168fff';
+        // A restrained glow picks out the outward-facing edges of the rings.
+        ctx.shadowBlur = head > 0.35 ? (compact ? 3 : 4) * head : 0;
         ctx.fillRect(x, y, cellSize, cellSize);
       }
     }
     ctx.globalAlpha = 1;
+    ctx.shadowBlur = 0;
   }
 
   function tick(now: number) {

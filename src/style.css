@@ -100,7 +100,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
 }
-/* A quiet grid connects the media surround, pricing, and reviews. */
+/* The same quiet grid connects the hero, media surround, pricing, and reviews. */
+.hero-stage::before,
 .hero-content::after,
 .pricing-section::before,
 .reviews-section::before {
@@ -114,6 +115,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   background-size: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 56px);
   background-position: center;
 }
+.hero-stage::before {
+  inset: 0;
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
+}
 .hero-content::after {
   inset: -100px calc(50% - 50vw) -220px;
   -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
@@ -124,7 +130,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: absolute;
   inset: 0;
   width: 100%;
-  height: clamp(340px, 34vw, 510px);
+  height: 100%;
   pointer-events: none;
 }
 
