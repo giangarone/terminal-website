@@ -44,10 +44,12 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const originY = height * 1.05;
     const horizontalSpread = compact ? 1.05 : 1.5;
     const maxRadius = Math.hypot(width / (2 * horizontalSpread), originY);
-    const ringSpacing = maxRadius * 0.36;
-    const trailLength = Math.min(ringSpacing * 0.72, compact ? 108 : 165);
+    const waveSpan = maxRadius * 0.36;
+    // Space waves independently of their travel speed and fading trail.
+    const ringSpacing = waveSpan * 2;
+    const trailLength = Math.min(waveSpan * 0.72, compact ? 108 : 165);
     const leadingEdge = compact ? 7 : 10;
-    const pulseRadius = ringSpacing * (0.72 + time / 7.2);
+    const pulseRadius = waveSpan * (0.72 + time / 7.2);
 
     // This lattice only changes on resize. Time affects light, never geometry.
     for (let column = 0; column < columns; column++) {
