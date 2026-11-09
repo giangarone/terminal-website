@@ -46,10 +46,12 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const maxRadius = Math.hypot(width / (2 * horizontalSpread), originY);
     const waveSpan = maxRadius * 0.36;
     // Space waves independently of their travel speed and fading trail.
-    const ringSpacing = waveSpan * 2;
+    const ringSpacing = waveSpan;
     const trailLength = Math.min(waveSpan * 0.72, compact ? 108 : 165);
     const leadingEdge = compact ? 7 : 10;
     const pulseRadius = waveSpan * (0.72 + time / 7.2);
+    const fadeStart = maxRadius * 0.25;
+    const fadeEnd = maxRadius * 0.65;
 
     // This lattice only changes on resize. Time affects light, never geometry.
     for (let column = 0; column < columns; column++) {
@@ -63,6 +65,12 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
         const behind = ((pulseRadius - radius) % ringSpacing + ringSpacing) % ringSpacing;
         if (behind >= trailLength) continue;
 
+        // Dim the whole wave as it expands, including its trailing cells.
+        const waveRadius = radius + behind;
+        const fadeProgress = Math.max(0, Math.min(1, (waveRadius - fadeStart) / (fadeEnd - fadeStart)));
+        const waveFade = 1 - fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
+        if (waveFade === 0) continue;
+
         const trail = (1 - behind / trailLength) ** 2;
         const head = Math.exp(-((behind / leadingEdge) ** 2));
         const edge = Math.min(1, centerY / 48, (height - centerY) / 48, centerX / 32, (width - centerX) / 32);
@@ -72,7 +80,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
           (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
         ));
         const contentFade = 0.16 + 0.84 * focus * focus;
-        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade;
+        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade * waveFade;
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
