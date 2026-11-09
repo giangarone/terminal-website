@@ -42,16 +42,18 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const offsetY = Math.round((height - (rows - 1) * cellPitch - cellSize) / 2);
     const originX = width / 2;
     const originY = height * 1.05;
-    const horizontalSpread = compact ? 1.05 : 1.5;
+    const horizontalSpread = 1;
     const maxRadius = Math.hypot(width / (2 * horizontalSpread), originY);
     const waveSpan = maxRadius * 0.36;
-    // Space waves independently of their travel speed and fading trail.
-    const ringSpacing = waveSpan;
     const trailLength = Math.min(waveSpan * 0.72, compact ? 108 : 165);
     const leadingEdge = compact ? 7 : 10;
-    const pulseRadius = waveSpan * (0.72 + time / 7.2);
+    // Hold the low arc at the reference size, breathing by 6% every 7 seconds.
+    const baseRadius = height * 0.56;
+    const ringRadius = baseRadius * (1 + 0.06 * Math.sin(time * Math.PI * 2 / 7));
     const fadeStart = maxRadius * 0.25;
     const fadeEnd = maxRadius * 0.65;
+    const fadeProgress = Math.max(0, Math.min(1, (ringRadius - fadeStart) / (fadeEnd - fadeStart)));
+    const ringFade = 1 - fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
 
     // This lattice only changes on resize. Time affects light, never geometry.
     for (let column = 0; column < columns; column++) {
@@ -60,18 +62,14 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
       for (let row = 0; row < rows; row++) {
         const y = offsetY + row * cellPitch;
         const centerY = y + cellSize / 2;
-        // Expanding rings illuminate fixed cells outward from below the hero.
+        // One circle stays anchored below the hero; its light shifts over fixed cells.
         const radius = Math.hypot((centerX - originX) / horizontalSpread, centerY - originY);
-        const behind = ((pulseRadius - radius) % ringSpacing + ringSpacing) % ringSpacing;
-        if (behind >= trailLength) continue;
+        const behind = ringRadius - radius;
+        if (behind < 0) continue;
 
-        // Dim the whole wave as it expands, including its trailing cells.
-        const waveRadius = radius + behind;
-        const fadeProgress = Math.max(0, Math.min(1, (waveRadius - fadeStart) / (fadeEnd - fadeStart)));
-        const waveFade = 1 - fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
-        if (waveFade === 0) continue;
-
-        const trail = (1 - behind / trailLength) ** 2;
+        // Keep a soft blue fill inside the circle instead of fading its center to black.
+        const trailProgress = Math.min(1, behind / trailLength);
+        const trail = 0.22 + 0.78 * (1 - trailProgress) ** 2;
         const head = Math.exp(-((behind / leadingEdge) ** 2));
         const edge = Math.min(1, centerY / 48, (height - centerY) / 48, centerX / 32, (width - centerX) / 32);
         // Soften illumination behind the central heading and description.
@@ -80,11 +78,11 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
           (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
         ));
         const contentFade = 0.16 + 0.84 * focus * focus;
-        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade * waveFade;
+        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade * ringFade;
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
-        ctx.fillStyle = palette[Math.round((behind / trailLength) * (palette.length - 1))];
+        ctx.fillStyle = palette[Math.round(Math.min(0.85, trailProgress) * (palette.length - 1))];
         // A restrained glow picks out the outward-facing edges of the rings.
         ctx.shadowBlur = head > 0.35 ? (compact ? 3 : 4) * head : 0;
         ctx.fillRect(x, y, cellSize, cellSize);
