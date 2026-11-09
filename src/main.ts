@@ -19,7 +19,7 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
 if (heroCells) initHeroCells(heroCells);
 
-const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-section > .aurora-canvas');
+const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;

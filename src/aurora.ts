@@ -1,10 +1,10 @@
-// Aurora behind pricing and checkout, using the Pro plan's navy and blues.
+// Aurora behind the pricing grid, using the Pro plan's navy and blues.
 const CONFIG = {
   colorA: '#2563eb',
   colorB: '#13233c',
   colorC: '#60a5fa',
   brightness: 1,
-  speed: 0.52,
+  speed: 1.04,
   spread: 0.27,
   diag: -1,
   alpha: 2,
