@@ -2,7 +2,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const cellSize = 4;
+  const cellSize = 6;
   const cellPitch = 8;
   // Blend ice blue through cyan into deeper blue as each illuminated cell fades.
   const colorStops = [
@@ -45,9 +45,9 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const horizontalSpread = compact ? 1.05 : 1.5;
     const maxRadius = Math.hypot(width / (2 * horizontalSpread), originY);
     const ringSpacing = maxRadius * 0.36;
-    const trailLength = Math.min(ringSpacing * 0.52, compact ? 72 : 110);
+    const trailLength = Math.min(ringSpacing * 0.72, compact ? 108 : 165);
     const leadingEdge = compact ? 7 : 10;
-    const pulseRadius = ringSpacing * (0.72 + time / 4.8);
+    const pulseRadius = ringSpacing * (0.72 + time / 7.2);
 
     // This lattice only changes on resize. Time affects light, never geometry.
     for (let column = 0; column < columns; column++) {
