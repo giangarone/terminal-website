@@ -485,7 +485,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-feature-heading { margin: 0; color: var(--text); font-size: inherit; font-weight: 450; line-height: 1.5; }
 .plan-feature-description { color: var(--text-secondary); line-height: 1.5; }
 .plan-feature-level { display: inline-block; margin-left: 2px; padding: 0px 6px; border-radius: 5px; background: #3983f780; font-size: 11px; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
-.plan-feature-level-depth { color: var(--text); background: #8f2071; }
+.plan-feature-level-depth { background: #8f2071; }
 
 /* Checkout reassurance: site typography with the original icons and layout. */
 .n-safe-div { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; width: 100%; margin: 60px auto 0; }
