@@ -421,9 +421,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
   mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
 }
-/* The opaque aurora sits below the grid, with checkout content above both. */
-.pricing-section > .aurora-canvas { z-index: -2; }
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
+/* Limit the aurora to the plans' height, below the section's grid background. */
+.pricing-grid > .aurora-canvas { z-index: -2; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 30px; }
 @property --plan-stroke-angle {
   syntax: '<angle>';
@@ -477,7 +477,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .featured-plan .button-plan:hover { background: var(--pro-button-hover); border-color: var(--pro-button-hover); }
 .featured-plan .button-plan:focus-visible { outline-color: var(--accent-blue); }
 .plan-features { border-top: 0.5px solid var(--border); margin-top: 30px; padding-top: 25px; }
-.plan-features > p { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
+.plan-features > p { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
 .plan-features li { position: relative; padding-left: 22px; color: var(--text-secondary); font-size: 12px; margin-bottom: 13px; }
 .plan-features li::before { content: ''; position: absolute; top: 7px; left: 2px; width: 10px; height: 5px; border-left: 1px solid var(--text-muted); border-bottom: 1px solid var(--text-muted); transform: rotate(-45deg); }
 .featured-plan .plan-features li::before { border-color: var(--accent-blue); }
