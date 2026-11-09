@@ -477,9 +477,15 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-features { border-top: 0.5px solid var(--border); margin-top: 30px; padding-top: 25px; }
 .plan-features > p { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
 .plan-features li { position: relative; padding-left: 22px; color: var(--text-secondary); font-size: 12px; margin-bottom: 13px; }
-.plan-features li::before { content: ''; position: absolute; top: 7px; left: 2px; width: 8px; height: 4px; border-left: 0.5px solid var(--text-muted); border-bottom: 0.5px solid var(--text-muted); transform: rotate(-45deg); }
+.plan-features li::before { content: ''; position: absolute; top: 7px; left: 2px; width: 10px; height: 5px; border-left: 1px solid var(--text-muted); border-bottom: 1px solid var(--text-muted); transform: rotate(-45deg); }
 .featured-plan .plan-features li::before { border-color: var(--accent-blue); }
 .plan-features li:last-child { margin-bottom: 0; }
+.plan-features li.plan-feature { margin-bottom: 12px; }
+.plan-features li.plan-feature:last-child { margin-bottom: 0; }
+.plan-feature-heading { margin: 0; color: var(--text); font-size: inherit; font-weight: 450; line-height: 1.5; }
+.plan-feature-description { color: var(--text-secondary); line-height: 1.5; }
+.plan-feature-level { display: inline-block; margin-left: 5px; padding: 1px 6px; border-radius: 5px; background: var(--light-medium); font-size: 0.9em; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
+.plan-feature-level-depth { color: var(--text); background: color-mix(in srgb, var(--accent-blue) 35%, transparent); }
 
 /* Checkout reassurance: site typography with the original icons and layout. */
 .n-safe-div { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; width: 100%; margin: 60px auto 0; }
