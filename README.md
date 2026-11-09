@@ -41,7 +41,7 @@ Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are U
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`.
 
-The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
+The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. Identical 4px squares sit on an invisible 10px grid at every screen size. Traveling wave bands control only cell opacity and color; cell positions and sizes stay fixed until the hero resizes. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
 Pricing and checkout follow the hero's platform media. The WebGL aurora from `src/aurora.ts` is attached to `.pricing-grid` as a full-width decorative background limited to the plan cards' height; the heading and payment icons sit outside it. The quiet grid spans the checkout section and remains layered above the aurora and below the content. The aurora matches the Pro plan's navy surface (`#13233c`), blue button (`#2563eb`), and light blue border (`#60a5fa`). Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
 
