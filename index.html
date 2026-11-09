@@ -66,6 +66,7 @@
       </section>
 
       <section class="pricing-section section container" id="pricing" aria-labelledby="pricing-title">
+        <canvas class="aurora-canvas" aria-hidden="true"></canvas>
         <div class="section-heading centered-heading"><h2 id="pricing-title">Get more from every trade<br />with the full picture</h2><p>Start free, then upgrade when the market demands more.</p></div>
         <!-- Mock monthly prices and features are intentionally editable here. Checkout buttons have no actions. -->
         <div class="pricing-grid">
@@ -73,7 +74,31 @@
             <div class="plan-heading"><h3 id="free-plan">Free</h3></div><p class="plan-description">Find your footing. Build your workflow.</p>
             <p class="plan-price">$0<span>/ month</span></p><p class="plan-billing">Free to get started</p>
             <button class="button button-plan" type="button" aria-disabled="true">Get started for free</button>
-            <div class="plan-features"><p>The essentials, in one place</p><ul><li>Core multi-asset charts</li><li>Personal watchlists</li><li>Standard technical indicators</li><li>Limited AI assistance</li><li>Marketplace access</li></ul></div>
+            <div class="plan-features">
+              <p>The essentials, in one place</p>
+              <ul>
+                <li class="plan-feature">
+                  <h4 class="plan-feature-heading">Core multi-asset charts</h4>
+                  <p class="plan-feature-description">explore different markets in one charting workspace</p>
+                </li>
+                <li class="plan-feature">
+                  <h4 class="plan-feature-heading">Personal watchlists</h4>
+                  <p class="plan-feature-description">keep the markets you follow in one place</p>
+                </li>
+                <li class="plan-feature">
+                  <h4 class="plan-feature-heading">Standard technical indicators</h4>
+                  <p class="plan-feature-description">analyze price trends with essential charting tools</p>
+                </li>
+                <li class="plan-feature">
+                  <h4 class="plan-feature-heading">Limited AI assistance</h4>
+                  <p class="plan-feature-description">get help exploring charts and market questions</p>
+                </li>
+                <li class="plan-feature">
+                  <h4 class="plan-feature-heading">Marketplace access</h4>
+                  <p class="plan-feature-description">discover indicators built by the trading community</p>
+                </li>
+              </ul>
+            </div>
           </article>
           <article class="pricing-card featured-plan" aria-labelledby="pro-plan">
             <div class="plan-heading"><h3 id="pro-plan">Pro</h3><span class="plan-badge">Popular</span></div><p class="plan-description">More intelligence. Greater control.</p>
@@ -505,7 +530,6 @@
       </section>
 
       <section class="faq-section section container" id="faq" aria-labelledby="faq-title">
-        <canvas class="aurora-canvas" aria-hidden="true"></canvas>
         <div class="faq-heading"><h2 id="faq-title">Your questions.<br />Answered.</h2></div>
         <div class="faq-list">
           <details><summary>Can I start with a free plan?<span class="faq-indicator" aria-hidden="true"></span></summary><p>Yes. You can start for free and trade from your charts with a connected account. Our most powerful features — deeper market data, advanced AI, and more — are on premium plans.</p></details>

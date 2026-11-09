@@ -19,8 +19,8 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
 if (heroCells) initHeroCells(heroCells);
 
-const faqAurora = document.querySelector<HTMLCanvasElement>('.faq-section > .aurora-canvas');
-if (faqAurora) initAurora(faqAurora);
+const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-section > .aurora-canvas');
+if (pricingAurora) initAurora(pricingAurora);
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;

@@ -43,7 +43,7 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
-The FAQ section uses the ocean-blue WebGL aurora from `src/aurora.ts` as a full-section decorative background behind the heading and questions, without a grid. Deep blues and soft cyan highlights give the moving folds an ocean-wave feel. Fine, static grain softens gradient banding and fades with the glow at the edges. Pricing and checkout follow the hero's platform media, with a quiet grid background.
+Pricing and checkout follow the hero's platform media and use the ocean-blue WebGL aurora from `src/aurora.ts` as a full-section decorative background behind the heading, plans, and payment icons. Deep blues and soft cyan highlights give the moving folds an ocean-wave feel. Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 

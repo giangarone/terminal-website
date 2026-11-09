@@ -1,4 +1,4 @@
-// Ocean-blue aurora behind the FAQ.
+// Ocean-blue aurora behind pricing and checkout.
 const CONFIG = {
   colorA: '#168bdf',
   colorB: '#063a78',
