@@ -15,7 +15,7 @@ export function initCellWave(canvas: HTMLCanvasElement) {
     ...mode,
     spatialPhase: Math.random() * Math.PI * 2,
     temporalPhase: Math.random() * Math.PI * 2,
-    speed: 0.8 * Math.sqrt(mode.frequency),
+    speed: 1.4 * Math.sqrt(mode.frequency),
   }));
   // Carry the logo's cyan and azure from a pale highlight into a deep blue fade.
   const colorStops = [
@@ -82,14 +82,13 @@ export function initCellWave(canvas: HTMLCanvasElement) {
         const trail = (0.18 + 0.6 * (1 - trailProgress) ** 2) * submerged;
         const light = Math.min(1, 0.65 * trail + 0.55 * glow);
         const shade = Math.min(0.85, trailProgress);
-        const edge = Math.min(1, centerY / 48, (height - centerY) / 48, centerX / 32, (width - centerX) / 32);
         // Soften illumination behind the central heading and description.
         const focus = Math.min(1, Math.hypot(
           (centerX - width / 2) / (width * 0.38),
           (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
         ));
         const contentFade = 0.16 + 0.84 * focus * focus;
-        const opacity = light * edge * contentFade;
+        const opacity = light * contentFade;
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
