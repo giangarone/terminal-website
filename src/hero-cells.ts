@@ -4,6 +4,26 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const cellSize = 4;
   const cellPitch = 8;
+  // Blend ice blue through cyan into deeper blue as each illuminated cell fades.
+  const colorStops = [
+    { at: 0, rgb: [213, 251, 255] },
+    { at: 0.08, rgb: [157, 239, 255] },
+    { at: 0.18, rgb: [93, 225, 255] },
+    { at: 0.35, rgb: [53, 213, 255] },
+    { at: 0.65, rgb: [22, 171, 255] },
+    { at: 1, rgb: [32, 100, 235] },
+  ];
+  // Prepare the shades once so per-frame drawing only needs a palette lookup.
+  const palette = Array.from({ length: 256 }, (_, index) => {
+    const progress = index / 255;
+    const endIndex = Math.max(1, colorStops.findIndex((stop) => stop.at >= progress));
+    const start = colorStops[endIndex - 1];
+    const end = colorStops[endIndex];
+    const blend = (progress - start.at) / (end.at - start.at);
+    const smooth = blend * blend * (3 - 2 * blend);
+    const rgb = start.rgb.map((channel, i) => Math.round(channel + (end.rgb[i] - channel) * smooth));
+    return `rgb(${rgb.join(' ')})`;
+  });
   let width = 0;
   let height = 0;
   let time = 0;
@@ -54,7 +74,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
-        ctx.fillStyle = head > 0.55 ? '#d5fbff' : behind < trailLength * 0.3 ? '#35d5ff' : '#168fff';
+        ctx.fillStyle = palette[Math.round((behind / trailLength) * (palette.length - 1))];
         // A restrained glow picks out the outward-facing edges of the rings.
         ctx.shadowBlur = head > 0.35 ? (compact ? 3 : 4) * head : 0;
         ctx.fillRect(x, y, cellSize, cellSize);
