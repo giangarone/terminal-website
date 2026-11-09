@@ -92,14 +92,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
 .hero { position: relative; isolation: isolate; text-align: center; padding: 0 0 58px; --hero-inset: 107px; }
 .hero-content { position: relative; z-index: 2; }
-.hero-description { margin-top: 22px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
+.hero-description { margin-top: 22px; font-size: 15px; color: var(--text-soft); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
 .hero-stage h1,
 .hero-stage .hero-description {
   text-shadow: 0 2px 4px var(--background), 0 0 16px var(--background), 0 0 32px var(--background);
-}
-.hero-actions .button {
-  box-shadow: 0 4px 12px var(--background), 0 0 28px var(--background);
 }
 
 .hero-stage {
