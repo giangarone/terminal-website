@@ -1,8 +1,8 @@
-// Ocean-blue aurora behind pricing and checkout.
+// Aurora behind pricing and checkout, using the Pro plan's navy and blues.
 const CONFIG = {
-  colorA: '#168bdf',
-  colorB: '#063a78',
-  colorC: '#23b7d5',
+  colorA: '#2563eb',
+  colorB: '#13233c',
+  colorC: '#60a5fa',
   brightness: 1,
   speed: 0.52,
   spread: 0.27,

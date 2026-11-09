@@ -43,7 +43,7 @@ Color, surface, typography, and spacing rules live in `src/style.css`; palette v
 
 The hero’s animated waves of illuminated cells live in `src/hero-cells.ts`. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.
 
-Pricing and checkout follow the hero's platform media and use the ocean-blue WebGL aurora from `src/aurora.ts` as a full-section decorative background behind the heading, plans, and payment icons. Deep blues and soft cyan highlights give the moving folds an ocean-wave feel. Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
+Pricing and checkout follow the hero's platform media and use the WebGL aurora from `src/aurora.ts` as a full-section decorative background behind the heading, plans, and payment icons. The quiet grid remains layered above the aurora and below the content. The aurora matches the Pro plan's navy surface (`#13233c`), blue button (`#2563eb`), and light blue border (`#60a5fa`). Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 
