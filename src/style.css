@@ -484,7 +484,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-features li.plan-feature:last-child { margin-bottom: 0; }
 .plan-feature-heading { margin: 0; color: var(--text); font-size: inherit; font-weight: 450; line-height: 1.5; }
 .plan-feature-description { color: var(--text-secondary); line-height: 1.5; }
-.plan-feature-level { display: inline-block; margin-left: 5px; padding: 0px 6px; border-radius: 5px; border: 0.5px solid #3983f7; background: #3983f780; font-size: 11px; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
+.plan-feature-level { display: inline-block; margin-left: 2px; padding: 0px 6px; border-radius: 5px; border: 0.5px solid #3983f7; background: #3983f780; font-size: 11px; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
 .plan-feature-level-depth { color: var(--text); border: 0.5px solid #3983f7; background: #3983f780; }
 
 /* Checkout reassurance: site typography with the original icons and layout. */
