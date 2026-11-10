@@ -669,6 +669,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .desktop-nav { display: none; }
   .menu-toggle { display: block; }
   .hero { padding: 0 0 72px; --hero-inset: 82px; }
+  .platform-media { width: 100%; }
   .split-heading { display: block; }
   .split-heading > p { margin-top: 23px; max-width: 480px; }
   .data-layout { grid-template-columns: 1fr 1fr; gap: 32px; }
