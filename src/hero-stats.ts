@@ -38,7 +38,8 @@ export function initHeroStats() {
       finish();
       return;
     }
-    const eased = 1 - (1 - progress) ** 3;
+    // A stronger ease-out moves quickly at first, then settles more gradually.
+    const eased = 1 - (1 - progress) ** 4;
     for (const counter of counters) {
       // Round down so the final value arrives only when the animation lands.
       const precision = Number.isInteger(counter.target) ? 1 : 10;
