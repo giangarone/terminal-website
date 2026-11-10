@@ -104,9 +104,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
 }
-/* The same quiet grid connects the hero, media surround, pricing, and reviews. */
+/* The same quiet grid connects the hero, pricing, and reviews. */
 .hero-stage::before,
-.hero-content::after,
 .pricing-section::before,
 .reviews-section::before {
   content: '';
@@ -123,11 +122,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   inset: 0;
   -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
   mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
-}
-.hero-content::after {
-  inset: -100px calc(50% - 50vw) -220px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
-  mask-image: radial-gradient(ellipse 80% 55% at 50% 50%, rgb(0 0 0 / 85%) 35%, transparent 90%);
 }
 .hero-stage .centered-heading { position: relative; z-index: 1; }
 .hero-cells {
