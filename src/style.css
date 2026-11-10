@@ -488,8 +488,28 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-features li:last-child { margin-bottom: 0; }
 .plan-features li.plan-feature { margin-bottom: 12px; }
 .plan-features li.plan-feature:last-child { margin-bottom: 0; }
-.plan-feature-heading { margin: 0; color: var(--text); font-size: inherit; font-weight: 500; line-height: 1.5; }
+.plan-feature-heading, .plan-feature-tooltip-title { margin: 0; color: var(--text); font-size: inherit; font-weight: 500; line-height: 1.5; }
 .plan-feature-description { color: var(--text-secondary); line-height: 1.5; }
+.plan-feature[data-feature-detail] { cursor: help; }
+.plan-feature-trigger { display: inline; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: help; }
+.plan-feature:hover .plan-feature-trigger,
+.plan-feature:focus-within .plan-feature-trigger,
+.plan-feature[data-tooltip-open] .plan-feature-trigger { text-decoration: underline dotted var(--text-muted); text-underline-offset: 3px; }
+.plan-feature-tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 100;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  padding: 10px 12px;
+  border: 0.5px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--text-secondary);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+.plan-feature-tooltip-title { display: block; margin-bottom: 6px; }
 .plan-feature-level { display: inline-block; margin-left: 2px; padding: 0px 6px; border-radius: 6px; background: #3983f780; font-size: 11px; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
 .plan-feature-level-depth { background: #8f2071; }
 

@@ -3,8 +3,10 @@ import { setupIndicators } from './indicators.ts';
 import { initHeroCells } from './hero-cells.ts';
 import { initCellWave } from './cell-wave.ts';
 import { initAurora } from './aurora.ts';
+import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 
 setupIndicators();
+initPlanFeatureTooltips();
 
 // A matching second group makes the marquee wrap without a visible jump.
 for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track')) {
