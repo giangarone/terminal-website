@@ -435,8 +435,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   inherits: false;
 }
 .featured-plan {
-  --text-secondary: #b8c6dc;
-  --text-muted: #9fb1ca;
   --border: #283f61;
   --pro-button: #2563eb;
   --pro-button-hover: #1d4ed8;
