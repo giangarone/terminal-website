@@ -112,11 +112,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-stat dd { order: -1; margin: 0; font-size: 30px; font-weight: 500; line-height: 1.15; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
 .hero-stat dd span { color: var(--text-secondary); font-weight: 400; }
 .hero-stat dd .hero-rating-star { font-size: 0.75em; }
-.hero-stage h1,
-.hero-stage .hero-description,
-.hero-stats {
-  text-shadow: 0 2px 4px var(--background), 0 0 16px var(--background), 0 0 32px var(--background);
-}
 
 .hero-stage {
   isolation: isolate;

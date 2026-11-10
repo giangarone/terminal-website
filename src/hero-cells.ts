@@ -39,7 +39,8 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const columns = Math.floor(width / cellPitch);
     const rows = Math.floor(height / cellPitch);
     const offsetX = Math.round((width - (columns - 1) * cellPitch - cellSize) / 2);
-    const offsetY = Math.round((height - (rows - 1) * cellPitch - cellSize) / 2);
+    // Anchor the last row to the canvas bottom; leave spare space at the top.
+    const offsetY = height - (rows - 1) * cellPitch - cellSize;
     const originX = width / 2;
     const originY = height * 1.05;
     const horizontalSpread = 1;
@@ -71,7 +72,8 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
         const trailProgress = Math.min(1, behind / trailLength);
         const trail = 0.22 + 0.78 * (1 - trailProgress) ** 2;
         const head = Math.exp(-((behind / leadingEdge) ** 2));
-        const edge = Math.min(1, centerY / 48, (height - centerY) / 48, centerX / 32, (width - centerX) / 32);
+        // Soften the top and sides while keeping the circle lit to the bottom edge.
+        const edge = Math.min(1, centerY / 48, centerX / 32, (width - centerX) / 32);
         // Soften illumination behind the central heading and description.
         const focus = Math.min(1, Math.hypot(
           (centerX - width / 2) / (width * 0.38),
