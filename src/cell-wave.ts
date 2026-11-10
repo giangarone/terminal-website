@@ -16,7 +16,7 @@ export function initCellWave(canvas: HTMLCanvasElement) {
     spatialPhase: Math.random() * Math.PI * 2,
     temporalPhase: Math.random() * Math.PI * 2,
     // Keep the shorter swells moving at a gentle, steady pace.
-    speed: 2.1 * Math.sqrt(mode.frequency),
+    speed: 1.6 * Math.sqrt(mode.frequency),
   }));
   // Carry the logo's cyan and azure from a pale highlight into a deep blue fade.
   const colorStops = [
@@ -53,7 +53,8 @@ export function initCellWave(canvas: HTMLCanvasElement) {
     const columns = Math.floor(width / cellPitch);
     const rows = Math.floor(height / cellPitch);
     const offsetX = Math.round((width - (columns - 1) * cellPitch - cellSize) / 2);
-    const offsetY = Math.round((height - (rows - 1) * cellPitch - cellSize) / 2);
+    // Anchor the last row to the section edge, with no leftover space below it.
+    const offsetY = height - (rows - 1) * cellPitch - cellSize;
     const trailLength = height * 0.28;
     const leadingEdge = compact ? 7 : 10;
     const displacements = modes.map((mode) =>
@@ -116,8 +117,9 @@ export function initCellWave(canvas: HTMLCanvasElement) {
   }
 
   new ResizeObserver(() => {
-    width = canvas.clientWidth;
-    height = canvas.clientHeight;
+    const bounds = canvas.getBoundingClientRect();
+    width = bounds.width;
+    height = bounds.height;
     const scale = Math.min(devicePixelRatio, 2);
     canvas.width = Math.round(width * scale);
     canvas.height = Math.round(height * scale);
