@@ -30,6 +30,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   let inView = false;
   let frame = 0;
   let lastDraw = 0;
+  const entranceDuration = 1.5;
 
   function paint() {
     if (!ctx) return;
@@ -48,12 +49,17 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const waveSpan = maxRadius * 0.36;
     const trailLength = Math.min(waveSpan * 0.72, compact ? 108 : 165);
     const leadingEdge = compact ? 7 : 10;
-    // Hold the low arc at the reference size, breathing by 6% every 7 seconds.
+    // Reveal cells radially from the origin, then settle into the gentle pulse.
+    const entranceProgress = motion.matches ? 1 : Math.min(1, time / entranceDuration);
+    const entrance = 1 - (1 - entranceProgress) ** 3;
+    const entranceOpacity = entranceProgress * entranceProgress * (3 - 2 * entranceProgress);
+    const pulseTime = Math.max(0, time - entranceDuration);
     const baseRadius = height * 0.56;
-    const ringRadius = baseRadius * (1 + 0.06 * Math.sin(time * Math.PI * 2 / 7));
+    const targetRadius = baseRadius * (1 + 0.06 * Math.sin(pulseTime * Math.PI * 2 / 7));
+    const ringRadius = targetRadius * entrance;
     const fadeStart = maxRadius * 0.25;
     const fadeEnd = maxRadius * 0.65;
-    const fadeProgress = Math.max(0, Math.min(1, (ringRadius - fadeStart) / (fadeEnd - fadeStart)));
+    const fadeProgress = Math.max(0, Math.min(1, (targetRadius - fadeStart) / (fadeEnd - fadeStart)));
     const ringFade = 1 - fadeProgress * fadeProgress * (3 - 2 * fadeProgress);
 
     // This lattice only changes on resize. Time affects light, never geometry.
@@ -80,7 +86,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
           (centerY - height * 0.5) / (height * (compact ? 0.75 : 0.55)),
         ));
         const contentFade = 0.16 + 0.84 * focus * focus;
-        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade * ringFade;
+        const opacity = Math.min(1, 0.75 * trail + 0.55 * head) * edge * contentFade * ringFade * entranceOpacity;
         if (opacity < 0.015) continue;
 
         ctx.globalAlpha = opacity;
@@ -106,6 +112,10 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   function updateMotion() {
     cancelAnimationFrame(frame);
     lastDraw = 0;
+    if (motion.matches) {
+      time = Math.max(time, entranceDuration);
+      paint();
+    }
     if (inView && !document.hidden && !motion.matches) frame = requestAnimationFrame(tick);
   }
 

@@ -1,6 +1,7 @@
 import { productImages } from './content.ts';
 import { setupIndicators } from './indicators.ts';
 import { initHeroCells } from './hero-cells.ts';
+import { initHeroStats } from './hero-stats.ts';
 import { initCellWave } from './cell-wave.ts';
 import { initAurora } from './aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
@@ -21,6 +22,7 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 
 const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
 if (heroCells) initHeroCells(heroCells);
+initHeroStats();
 
 const faqCells = document.querySelector<HTMLCanvasElement>('.faq-cells');
 if (faqCells) initCellWave(faqCells);
