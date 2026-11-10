@@ -30,9 +30,9 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   let inView = false;
   let frame = 0;
   let lastDraw = 0;
-  const entranceDuration = 1.8;
+  const entranceDuration = 2.4;
 
-  // cubic-bezier(0.32, 0, 0.2, 1): a soft start and a long, gentle settle.
+  // cubic-bezier(0.32, 0, 0.1, 1): a soft start and an extended, gentle settle.
   function easeEntrance(progress: number) {
     if (progress <= 0 || progress >= 1) return progress;
     let low = 0;
@@ -41,7 +41,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     for (let iteration = 0; iteration < 16; iteration++) {
       const t = (low + high) / 2;
       const inverse = 1 - t;
-      const x = 3 * inverse * inverse * t * 0.32 + 3 * inverse * t * t * 0.2 + t ** 3;
+      const x = 3 * inverse * inverse * t * 0.32 + 3 * inverse * t * t * 0.1 + t ** 3;
       if (x < progress) low = t;
       else high = t;
     }
@@ -71,7 +71,7 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const entrance = easeEntrance(entranceProgress);
     const entranceOpacity = entrance;
     const pulseTime = Math.max(0, time - entranceDuration);
-    const pulseProgress = Math.min(1, pulseTime / 0.6);
+    const pulseProgress = Math.min(1, pulseTime / 0.9);
     const pulseStrength = pulseProgress * pulseProgress * (3 - 2 * pulseProgress);
     const baseRadius = height * 0.56;
     const targetRadius = baseRadius * (1 + 0.06 * pulseStrength * Math.sin(pulseTime * Math.PI * 2 / 7));
