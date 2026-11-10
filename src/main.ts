@@ -105,10 +105,14 @@ if (!motionPreference.matches && 'IntersectionObserver' in window && 'animate' i
       const index = siblingCounts.get(element.parentElement) ?? 0;
       siblingCounts.set(element.parentElement, index + 1);
       const isVisual = element.matches('.platform-media, .depth-visual');
-      const animation = element.animate([
+      const keyframes = element.closest('.hero') ? [
+        { opacity: 0 },
+        { opacity: 1 },
+      ] : [
         { opacity: 0, transform: `translateY(${isVisual ? 28 : 20}px)` },
         { opacity: 1, transform: 'translateY(0)' },
-      ], {
+      ];
+      const animation = element.animate(keyframes, {
         duration: isVisual ? 900 : 720,
         delay: Math.min(index * 75, 225),
         easing: 'cubic-bezier(0.22, 1, 0.36, 1)',

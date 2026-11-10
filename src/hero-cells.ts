@@ -30,7 +30,24 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
   let inView = false;
   let frame = 0;
   let lastDraw = 0;
-  const entranceDuration = 1.5;
+  const entranceDuration = 1.8;
+
+  // cubic-bezier(0.32, 0, 0.2, 1): a soft start and a long, gentle settle.
+  function easeEntrance(progress: number) {
+    if (progress <= 0 || progress >= 1) return progress;
+    let low = 0;
+    let high = 1;
+    // Solve the curve's time coordinate before sampling its output coordinate.
+    for (let iteration = 0; iteration < 16; iteration++) {
+      const t = (low + high) / 2;
+      const inverse = 1 - t;
+      const x = 3 * inverse * inverse * t * 0.32 + 3 * inverse * t * t * 0.2 + t ** 3;
+      if (x < progress) low = t;
+      else high = t;
+    }
+    const t = (low + high) / 2;
+    return t * t * (3 - 2 * t);
+  }
 
   function paint() {
     if (!ctx) return;
@@ -51,11 +68,13 @@ export function initHeroCells(canvas: HTMLCanvasElement) {
     const leadingEdge = compact ? 7 : 10;
     // Reveal cells radially from the origin, then settle into the gentle pulse.
     const entranceProgress = motion.matches ? 1 : Math.min(1, time / entranceDuration);
-    const entrance = 1 - (1 - entranceProgress) ** 3;
-    const entranceOpacity = entranceProgress * entranceProgress * (3 - 2 * entranceProgress);
+    const entrance = easeEntrance(entranceProgress);
+    const entranceOpacity = entrance;
     const pulseTime = Math.max(0, time - entranceDuration);
+    const pulseProgress = Math.min(1, pulseTime / 0.6);
+    const pulseStrength = pulseProgress * pulseProgress * (3 - 2 * pulseProgress);
     const baseRadius = height * 0.56;
-    const targetRadius = baseRadius * (1 + 0.06 * Math.sin(pulseTime * Math.PI * 2 / 7));
+    const targetRadius = baseRadius * (1 + 0.06 * pulseStrength * Math.sin(pulseTime * Math.PI * 2 / 7));
     const ringRadius = targetRadius * entrance;
     const fadeStart = maxRadius * 0.25;
     const fadeEnd = maxRadius * 0.65;
