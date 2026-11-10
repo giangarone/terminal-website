@@ -39,6 +39,8 @@ The collection supports touch swiping, trackpad scrolling, previous/next buttons
 
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
+The hero's three social-proof stats are in `index.html` under `.hero-stats`. The figures (10K+ active users, 1M+ trades tracked, and 4.9★ average rating) are design placeholders; replace the values and labels with verified metrics before launch. They use an accessible description list and a responsive three-column layout beneath the main button.
+
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`.
 
 The hero’s expanding radial pulses live in `src/hero-cells.ts`. Identical 4px squares sit on an invisible 8px grid (4px gaps) at every screen size. Concentric arcs radiate from just below the bottom center, with bright icy-cyan outer edges, restrained glow, and fading blue trails toward the origin. Arcs spread wider on desktop, with a new pulse every 4.8 seconds and spacing proportional to the canvas dimensions. Light softens around the headline and at the canvas edges. Only cell opacity, color, and glow animate; positions and sizes stay fixed until the hero resizes. A separate, subtle background grid remains visible behind the animated cells. The renderer pauses outside the viewport and in hidden tabs, and shows a still composition for reduced motion.

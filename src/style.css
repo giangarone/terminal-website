@@ -94,15 +94,34 @@ ul { margin: 0; padding: 0; list-style: none; }
 .hero-content { position: relative; z-index: 2; }
 .hero-description { margin-top: 22px; font-size: 15px; color: var(--text-soft); line-height: 1.8; }
 .hero-actions { display: flex; justify-content: center; gap: 12px; margin-top: 31px; }
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(100%, 600px);
+  margin: 48px auto 0;
+}
+.hero-stat { position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 0 20px; }
+.hero-stat + .hero-stat::before {
+  content: '';
+  position: absolute;
+  inset: 8px auto 8px 0;
+  width: 1px;
+  background: var(--border-strong);
+}
+.hero-stat dt { color: var(--text-secondary); font-size: 12px; line-height: 1.5; text-wrap: balance; }
+.hero-stat dd { order: -1; margin: 0; font-size: 34px; font-weight: 500; line-height: 1.15; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+.hero-stat dd span { color: var(--text-secondary); font-weight: 400; }
+.hero-stat dd .hero-rating-star { font-size: 0.75em; }
 .hero-stage h1,
-.hero-stage .hero-description {
+.hero-stage .hero-description,
+.hero-stats {
   text-shadow: 0 2px 4px var(--background), 0 0 16px var(--background), 0 0 32px var(--background);
 }
 
 .hero-stage {
   isolation: isolate;
   position: relative;
-  padding-block: var(--hero-inset) clamp(68px, 7vw, 112px);
+  padding-block: var(--hero-inset) clamp(26px, 2.5vw, 40px);
 }
 /* The same quiet grid connects the hero, pricing, and reviews. */
 .hero-stage::before,
@@ -687,6 +706,10 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .desktop-break { display: none; }
   .hero-actions { gap: 10px; margin-top: 28px; }
   .hero-actions .button { padding: 12px 17px; gap: 13px; font-size: 11px; min-height: 46px; }
+  .hero-stats { margin-top: 36px; }
+  .hero-stat { padding-inline: 8px; }
+  .hero-stat dt { font-size: 11px; max-width: 100px; }
+  .hero-stat dd { font-size: 27px; }
 
   .section-heading > p:last-child { font-size: 13px; max-width: 300px; margin-inline: auto; }
   .platform-media { margin-top: 0; aspect-ratio: 1.8; border-radius: 20px; }
