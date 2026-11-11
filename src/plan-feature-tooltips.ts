@@ -47,6 +47,7 @@ export function initPlanFeatureTooltips() {
     const entering = active !== feature;
     if (entering) close();
     active = feature;
+    tooltip.classList.toggle('is-featured', feature.closest('.featured-plan') !== null);
     title.textContent = feature.querySelector('h4')!.textContent!.replace(/\s+/g, ' ').trim();
     description.textContent = feature.dataset.featureDetail!;
     feature.setAttribute('data-tooltip-open', '');
