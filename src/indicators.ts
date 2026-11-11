@@ -60,16 +60,47 @@ export function setupIndicators() {
   }
 
   const cards = [...list.children] as HTMLElement[];
+  list.style.setProperty('--indicator-count', String(Math.max(1, cards.length)));
+  let stops = measureStops();
+  let targetOffset: number | null = null;
+  let drag: { pointerId: number; startX: number; startY: number; index: number; active: boolean } | null = null;
+
+  function measureStops() {
+    const maxOffset = track.scrollWidth - track.clientWidth;
+    const listLeft = list.getBoundingClientRect().left;
+    const offsets = [0];
+    for (const card of cards.slice(1)) {
+      if (offsets[offsets.length - 1] >= maxOffset - 1) break;
+      offsets.push(Math.min(maxOffset, card.getBoundingClientRect().left - listLeft));
+    }
+    return offsets;
+  }
+
+  function nearestStop(offset: number) {
+    return stops.reduce((nearest, stop, index) =>
+      Math.abs(stop - offset) < Math.abs(stops[nearest] - offset) ? index : nearest, 0);
+  }
 
   function updateNavigation() {
-    previous.disabled = track.scrollLeft <= 2;
-    next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+    const offset = targetOffset ?? track.scrollLeft;
+    previous.disabled = offset <= 1;
+    next.disabled = offset >= stops[stops.length - 1] - 1;
+  }
+
+  function scrollToIndex(index: number) {
+    const offset = stops[Math.max(0, Math.min(index, stops.length - 1))];
+    targetOffset = offset;
+    track.scrollTo({ left: offset, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    updateNavigation();
   }
 
   function move(direction: number) {
-    const stride = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth;
-    const pageSize = Math.max(1, Math.floor(track.clientWidth / stride));
-    track.scrollBy({ left: direction * stride * pageSize, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+    scrollToIndex(nearestStop(targetOffset ?? track.scrollLeft) + direction);
+  }
+
+  function syncNavigation() {
+    targetOffset = null;
+    updateNavigation();
   }
 
   previous.addEventListener('click', () => move(-1));
@@ -81,14 +112,95 @@ export function setupIndicators() {
       move(event.key === 'ArrowLeft' ? -1 : 1);
     } else if (event.key === 'Home' || event.key === 'End') {
       event.preventDefault();
-      track.scrollTo({ left: event.key === 'Home' ? 0 : track.scrollWidth, behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+      scrollToIndex(event.key === 'Home' ? 0 : stops.length - 1);
     }
   });
+
+  track.addEventListener('pointerdown', event => {
+    if (!event.isPrimary || event.button !== 0 || stops.length < 2) return;
+    drag = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      index: nearestStop(track.scrollLeft),
+      active: false,
+    };
+  });
+
+  track.addEventListener('pointermove', event => {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    const distance = drag.startX - event.clientX;
+    if (!drag.active) {
+      if (Math.abs(distance) < 8 || Math.abs(distance) <= Math.abs(event.clientY - drag.startY)) return;
+      drag.active = true;
+      track.setPointerCapture(event.pointerId);
+      track.classList.add('is-dragging');
+      syncNavigation();
+    }
+    const previousStop = stops[Math.max(0, drag.index - 1)];
+    const nextStop = stops[Math.min(stops.length - 1, drag.index + 1)];
+    track.scrollLeft = Math.max(previousStop, Math.min(nextStop, stops[drag.index] + distance));
+  });
+
+  function finishDrag(event: PointerEvent) {
+    if (!drag || event.pointerId !== drag.pointerId) return;
+    const { active, index, startX } = drag;
+    drag = null;
+    if (!active) return;
+    const distance = startX - event.clientX;
+    const advance = event.type === 'pointerup' && Math.abs(distance) >= Math.min(72, stops[1] / 4);
+    track.classList.remove('is-dragging');
+    scrollToIndex(index + (advance ? Math.sign(distance) : 0));
+  }
+
+  track.addEventListener('pointerup', finishDrag);
+  track.addEventListener('pointercancel', finishDrag);
+  track.addEventListener('pointerleave', event => {
+    if (drag && !drag.active) finishDrag(event);
+  });
+  track.addEventListener('lostpointercapture', event => {
+    if (event.target === track) finishDrag(event);
+  });
+
+  let lastWheelTime = -Infinity;
+  let wheelDistance = 0;
+  let wheelAdvanced = false;
+  track.addEventListener('wheel', event => {
+    const threshold = event.deltaMode === WheelEvent.DOM_DELTA_PIXEL ? 36 : 1;
+    const delta = event.deltaX || (event.shiftKey ? event.deltaY : 0);
+    if (event.ctrlKey || !delta || stops.length < 2) return;
+    if (!event.shiftKey && Math.abs(delta) <= Math.abs(event.deltaY)) return;
+    event.preventDefault();
+
+    // Group trackpad deltas and their momentum into a single step.
+    if (event.timeStamp - lastWheelTime > 150) {
+      wheelDistance = 0;
+      wheelAdvanced = false;
+    }
+    lastWheelTime = event.timeStamp;
+    if (wheelAdvanced || drag?.active) return;
+    wheelDistance += delta;
+    if (Math.abs(wheelDistance) < threshold) return;
+    wheelAdvanced = true;
+    move(Math.sign(wheelDistance));
+  }, { passive: false });
+
   let frame = 0;
   track.addEventListener('scroll', () => {
     cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(updateNavigation);
+    frame = requestAnimationFrame(() => {
+      if (targetOffset !== null && Math.abs(track.scrollLeft - targetOffset) <= 1) targetOffset = null;
+      updateNavigation();
+    });
   }, { passive: true });
-  new ResizeObserver(updateNavigation).observe(track);
+  track.addEventListener('scrollend', syncNavigation);
+  new ResizeObserver(() => {
+    stops = measureStops();
+    if (drag) {
+      drag = null;
+      track.classList.remove('is-dragging');
+    }
+    syncNavigation();
+  }).observe(track);
   updateNavigation();
 }
