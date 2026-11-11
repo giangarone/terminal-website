@@ -30,8 +30,6 @@
   --accent-blue: #60a5fa;
   --accent-purple: #b18aff;
   --accent-gold: #ffc752;
-  --shadow: rgb(0 0 0 / 20%);
-  --shadow-soft: rgb(0 0 0 / 12%);
   --light-soft: rgb(255 255 255 / 3%);
   --light-medium: rgb(255 255 255 / 7%);
   --light-strong: rgb(255 255 255 / 20%);
@@ -196,50 +194,29 @@ ul { margin: 0; padding: 0; list-style: none; }
 .depth-media { aspect-ratio: 4 / 3; }
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
-/* Typed strengths let the gradient fade in and out instead of switching images. */
-@property --indicator-fade-left {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
-}
-@property --indicator-fade-right {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
+.indicators-section { position: relative; isolation: isolate; }
+.indicator-cells {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 45%;
+  pointer-events: none;
 }
 .indicators-heading h2 { margin-top: 21px; }
 .indicators-heading > p { max-width: 360px; }
 .indicator-track {
-  --indicator-fade-size: clamp(16px, 3vw, 48px);
-  --indicator-edge-mask: linear-gradient(90deg,
-    rgb(0 0 0 / calc(1 - var(--indicator-fade-left, 0))) 0%,
-    rgb(0 0 0 / calc(1 - 0.9 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.2),
-    rgb(0 0 0 / calc(1 - 0.65 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.4),
-    rgb(0 0 0 / calc(1 - 0.35 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.6),
-    rgb(0 0 0 / calc(1 - 0.1 * var(--indicator-fade-left, 0))) calc(var(--indicator-fade-size) * 0.8),
-    #000 var(--indicator-fade-size),
-    #000 calc(100% - var(--indicator-fade-size)),
-    rgb(0 0 0 / calc(1 - 0.1 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.8),
-    rgb(0 0 0 / calc(1 - 0.35 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.6),
-    rgb(0 0 0 / calc(1 - 0.65 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.4),
-    rgb(0 0 0 / calc(1 - 0.9 * var(--indicator-fade-right, 0))) calc(100% - var(--indicator-fade-size) * 0.2),
-    rgb(0 0 0 / calc(1 - var(--indicator-fade-right, 0))) 100%
-  );
   margin-top: 48px;
   overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   padding-bottom: 14px;
-  -webkit-mask-image: var(--indicator-edge-mask);
-  mask-image: var(--indicator-edge-mask);
-  transition: --indicator-fade-left 450ms ease-in-out, --indicator-fade-right 450ms ease-in-out;
 }
-/* Keep the fade at the viewport edge, only where more cards are offscreen. */
-.indicator-track.can-scroll-left { --indicator-fade-left: 1; }
-.indicator-track.can-scroll-right { --indicator-fade-right: 1; }
 .indicator-track::-webkit-scrollbar { display: none; }
-.indicator-track:focus-visible { outline-offset: 4px; -webkit-mask-image: none; mask-image: none; }
+.indicator-track:focus-visible { outline-offset: 4px; }
 .indicator-list { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 68px) / 3.2); gap: 20px; }
 .indicator-item { min-width: 0; scroll-snap-align: start; }
 .indicator-card { display: flex; flex-direction: column; height: 100%; border: 0.5px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); }
@@ -396,8 +373,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .xray-trade-label { position: absolute; top: 3%; left: 60.625%; translate: -50% 0; color: var(--positive); font-size: 10px; white-space: nowrap; }
 .xray-legend { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-size: 9px; color: var(--text-muted); }
 .xray-legend > span { display: inline-flex; align-items: center; gap: 7px; }
-.xray-legend i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--positive); box-shadow: 0 0 0 3px color-mix(in srgb, var(--positive) 10%, transparent); }
-.xray-legend > span:last-child i { width: 16px; height: 6px; border-radius: 2px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--positive) 45%, transparent)); box-shadow: none; }
+.xray-legend i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--positive); }
+.xray-legend > span:last-child i { width: 16px; height: 6px; border-radius: 2px; background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--positive) 45%, transparent)); }
 @media (max-width: 1100px) {
   .features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .feature-card { grid-column: span 1; }
@@ -471,7 +448,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 .featured-plan::after {
   inset: 0;
   z-index: -1;
-  box-shadow: inset 0 0 34px rgb(96 165 250 / 50%), inset 0 0 88px rgb(37 99 235 / 34%);
   mask-image: conic-gradient(from var(--plan-stroke-angle),
     transparent 0deg 110deg, rgb(0 0 0 / 28%) 136deg, rgb(0 0 0 / 78%) 172deg,
     transparent 180deg 270deg, rgb(0 0 0 / 40%) 310deg, #000 352deg, transparent 360deg);
@@ -518,7 +494,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: 16px;
   background: var(--surface-inset);
   color: var(--text-secondary);
-  box-shadow: 0 4px 12px var(--shadow);
 }
 .plan-feature-tooltip.is-featured {
   background: #20262f;
@@ -569,7 +544,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .review-marquee:hover .review-track { animation-play-state: paused; }
 }
 .review-group { display: flex; gap: var(--review-gap); padding-right: var(--review-gap); min-width: 100vw; }
-.review-card { display: flex; flex: 1 0 auto; flex-direction: column; width: 348px; max-width: calc(100vw - 64px); padding: 24px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); box-shadow: inset 0 1px 0 var(--light-soft); }
+.review-card { display: flex; flex: 1 0 auto; flex-direction: column; width: 348px; max-width: calc(100vw - 64px); padding: 24px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); }
 .review-card h3 { color: var(--light); font-size: 18px; line-height: 1.4; }
 .review-copy { margin-top: 14px; color: var(--text-secondary); font-size: 13px; line-height: 1.85; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
 .review-stars { margin-top: auto; padding-top: 23px; color: var(--accent-gold); filter: saturate(1.2); font-size: 17px; line-height: 1; letter-spacing: -1px; }
@@ -603,9 +578,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   height: 100%;
   z-index: -1;
   pointer-events: none;
-}
-.faq-heading, .faq-list {
-  text-shadow: 0 2px 4px var(--background), 0 0 16px var(--background), 0 0 32px var(--background);
 }
 .faq-heading h2 { margin-top: 23px; font-size: clamp(36px, 3.5vw, 46px); }
 .faq-list details { border-bottom: 0.5px solid var(--border); }
