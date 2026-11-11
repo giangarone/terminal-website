@@ -1,8 +1,7 @@
-// Decorative signal columns: fixed cells, independently moving light levels.
+// Decorative signal columns drawn on a fixed cell grid.
 export function initSignalSkyline(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const pitch = 8;
   const size = 6;
   // The same pale cyan, logo cyan, azure, and deep blue as the hero.
@@ -20,10 +19,6 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
   });
   let width = 0;
   let height = 0;
-  let time = 0;
-  let frame = 0;
-  let lastDraw = 0;
-  let inView = false;
   let columns: { x: number; front: number; back: number; gutter: boolean }[] = [];
 
   function smooth(value: number) {
@@ -46,18 +41,15 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
     const frontLevels = new Map<number, number>();
     const backLevels = new Map<number, number>();
     for (const column of columns) {
-      // Every group has its own height and tempo, without sliding the lattice.
       if (!frontLevels.has(column.front)) {
         const id = column.front;
-        // Broad strokes every 3.6–5.5 seconds, with a slower secondary sway.
         frontLevels.set(id, height * (0.38 + seed(id + 2) * 0.08
-          + Math.sin(time * (1.15 + seed(id + 9) * 0.6) + id * 2.4) * 0.25
-          + Math.sin(time * 0.65 + id * 0.8) * 0.055));
+          + Math.sin(id * 2.4) * 0.25 + Math.sin(id * 0.8) * 0.055));
       }
       if (!backLevels.has(column.back)) {
         const id = column.back;
         backLevels.set(id, height * (0.42 + seed(id + 41) * 0.1
-          + Math.sin(time * (0.85 + seed(id + 53) * 0.35) + id * 1.7) * 0.23));
+          + Math.sin(id * 1.7) * 0.23));
       }
     }
 
@@ -93,22 +85,6 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
     ctx.globalAlpha = 1;
   }
 
-  function tick(now: number) {
-    if (now - lastDraw >= 1000 / 60 - 1) {
-      if (lastDraw) time += Math.min(now - lastDraw, 100) / 1000;
-      lastDraw = now;
-      paint();
-    }
-    frame = requestAnimationFrame(tick);
-  }
-
-  function updateMotion() {
-    cancelAnimationFrame(frame);
-    lastDraw = 0;
-    paint();
-    if (inView && !document.hidden && !motion.matches) frame = requestAnimationFrame(tick);
-  }
-
   function resize() {
     const bounds = canvas.getBoundingClientRect();
     width = bounds.width;
@@ -134,10 +110,4 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
   }
 
   new ResizeObserver(resize).observe(canvas);
-  new IntersectionObserver(([entry]) => {
-    inView = entry.isIntersecting;
-    updateMotion();
-  }).observe(canvas);
-  motion.addEventListener('change', updateMotion);
-  document.addEventListener('visibilitychange', updateMotion);
 }
