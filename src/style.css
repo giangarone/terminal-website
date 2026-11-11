@@ -508,9 +508,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   max-height: calc(100dvh - 24px);
   overflow-y: auto;
   padding: 10px 12px;
-  border: 0.5px solid var(--border);
+  border: 0.5px solid var(--border-detail);
   border-radius: 16px;
-  background: var(--surface);
+  background: var(--surface-inset);
   color: var(--text-secondary);
   box-shadow: 0 4px 12px var(--shadow);
 }
