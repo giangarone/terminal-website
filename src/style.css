@@ -197,19 +197,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
 .indicators-section { position: relative; isolation: isolate; }
-.indicators-section::before,
-.indicator-cells {
+.indicators-section::before {
+  inset-block: 0;
   left: 50%;
   transform: translateX(-50%);
   width: min(100vw, 1920px);
-}
-.indicators-section::before { inset-block: 0; z-index: -2; }
-.indicator-cells {
-  position: absolute;
-  z-index: -1;
-  bottom: 0;
-  height: 45%;
-  pointer-events: none;
 }
 .indicators-heading h2 { margin-top: 21px; }
 .indicators-heading > p { max-width: 360px; }

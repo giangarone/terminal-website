@@ -3,7 +3,6 @@ import { setupIndicators } from './indicators.ts';
 import { initHeroCells } from './hero-cells.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initCellWave } from './cell-wave.ts';
-import { initSignalSkyline } from './signal-skyline.ts';
 import { initAurora } from './aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 
@@ -27,9 +26,6 @@ initHeroStats();
 
 const faqCells = document.querySelector<HTMLCanvasElement>('.faq-cells');
 if (faqCells) initCellWave(faqCells);
-
-const indicatorCells = document.querySelector<HTMLCanvasElement>('.indicator-cells');
-if (indicatorCells) initSignalSkyline(indicatorCells);
 
 const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
