@@ -521,10 +521,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   box-shadow: 0 4px 12px var(--shadow);
 }
 .plan-feature-tooltip.is-featured {
-  background: color-mix(in srgb, var(--background), var(--accent-blue) 28%);
-  border-color: color-mix(in srgb, var(--border-detail), var(--accent-blue) 32%);
+  background: #20262f;
+  border-color: var(--border-strong);
 }
 .plan-feature-tooltip-title { display: block; margin-bottom: 6px; }
+.plan-feature-tooltip.is-featured .plan-feature-tooltip-title { margin-bottom: 4px; }
 .plan-feature-level { display: inline-block; margin-left: 2px; padding: 0px 6px; border-radius: 6px; background: #3983f780; font-size: 11px; font-weight: 500; vertical-align: baseline; white-space: nowrap; }
 .plan-feature-level-depth { background: #8f2071; }
 
