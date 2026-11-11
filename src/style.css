@@ -80,7 +80,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .button span[aria-hidden] { font-size: 18px; line-height: 1; font-weight: 400; }
 .button-primary { background: var(--button); color: var(--button-text); }
 .button-primary:hover { background: var(--button-hover); }
-.button-small { min-height: 39px; font-size: 13px; padding: 8px 17px; gap: 8px; }
+.button-small { min-height: 0; font-size: 13px; padding: 8px 17px; gap: 8px; }
 .button-small span[aria-hidden] { font-size: 15px; }
 .menu-toggle { display: none; background: none; border: 0.5px solid var(--border); border-radius: 50%; width: 42px; height: 42px; padding: 12px; }
 .menu-toggle span { width: 16px; height: 1px; background: var(--text); display: block; margin-block: 5px; }
@@ -692,7 +692,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-inner { height: 72px; gap: 12px; }
   .header-inner .wordmark { flex-shrink: 1; min-width: 0; }
   .header-actions { flex-shrink: 0; gap: 8px; }
-  .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 12px; }
+  .header-actions .button-small { padding: 8px 12px; font-size: 12px; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
