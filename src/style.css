@@ -247,8 +247,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .indicator-card h3 { font-size: 18px; line-height: 1.4; }
 .indicator-description { color: var(--text-secondary); font-size: 12px; line-height: 1.85; margin-top: 12px; margin-bottom: 25px; }
 .indicator-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 0.5px solid var(--border); padding-top: 15px; margin-top: auto; }
-.indicator-favorites { display: inline-flex; align-items: center; gap: 7px; color: var(--text-muted); font-size: 10px; font-variant-numeric: tabular-nums; }
-.indicator-favorites svg { width: 14px; height: 14px; }
+.indicator-users { display: inline-flex; align-items: center; gap: 7px; color: var(--text-muted); font-size: 10px; font-variant-numeric: tabular-nums; }
+.indicator-users svg { width: 14px; height: 14px; }
 .indicator-detail { display: inline-flex; align-items: center; justify-content: center; gap: 13px; background: var(--light-medium); border: 0; border-radius: 100px; padding: 6px 12px; font-size: 11px; white-space: nowrap; transition: background-color 180ms ease; }
 .indicator-detail:focus-visible { outline-offset: 2px; }
 .indicator-navigation { display: flex; align-items: center; justify-content: flex-end; gap: 20px; margin-top: 14px; }
@@ -690,9 +690,9 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .section { padding-block: 68px; }
   .section h2, .hero h1 { font-size: 37px; letter-spacing: -0.05em; }
   .header-inner { height: 72px; gap: 12px; }
-  .header-actions { gap: 8px; }
+  .header-inner .wordmark { flex-shrink: 1; min-width: 0; }
+  .header-actions { flex-shrink: 0; gap: 8px; }
   .header-actions .button-small { min-height: 42px; padding: 8px 12px; font-size: 12px; }
-  .header-actions .button-small span { display: none; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
@@ -736,7 +736,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 }
 @media (max-width: 360px) {
   .container { width: calc(100% - 32px); }
-  .header-actions .button-small { display: none; }
   .hero-actions { flex-direction: column; padding-inline: 18px; }
   .section h2, .hero h1 { font-size: 32px; }
 

@@ -33,7 +33,7 @@ The indicator showcase follows market depth. Edit or add entries in `premiumIndi
 
 Each entry has an empty image source ready for a screenshot (approximately 1.8:1). Include the deployment base in image paths, e.g. `/terminal-website/images/indicator.webp` for the current GitHub Pages setup. Empty or failed images leave a clean charcoal frame.
 
-Favorite counts are invented design placeholders between 200 and 2,000, requested for the mockup. Replace them with verified counts before launch; `null` displays an em dash. The “View indicator” buttons are intentionally inactive and marked `aria-disabled`.
+The `userCount` values are design placeholders for the number of users using each indicator. Replace them with verified counts before launch. A `null` value displays an em dash. The “View indicator” buttons are intentionally inactive and marked `aria-disabled`.
 
 The collection supports touch swiping, trackpad scrolling, previous/next buttons, and Left/Right/Home/End keys when focused. Reduced-motion preferences disable animated scrolling.
 

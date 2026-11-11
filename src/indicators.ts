@@ -18,7 +18,13 @@ export function setupIndicators() {
           <h3></h3>
           <p class="indicator-description"></p>
           <div class="indicator-card-footer">
-            <span class="indicator-favorites"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span></span></span>
+            <span class="indicator-users" role="img">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="7" r="3"/>
+                <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 4a3 3 0 0 1 0 6m2 4a4 4 0 0 1 3 4v2"/>
+              </svg>
+              <span></span>
+            </span>
             <button class="indicator-detail" type="button" aria-disabled="true">View indicator</button>
           </div>
         </div>
@@ -28,11 +34,15 @@ export function setupIndicators() {
     title.textContent = indicator.name;
     item.querySelector('article')!.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
-    const favorites = item.querySelector<HTMLElement>('.indicator-favorites')!;
-    const favoriteLabel = indicator.favorites === null ? 'Favorite count unavailable' : `${number.format(indicator.favorites)} favorites`;
-    favorites.title = favoriteLabel;
-    favorites.setAttribute('aria-label', favoriteLabel);
-    favorites.querySelector('span')!.textContent = indicator.favorites === null ? '—' : number.format(indicator.favorites);
+    const users = item.querySelector<HTMLElement>('.indicator-users')!;
+    const { userCount } = indicator;
+    const countText = userCount === null ? '—' : number.format(userCount);
+    const countLabel = userCount === null
+      ? 'User count unavailable'
+      : `${countText} ${userCount === 1 ? 'user' : 'users'} using this indicator`;
+    users.title = countLabel;
+    users.setAttribute('aria-label', countLabel);
+    users.querySelector('span')!.textContent = countText;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     if (indicator.image.src) {
