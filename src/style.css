@@ -82,10 +82,11 @@ ul { margin: 0; padding: 0; list-style: none; }
 .button-primary:hover { background: var(--button-hover); }
 .button-small { min-height: 0; font-size: 13px; padding: 8px 17px; gap: 8px; }
 .button-small span[aria-hidden] { font-size: 15px; }
-.menu-toggle { display: none; background: none; border: 0.5px solid var(--border); border-radius: 50%; width: 42px; height: 42px; padding: 12px; }
-.menu-toggle span { width: 16px; height: 1px; background: var(--text); display: block; margin-block: 5px; }
-.menu-toggle[aria-expanded='true'] span:first-child { transform: translateY(3px) rotate(45deg); }
-.menu-toggle[aria-expanded='true'] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+.menu-toggle { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 4px; width: 42px; height: 42px; padding: 0; background: none; border: 0; }
+.menu-toggle span { width: 18px; height: 1px; background: var(--text); }
+.menu-toggle[aria-expanded='true'] span:first-child { transform: translateY(5px) rotate(45deg); }
+.menu-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+.menu-toggle[aria-expanded='true'] span:last-child { transform: translateY(-5px) rotate(-45deg); }
 .mobile-nav { padding-block: 16px 24px; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
 .mobile-nav .button-small { margin-top: 8px; }
@@ -626,7 +627,8 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .desktop-nav a, .site-footer nav a {
   transition: color 180ms ease;
 }
-.menu-toggle span, .faq-indicator::after { transition: transform 160ms ease; }
+.menu-toggle span { transition: transform 160ms ease, opacity 160ms ease; }
+.faq-indicator::after { transition: transform 160ms ease; }
 @media (hover: hover) {
   .button-plan:hover { border-color: var(--text-secondary); }
   .indicator-detail:hover { background: color-mix(in srgb, var(--light-medium), var(--light) 5%); }
@@ -660,7 +662,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-inner { height: 78px; gap: 20px; }
   .wordmark { width: 150px; }
   .desktop-nav, .header-actions .button-small { display: none; }
-  .menu-toggle { display: block; }
+  .menu-toggle { display: flex; }
   .hero { padding: 0 0 72px; --hero-inset: 82px; }
   .platform-media { width: 100%; }
   .split-heading { display: block; }
@@ -692,7 +694,6 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .section h2, .hero h1 { font-size: 37px; letter-spacing: -0.05em; }
   .header-inner { height: 72px; gap: 12px; }
   .mobile-nav .button-small { padding: 8px 12px; font-size: 12px; }
-  .menu-toggle { width: 42px; height: 42px; padding: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
   .desktop-break { display: none; }
