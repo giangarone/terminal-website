@@ -118,9 +118,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   position: relative;
   padding-block: var(--hero-inset) clamp(26px, 2.5vw, 40px);
 }
-/* The same quiet grid connects the hero, pricing, and reviews. */
+/* Shared static grid for section backgrounds. */
 .hero-stage::before,
 .pricing-section::before,
+.indicators-section::before,
 .reviews-section::before {
   content: '';
   position: absolute;
@@ -132,8 +133,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   background-size: clamp(32px, 4vw, 56px) clamp(32px, 4vw, 56px);
   background-position: center;
 }
-.hero-stage::before {
-  inset: 0;
+.hero-stage::before { inset: 0; }
+.hero-stage::before,
+.indicators-section::before {
   -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
   mask-image: radial-gradient(ellipse 65% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
 }
@@ -195,13 +197,17 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
 .indicators-section { position: relative; isolation: isolate; }
+.indicators-section::before,
+.indicator-cells {
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100vw, 1920px);
+}
+.indicators-section::before { inset-block: 0; z-index: -2; }
 .indicator-cells {
   position: absolute;
   z-index: -1;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
   height: 45%;
   pointer-events: none;
 }

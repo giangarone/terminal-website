@@ -42,6 +42,7 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
     const rows = Math.floor(height / pitch);
     const offsetY = height - (rows - 1) * pitch - size;
     const base = height * 0.96;
+    const sideFadeWidth = Math.min(384, width * 0.25);
     const frontLevels = new Map<number, number>();
     const backLevels = new Map<number, number>();
     for (const column of columns) {
@@ -64,7 +65,7 @@ export function initSignalSkyline(canvas: HTMLCanvasElement) {
       const centerX = column.x + size / 2;
       const frontTop = frontLevels.get(column.front)!;
       const backTop = backLevels.get(column.back)!;
-      const sideFade = smooth(Math.min(centerX, width - centerX) / 56);
+      const sideFade = smooth(Math.min(centerX, width - centerX) / sideFadeWidth);
       for (let row = 0; row < rows; row++) {
         const y = offsetY + row * pitch;
         const centerY = y + size / 2;
