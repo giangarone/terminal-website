@@ -88,6 +88,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .menu-toggle[aria-expanded='true'] span:last-child { transform: translateY(-3px) rotate(-45deg); }
 .mobile-nav { padding-block: 16px 24px; }
 .mobile-nav a { display: block; padding: 12px 0; color: var(--text-secondary); }
+.mobile-nav .button-small { margin-top: 8px; }
 
 /* Purely decorative light: no charts, plotted prices, or simulated data. */
 .hero { position: relative; isolation: isolate; text-align: center; padding: 0 0 58px; --hero-inset: 107px; }
@@ -658,7 +659,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .section { padding-block: 85px; }
   .header-inner { height: 78px; gap: 20px; }
   .wordmark { width: 150px; }
-  .desktop-nav { display: none; }
+  .desktop-nav, .header-actions .button-small { display: none; }
   .menu-toggle { display: block; }
   .hero { padding: 0 0 72px; --hero-inset: 82px; }
   .platform-media { width: 100%; }
@@ -690,9 +691,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .section { padding-block: 68px; }
   .section h2, .hero h1 { font-size: 37px; letter-spacing: -0.05em; }
   .header-inner { height: 72px; gap: 12px; }
-  .header-inner .wordmark { flex-shrink: 1; min-width: 0; }
-  .header-actions { flex-shrink: 0; gap: 8px; }
-  .header-actions .button-small { padding: 8px 12px; font-size: 12px; }
+  .mobile-nav .button-small { padding: 8px 12px; font-size: 12px; }
   .menu-toggle { width: 42px; height: 42px; padding: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
