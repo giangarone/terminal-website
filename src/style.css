@@ -698,6 +698,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-inner { height: 72px; gap: 12px; }
   .mobile-nav .button-small { padding: 8px 12px; font-size: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
+  .hero h1 { text-wrap: balance; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
   .desktop-break { display: none; }
   .hero-actions { gap: 10px; margin-top: 28px; }
