@@ -1,4 +1,4 @@
-// Aurora behind the pricing grid, using the Pro plan's navy and blues.
+// Aurora behind the pricing grid, using navy and the Pro plan's blue accents.
 const CONFIG = {
   colorA: '#2563eb',
   colorB: '#13233c',
