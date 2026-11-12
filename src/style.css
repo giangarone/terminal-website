@@ -233,7 +233,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .indicator-card[data-level='L1'] { --level-color: var(--accent-blue); }
 .indicator-card[data-level='L2'] { --level-color: var(--accent-purple); }
 .indicator-image { position: relative; aspect-ratio: 1.8; border-bottom: 0.5px solid var(--border); }
-.indicator-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.indicator-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05); }
 .indicator-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
 .indicator-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .indicator-card h3 { font-size: 18px; line-height: 1.4; }
