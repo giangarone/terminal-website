@@ -36,6 +36,21 @@ export const premiumIndicators: PremiumIndicator[] = [
     image: { src: '/terminal-website/images/indicators/flowprint-blocks.png', alt: 'Candlestick chart with highlighted buy and sell liquidity zones' }, userCount: 1084,
   },
   {
+    id: 'liquidation-prints', name: 'Liquidation Prints', level: 'L1', category: 'Liquidations',
+    description: 'See forced exits on perpetual futures charts. Red bubbles below candles mark long liquidations, and green bubbles above mark short liquidations.',
+    image: { src: '/terminal-website/images/indicators/liquidation-prints.png', alt: 'Candlestick chart with red liquidation bubbles below candles and green bubbles above' }, userCount: 947,
+  },
+  {
+    id: 'prime-support-resistance', name: 'Prime Support & Resistance', level: 'L1', category: 'Order flow',
+    description: 'See potential support and resistance directly on your chart. Our servers calculate each level from executed market trades.',
+    image: { src: '/terminal-website/images/indicators/prime-support-resistance.png', alt: 'Candlestick chart with green support and red resistance levels' }, userCount: 1316,
+  },
+  {
+    id: 'footprint', name: 'Footprint', level: 'L1', category: 'Order flow',
+    description: 'See how much traded at the bid and ask at every price within each candle. Fine-tune the view with dedicated footprint settings.',
+    image: { src: '/terminal-website/images/indicators/footprint.png', alt: 'Footprint chart with red and green volume delta values at each price level' }, userCount: 1542,
+  },
+  {
     id: 'whale-movement', name: 'Whale Movement', level: null, category: 'Large participants',
     description: 'Follow the size behind the move. Surface outsized trading activity and see where the market’s biggest participants are stepping in.',
     image: { src: '', alt: 'Whale Movement indicator preview' }, userCount: 1632,
