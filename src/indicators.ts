@@ -62,10 +62,12 @@ export function setupIndicators() {
     const orb = document.createElement('div');
     orb.className = 'indicator-orb';
     const canvas = document.createElement('canvas');
-    orb.append(canvas);
+    const grain = document.createElement('span');
+    grain.className = 'indicator-orb-grain';
+    orb.append(canvas, grain);
     frame.append(orb);
     list.append(item);
-    initIndicatorOrb(canvas, card, indicator.orb);
+    initIndicatorOrb(canvas, indicator.orbTexture);
   }
 
   const cards = [...list.children] as HTMLElement[];
