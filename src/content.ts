@@ -31,6 +31,11 @@ export const premiumIndicators: PremiumIndicator[] = [
     image: { src: '', alt: 'Aggressive Order Flow indicator preview' }, userCount: 1847,
   },
   {
+    id: 'flowprint-blocks', name: 'Flowprint Blocks', level: 'L2', category: 'Liquidity',
+    description: 'See where buy and sell orders cluster, and track how price reacts when it reaches those levels.',
+    image: { src: '/terminal-website/images/indicators/flowprint-blocks.png', alt: 'Candlestick chart with highlighted buy and sell liquidity zones' }, userCount: 1084,
+  },
+  {
     id: 'whale-movement', name: 'Whale Movement', level: null, category: 'Large participants',
     description: 'Follow the size behind the move. Surface outsized trading activity and see where the market’s biggest participants are stepping in.',
     image: { src: '', alt: 'Whale Movement indicator preview' }, userCount: 1632,

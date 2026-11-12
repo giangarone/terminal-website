@@ -29,18 +29,19 @@ export function setupIndicators() {
           </div>
         </div>
       </article>`;
-    const title = item.querySelector('h3')!;
+    const card = item.querySelector('article')!;
+    const title = card.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
     const { level, userCount } = indicator;
     if (level) {
+      card.dataset.level = level;
       const levelTag = document.createElement('span');
       levelTag.className = 'indicator-level';
-      levelTag.dataset.level = level;
       levelTag.textContent = level === 'L2' ? 'Orderbook • L2' : 'Orderflow • L1';
       title.after(levelTag);
     }
-    item.querySelector('article')!.setAttribute('aria-labelledby', title.id);
+    card.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
     const users = item.querySelector<HTMLElement>('.indicator-users')!;
     const countText = userCount === null ? '—' : number.format(userCount);
