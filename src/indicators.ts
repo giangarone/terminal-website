@@ -37,7 +37,7 @@ export function setupIndicators() {
       const levelTag = document.createElement('span');
       levelTag.className = 'indicator-level';
       levelTag.dataset.level = level;
-      levelTag.textContent = level;
+      levelTag.textContent = level === 'L2' ? 'Orderbook • L2' : 'Orderflow • L1';
       title.after(levelTag);
     }
     item.querySelector('article')!.setAttribute('aria-labelledby', title.id);
