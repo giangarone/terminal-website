@@ -21,6 +21,11 @@ export interface PremiumIndicator {
 // before launch. Add entries here to extend the carousel.
 export const premiumIndicators: PremiumIndicator[] = [
   {
+    id: 'exhaustion', name: 'Exhaustion', level: 'L2', category: 'Momentum',
+    description: 'Spot when buying or selling pressure fades and a move starts to lose momentum.',
+    image: { src: '/terminal-website/images/indicators/exhaustion.png', alt: 'Candlestick chart with highlighted exhaustion zones' }, userCount: 782,
+  },
+  {
     id: 'aggressive-order-flow', name: 'Aggressive Order Flow', level: 'L1', category: 'Order flow',
     description: 'See who’s driving the move. Track aggressive buying and selling in real time to reveal which side is taking control.',
     image: { src: '', alt: 'Aggressive Order Flow indicator preview' }, userCount: 1847,

@@ -15,7 +15,7 @@ export function setupIndicators() {
       <article class="indicator-card">
         <div class="indicator-image" aria-hidden="true"></div>
         <div class="indicator-body">
-          <h3></h3>
+          <div class="indicator-heading"><h3></h3></div>
           <p class="indicator-description"></p>
           <div class="indicator-card-footer">
             <span class="indicator-users" role="img">
@@ -32,10 +32,17 @@ export function setupIndicators() {
     const title = item.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
+    const { level, userCount } = indicator;
+    if (level) {
+      const levelTag = document.createElement('span');
+      levelTag.className = 'indicator-level';
+      levelTag.dataset.level = level;
+      levelTag.textContent = level;
+      title.after(levelTag);
+    }
     item.querySelector('article')!.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
     const users = item.querySelector<HTMLElement>('.indicator-users')!;
-    const { userCount } = indicator;
     const countText = userCount === null ? '—' : number.format(userCount);
     const countLabel = userCount === null
       ? 'User count unavailable'
