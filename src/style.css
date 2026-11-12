@@ -233,7 +233,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .indicator-card[data-level='L1'] { --level-color: var(--accent-blue); }
 .indicator-card[data-level='L2'] { --level-color: var(--accent-purple); }
 .indicator-image { position: relative; aspect-ratio: 1.8; border-bottom: 0.5px solid var(--border); }
-.indicator-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: contrast(1.05); }
+.indicator-orb-frame { display: grid; place-items: center; overflow: hidden; background: radial-gradient(ellipse at 50% 75%, color-mix(in srgb, var(--orb-mid) 18%, #111) 0%, color-mix(in srgb, var(--orb-base) 10%, #111) 35%, #111111 72%); }
+.indicator-orb { position: relative; height: 80%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(ellipse at 26% 28%, var(--orb-highlight), transparent 45%), radial-gradient(ellipse at 76% 65%, var(--orb-accent), transparent 58%), var(--orb-base); box-shadow: 0 18px 35px -18px color-mix(in srgb, var(--orb-mid) 30%, transparent); }
+.indicator-orb canvas { display: block; width: 100%; height: 100%; border-radius: inherit; }
 .indicator-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }
 .indicator-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .indicator-card h3 { font-size: 18px; line-height: 1.4; }

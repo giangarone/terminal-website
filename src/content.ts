@@ -13,7 +13,7 @@ export interface PremiumIndicator {
   level: 'L1' | 'L2' | null;
   category: string;
   description: string;
-  image: { src: string; alt: string };
+  orb: { base: string; mid: string; highlight: string; accent: string };
   userCount: number | null;
 }
 
@@ -23,76 +23,26 @@ export const premiumIndicators: PremiumIndicator[] = [
   {
     id: 'exhaustion', name: 'Exhaustion', level: 'L2', category: 'Momentum',
     description: 'Spot when buying or selling pressure fades and a move starts to lose momentum.',
-    image: { src: '/terminal-website/images/indicators/exhaustion.png', alt: 'Candlestick chart with highlighted exhaustion zones' }, userCount: 782,
-  },
-  {
-    id: 'aggressive-order-flow', name: 'Aggressive Order Flow', level: 'L1', category: 'Order flow',
-    description: 'See who’s driving the move. Track aggressive buying and selling in real time to reveal which side is taking control.',
-    image: { src: '', alt: 'Aggressive Order Flow indicator preview' }, userCount: 1847,
+    orb: { base: '#1f3887', mid: '#6e61c7', highlight: '#b8d4fa', accent: '#c483c9' }, userCount: 782,
   },
   {
     id: 'flowprint-blocks', name: 'Flowprint Blocks', level: 'L2', category: 'Liquidity',
     description: 'See where buy and sell orders cluster, and track how price reacts when it reaches those levels.',
-    image: { src: '/terminal-website/images/indicators/flowprint-blocks.png', alt: 'Candlestick chart with highlighted buy and sell liquidity zones' }, userCount: 1084,
+    orb: { base: '#064f46', mid: '#209f82', highlight: '#bcf5df', accent: '#72d5af' }, userCount: 1084,
   },
   {
     id: 'liquidation-prints', name: 'Liquidation Prints', level: 'L1', category: 'Liquidations',
     description: 'See forced exits on perpetual futures charts. Red bubbles below candles mark long liquidations, and green bubbles above mark short liquidations.',
-    image: { src: '/terminal-website/images/indicators/liquidation-prints.png', alt: 'Candlestick chart with red liquidation bubbles below candles and green bubbles above' }, userCount: 947,
+    orb: { base: '#8c222c', mid: '#e15d49', highlight: '#ffe1b0', accent: '#f3a166' }, userCount: 947,
   },
   {
     id: 'prime-support-resistance', name: 'Prime Support & Resistance', level: 'L1', category: 'Order flow',
     description: 'See potential support and resistance directly on your chart. Our servers calculate each level from executed market trades.',
-    image: { src: '/terminal-website/images/indicators/prime-support-resistance.png', alt: 'Candlestick chart with green support and red resistance levels' }, userCount: 1316,
+    orb: { base: '#5b3b10', mid: '#c38c2c', highlight: '#fff1bb', accent: '#e9bd65' }, userCount: 1316,
   },
   {
     id: 'footprint', name: 'Footprint', level: 'L1', category: 'Order flow',
     description: 'See how much traded at the bid and ask at every price within each candle. Fine-tune the view with dedicated footprint settings.',
-    image: { src: '/terminal-website/images/indicators/footprint.png', alt: 'Footprint chart with red and green volume delta values at each price level' }, userCount: 1542,
-  },
-  {
-    id: 'whale-movement', name: 'Whale Movement', level: null, category: 'Large participants',
-    description: 'Follow the size behind the move. Surface outsized trading activity and see where the market’s biggest participants are stepping in.',
-    image: { src: '', alt: 'Whale Movement indicator preview' }, userCount: 1632,
-  },
-  {
-    id: 'spoofing-detector', name: 'Spoofing Detector', level: 'L2', category: 'Liquidity',
-    description: 'Look past the pressure. Flag large orders that appear and vanish, helping you spot liquidity that may be more illusion than intent.',
-    image: { src: '', alt: 'Spoofing Detector indicator preview' }, userCount: 978,
-  },
-  {
-    id: 'iceberg-detector', name: 'Iceberg Detector', level: 'L2', category: 'Hidden liquidity',
-    description: 'Uncover what’s beneath the book. Identify repeatedly replenished orders that can reveal larger positions working quietly below the surface.',
-    image: { src: '', alt: 'Iceberg Detector indicator preview' }, userCount: 1256,
-  },
-  {
-    id: 'limit-order-heatmap', name: 'Limit Order Heatmap', level: 'L2', category: 'Liquidity',
-    description: 'Put liquidity on the map. See resting orders beside price in a live heatmap, revealing the levels that could shape the next move.',
-    image: { src: '', alt: 'Limit Order Heatmap indicator preview' }, userCount: 1923,
-  },
-  {
-    id: 'absorption-detector', name: 'Absorption Detector', level: 'L2', category: 'Order flow',
-    description: 'See where conviction meets resistance. Detect heavy buying or selling absorbed by passive liquidity, revealing potential turning points.',
-    image: { src: '', alt: 'Absorption Detector indicator preview' }, userCount: 864,
-  },
-  {
-    id: 'trap-detector', name: 'Trap Detector', level: 'L2', category: 'Price structure',
-    description: 'Catch the breakout that doesn’t hold. Identify failed moves and the trapped positions that can fuel a sharp reversal.',
-    image: { src: '', alt: 'Trap Detector indicator preview' }, userCount: 743,
-  },
-  {
-    id: 'exhaustion-detector', name: 'Exhaustion Detector', level: 'L2', category: 'Momentum',
-    description: 'Know when a move is losing its drive. Spot aggressive flow delivering less price progress, an early clue that momentum may be fading.',
-    image: { src: '', alt: 'Exhaustion Detector indicator preview' }, userCount: 589,
-  },
-  {
-    id: 'delta-divergence-signal', name: 'Delta Divergence Signal', level: 'L2', category: 'Order flow',
-    description: 'See when price and participation part ways. Flag new price extremes that aggressive order flow doesn’t confirm, before you chase the move.',
-    image: { src: '', alt: 'Delta Divergence Signal indicator preview' }, userCount: 1128,
-  },
-  {
-    id: 'institutional-order-blocks', name: 'Institutional Order Blocks', level: 'L2', category: 'Price structure',
-    description: 'Map the zones that matter. Combine order flow and liquidity to highlight potential institutional positioning and levels worth watching on a return.',
-    image: { src: '', alt: 'Institutional Order Blocks indicator preview' }, userCount: 467,
+    orb: { base: '#103d70', mid: '#288bc2', highlight: '#c3efff', accent: '#72d7e3' }, userCount: 1542,
   },
 ];

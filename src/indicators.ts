@@ -1,4 +1,5 @@
 import { premiumIndicators } from './content.ts';
+import { initIndicatorOrb } from './indicator-orb.ts';
 
 export function setupIndicators() {
   const track = document.querySelector<HTMLElement>('#indicator-track')!;
@@ -53,18 +54,18 @@ export function setupIndicators() {
     users.querySelector('span')!.textContent = countText;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
-    if (indicator.image.src) {
-      const frame = item.querySelector<HTMLElement>('.indicator-image')!;
-      const image = new Image();
-      image.alt = indicator.image.alt;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      image.addEventListener('load', () => frame.removeAttribute('aria-hidden'), { once: true });
-      image.addEventListener('error', () => image.remove(), { once: true });
-      image.src = indicator.image.src;
-      frame.append(image);
+    const frame = item.querySelector<HTMLElement>('.indicator-image')!;
+    frame.classList.add('indicator-orb-frame');
+    for (const [name, color] of Object.entries(indicator.orb)) {
+      frame.style.setProperty(`--orb-${name}`, color);
     }
+    const orb = document.createElement('div');
+    orb.className = 'indicator-orb';
+    const canvas = document.createElement('canvas');
+    orb.append(canvas);
+    frame.append(orb);
     list.append(item);
+    initIndicatorOrb(canvas, card, indicator.orb);
   }
 
   const cards = [...list.children] as HTMLElement[];
