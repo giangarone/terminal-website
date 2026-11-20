@@ -427,6 +427,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   white-space: nowrap;
 }
 .billing-period input:checked + span { color: var(--text); background: var(--surface-hover); }
+.billing-period label:nth-child(2) > span { padding-right: 6px; }
 .billing-period input:focus-visible + span { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
 .billing-period small {
   display: inline-block;
