@@ -40,9 +40,13 @@ export function initPricingBilling() {
       plan.amount.textContent = price.amount;
       plan.billing.textContent = yearly.checked ? plan.annualBill : 'USD · Billed monthly';
       plan.comparisonPrice.textContent = price.comparison;
-      plan.badge.textContent = `${price.discount}% off`;
       plan.comparison.hidden = false;
-      plan.badge.hidden = false;
+      if (yearly.checked) {
+        plan.badge.textContent = `Save ${price.discount}%`;
+        plan.badge.hidden = false;
+      } else {
+        plan.badge.hidden = true;
+      }
     }
   };
 
