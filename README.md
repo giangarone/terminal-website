@@ -19,7 +19,7 @@ The hero and “Describe your idea. AI builds it.” both embed the `#ai` scene 
 
 ## Edit content and pricing
 
-Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
+Marketing copy, FAQs, and the three mock plans are in `index.html`. Monthly USD prices are Free $0, Pro $79.99, and Elite $149.99. The billing switcher uses the monthly cent amounts in `data-monthly-cents`. Yearly billing takes 20% off twelve monthly payments, rounds the annual total to cents, and displays its monthly equivalent above the total. The mock plan buttons use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
 The hero's three social-proof stats are in `index.html` under `.hero-stats`. The figures (100K+ active users, 1M+ trades tracked, and 4.9★ average rating) are design placeholders; replace the values and labels with verified metrics before launch. They use an accessible description list and a responsive three-column layout beneath the main button. `src/hero-stats.ts` counts each `data-count-to` value up once when the group enters view, easing out over 1.6 seconds after a short entrance delay. Keep the final text and accessible labels in sync when editing targets. Symbols stay fixed, screen readers retain the final values, and reduced motion or disabled JavaScript shows the finished stats immediately.
 

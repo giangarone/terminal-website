@@ -401,7 +401,36 @@ ul { margin: 0; padding: 0; list-style: none; }
   -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
   mask-image: radial-gradient(ellipse 60% 65% at 50% 45%, #000 15%, rgb(0 0 0 / 65%) 45%, transparent 80%);
 }
+.billing-period {
+  display: flex;
+  width: fit-content;
+  min-inline-size: 0;
+  gap: 3px;
+  margin: 26px auto 0;
+  padding: 4px;
+  border: 1px solid var(--border-strong);
+  border-radius: 100px;
+  background: var(--surface);
+}
+.billing-period label { position: relative; }
+.billing-period input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.billing-period label > span {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  border-radius: 100px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.billing-period input:checked + span { color: var(--text); background: var(--surface-hover); }
+.billing-period input:focus-visible + span { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
+.billing-period small { color: var(--accent-blue); font-size: 12px; }
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
+.billing-period:not([hidden]) + .pricing-grid { margin-top: 32px; }
 /* Limit the aurora to the plans' height, below the section's grid background. */
 .pricing-grid > .aurora-canvas { z-index: -2; }
 .pricing-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 24px; }
@@ -451,8 +480,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-heading h3 { font-size: 18px; }
 .plan-badge { flex-shrink: 0; border: 0.5px solid #3983f7; border-radius: 8px; background: #3983f780; padding: 2px 8px; font-size: 11px; font-weight: 550; white-space: nowrap; }
 .plan-description { margin-top: 8px; color: var(--text-secondary); font-size: 13px; }
-.plan-price { font-size: 52px; font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
-.plan-price > span { color: var(--text-muted); font-size: 12px; font-weight: 400; letter-spacing: 0; margin-left: 8px; }
+.plan-price { font-size: clamp(29px, calc(8vw - 22.5px), 52px); font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
+.plan-price-period { color: var(--text-muted); font-size: 12px; font-weight: 400; letter-spacing: 0; margin-left: 8px; white-space: nowrap; }
+.plan-price > [data-monthly-cents] { white-space: nowrap; }
 .plan-billing { font-size: 13px; color: var(--text-muted); margin-top: 9px; }
 .button-plan { background: transparent; border-color: var(--border-strong); width: 100%; margin-top: 25px; min-height: 45px; font-size: 12px; gap: 8px; }
 .button-plan.button-primary { background: var(--button); color: var(--button-text); border-color: var(--button); }
@@ -600,6 +630,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
 .faq-indicator::after { transition: transform 160ms ease; }
 @media (hover: hover) {
   .button-plan:hover { border-color: var(--text-secondary); }
+  .billing-period input:not(:checked):hover + span { color: var(--text); background: var(--surface-inset); }
 }
 
 @media (min-width: 851px) {
@@ -634,7 +665,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-heading h3 { width: 100%; }
   .plan-description { min-height: 36px; }
   .plan-price { margin-top: 20px; }
-  .plan-price > span { font-size: 10px; }
+  .plan-price-period { margin-left: 5px; font-size: 10px; }
   .plan-features li { font-size: 11px; padding-left: 18px; }
   .faq-section { grid-template-columns: 0.8fr 1.2fr; gap: 35px; }
   .faq-heading h2 { font-size: 36px; }
@@ -671,8 +702,8 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-heading { min-height: 30px; flex-wrap: nowrap; align-items: center; }
   .plan-heading h3 { width: auto; font-size: 20px; }
   .plan-description { min-height: 0; font-size: 12px; }
-  .plan-price { margin-top: 25px; }
-  .plan-price > span { font-size: 13px; }
+  .plan-price { margin-top: 25px; font-size: 52px; }
+  .plan-price-period { margin-left: 8px; font-size: 13px; }
   .button-plan { min-height: 46px; }
   .plan-features li { font-size: 13px; margin-bottom: 14px; padding-left: 23px; }
   .faq-section { grid-template-columns: 1fr; grid-template-areas: "heading" "questions"; gap: 35px; }

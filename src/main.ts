@@ -4,7 +4,9 @@ import { initHeroStars } from './hero-stars.ts';
 import { initAurora } from './aurora.ts';
 import { initAuroraBackdrops } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
+import { initPricingBilling } from './pricing-billing.ts';
 
+initPricingBilling();
 initPlanFeatureTooltips();
 
 // A matching second group makes the marquee wrap without a visible jump.

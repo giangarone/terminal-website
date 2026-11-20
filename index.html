@@ -241,12 +241,15 @@
 
       <section class="pricing-section section container" id="pricing" aria-labelledby="pricing-title">
         <div class="section-heading centered-heading"><h2 id="pricing-title">Get more from every trade<br />with the full picture</h2><p>Start free, then upgrade when the market demands more.</p></div>
-        <!-- Mock monthly prices and features are intentionally editable here. Checkout buttons have no actions. -->
+        <fieldset class="billing-period" aria-label="Billing period" hidden>
+          <label><input type="radio" name="billing-period" value="monthly" checked /><span>Monthly</span></label>
+          <label><input type="radio" name="billing-period" value="yearly" /><span>Yearly <small>Save 20%</small></span></label>
+        </fieldset>
         <div class="pricing-grid">
           <canvas class="aurora-canvas" aria-hidden="true"></canvas>
           <article class="pricing-card" aria-labelledby="free-plan">
             <div class="plan-heading"><h3 id="free-plan">Free</h3></div><p class="plan-description">Find your footing. Build your workflow.</p>
-            <p class="plan-price">$0<span>/ month</span></p><p class="plan-billing">Free to get started</p>
+            <p class="plan-price">$0<span class="plan-price-period">/ month</span></p><p class="plan-billing">Free to get started</p>
             <button class="button button-plan" type="button" aria-disabled="true">Get started for free</button>
             <div class="plan-features">
               <p>The essentials, in one place</p>
@@ -262,10 +265,6 @@
                 <li class="plan-feature" data-feature-detail="Apply essential technical indicators to your charts to study trends, momentum, and price behavior alongside your analysis.">
                   <h4 class="plan-feature-heading">Standard technical indicators</h4>
                   <p class="plan-feature-description">analyze price trends with essential charting tools</p>
-                </li>
-                <li class="plan-feature" data-feature-detail="Use a limited level of AI assistance to explore chart setups and ask market questions as you build your workflow.">
-                  <h4 class="plan-feature-heading">Limited AI assistance</h4>
-                  <p class="plan-feature-description">get help exploring charts and market questions</p>
                 </li>
                 <li class="plan-feature" data-feature-detail="Set alerts for the price levels you want to follow and receive browser notifications when they are reached.">
                   <h4 class="plan-feature-heading">Price alerts</h4>
@@ -284,7 +283,8 @@
           </article>
           <article class="pricing-card featured-plan" aria-labelledby="pro-plan">
             <div class="plan-heading"><h3 id="pro-plan">Pro</h3><span class="plan-badge">Popular</span></div><p class="plan-description">More intelligence. Greater control.</p>
-            <p class="plan-price">$49.99<span>/ month</span></p><p class="plan-billing">USD · Billed monthly</p>
+            <p class="plan-price"><span data-monthly-cents="7999">$79.99</span><span class="plan-price-period">/ month</span></p>
+            <p class="plan-billing">USD · Billed monthly</p>
             <button class="button button-primary button-plan" type="button" aria-disabled="true">Choose Pro</button>
             <div class="plan-features">
               <p>Everything in Free, plus</p>
@@ -330,7 +330,8 @@
           </article>
           <article class="pricing-card" aria-labelledby="elite-plan">
             <div class="plan-heading"><h3 id="elite-plan">Elite</h3></div><p class="plan-description">The full picture. Nothing held back.</p>
-            <p class="plan-price">$99.99<span>/ month</span></p><p class="plan-billing">USD · Billed monthly</p>
+            <p class="plan-price"><span data-monthly-cents="14999">$149.99</span><span class="plan-price-period">/ month</span></p>
+            <p class="plan-billing">USD · Billed monthly</p>
             <button class="button button-plan" type="button" aria-disabled="true">Choose Elite</button>
             <div class="plan-features">
               <p>Included in Elite</p>
