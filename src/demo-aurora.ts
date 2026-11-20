@@ -154,7 +154,7 @@ export function initAuroraBackdrops() {
   let frame: number | undefined;
   let previous: number | undefined;
   let needsPaint = true;
-  let time = 4;
+  let time = 0;
 
   function syncPlayback() {
     const active = draw && visible.size > 0 && !document.hidden && (needsPaint || !motion.matches);
@@ -178,7 +178,7 @@ export function initAuroraBackdrops() {
         const palette = palettes.get(canvas);
         if (!context || !palette) continue;
         const { width, height } = canvas;
-        draw(time, palette, width, height);
+        draw(canvas === hero ? time : time + 4, palette, width, height);
         // WebGL's viewport starts at the bottom left of the shared surface.
         context.drawImage(source, 0, source.height - height, width, height, 0, 0, width, height);
         canvas.classList.add('is-ready');

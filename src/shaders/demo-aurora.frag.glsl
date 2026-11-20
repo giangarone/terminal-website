@@ -12,7 +12,6 @@ uniform bool uHero;
 uniform vec3 uAmber;
 uniform vec3 uVermilion;
 uniform sampler3D uNoise;
-const int STEPS = 32;
 const vec3 VOLUME_LOW = vec3(-250.0, 50.0, -500.0);
 const vec3 VOLUME_HIGH = vec3(250.0, 125.0, 500.0);
 const vec3 EYE = vec3(0.0, 10.0, 0.0);
@@ -60,13 +59,14 @@ vec2 traceAurora(vec3 direction) {
   float nearDist = max(max(nearPlane.x, nearPlane.y), max(nearPlane.z, 10.0));
   float farDist = min(min(farPlane.x, farPlane.y), farPlane.z);
   if (farDist <= nearDist) return vec2(0.0);
-  float stepSize = (farDist - nearDist) / float(STEPS);
+  int steps = uHero ? 44 : 32;
+  float stepSize = (farDist - nearDist) / float(steps);
   float offset = 0.35 + 0.3 * hash(vec3(gl_FragCoord.xy, 7.0));
   vec3 point = EYE + direction * (nearDist + offset * stepSize);
   vec3 stepVector = direction * stepSize;
   float timeFlow = uTime * 0.65;
   vec2 light = vec2(0.0);
-  for (int i = 0; i < STEPS; i++) {
+  for (int i = 0; i < steps; i++) {
     float height = (point.y - VOLUME_LOW.y) / (VOLUME_HIGH.y - VOLUME_LOW.y);
     light += curtainDensity(point, timeFlow) * vec2(1.0 - height, height);
     point += stepVector;
@@ -81,16 +81,27 @@ vec3 heroPalette(float hue) {
   vec3 amberToVermilion = mix(uAmber, uVermilion, smoothstep(0.65, 0.94, hue));
   return mix(indigoToPurple, amberToVermilion, smoothstep(0.35, 0.65, hue));
 }
+float stars(vec3 direction) {
+  vec3 cell = direction * 180.0;
+  float star = step(0.994, hash(floor(cell)));
+  return star * (1.0 - smoothstep(0.06, 0.36, length(fract(cell) - 0.5)));
+}
 void main() {
-  float fade = smoothstep(0.04, 0.40, vUv.y);
+  vec2 sceneUv = vUv;
+  float aspect = uAspect;
+  if (uHero) {
+    // Match the reference hero's upper curtain and fade it into the full backdrop.
+    const float curtainHeight = 0.70;
+    sceneUv.y = (vUv.y - (1.0 - curtainHeight)) / curtainHeight;
+    aspect /= curtainHeight;
+  }
+  float fade = smoothstep(0.04, 0.40, sceneUv.y);
   if (fade <= 0.0) {
     fragColor = vec4(uBackground, 1.0);
     return;
   }
   // Keep the curtains in view as the canvas gets taller relative to its width.
-  float pitch = uHero
-    ? mix(0.13, 0.18, smoothstep(0.55, 1.5, uAspect))
-    : mix(0.31, 0.45, smoothstep(0.6, 1.6, uAspect));
+  float pitch = mix(0.31, 0.45, smoothstep(0.6, 1.6, aspect));
   vec3 forward = normalize(vec3(
     -0.4 + sin(uTime * 0.1) * 0.1,
     pitch + cos(uTime * 0.05) * 0.05,
@@ -98,23 +109,20 @@ void main() {
   ));
   vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
   vec3 up = cross(right, forward);
-  vec2 screen = (2.0 * vUv - 1.0) * vec2(uAspect, 1.0);
-  float distanceFromCenter = abs(2.0 * vUv.x - 1.0);
-  if (uHero) {
-    float arch = 1.0 - smoothstep(0.0, 1.0, abs(2.0 * vUv.x - 1.1));
-    screen.y -= mix(0.14, 0.52, arch);
-  }
+  vec2 screen = (2.0 * sceneUv - 1.0) * vec2(aspect, 1.0);
   vec3 direction = normalize(forward * 1.73205 + right * screen.x + up * screen.y);
   vec2 glow = traceAurora(direction) * fade;
-  vec3 aurora = toneMap(uBase * glow.x + uHighlight * glow.y);
+  vec3 gamma = vec3(1.0 / 2.2);
   // Give the headline some separation from the brightest parts of the curtains.
-  float exposure = mix(0.55, 0.82, smoothstep(0.0, 0.9, distanceFromCenter));
+  float exposure = mix(0.55, 0.82, smoothstep(0.0, 0.9, abs(2.0 * sceneUv.x - 1.0)));
+  vec3 light;
   if (uHero) {
-    float hue = vUv.x + 0.12 * (vUv.y - 0.5) + 0.025 * sin(4.0 * vUv.y + uTime * 0.2);
-    aurora = heroPalette(hue) * toneMap(vec3(glow.x + glow.y));
-    float edgeExposure = mix(0.68, 1.0, smoothstep(0.65, 1.25, uAspect));
-    exposure = mix(0.40, edgeExposure, smoothstep(0.18, 0.96, distanceFromCenter));
+    float hue = sceneUv.x + 0.12 * (sceneUv.y - 0.5) + 0.025 * sin(4.0 * sceneUv.y + uTime * 0.2);
+    vec3 aurora = heroPalette(hue) * toneMap(vec3(glow.x + glow.y));
+    vec3 starTint = pow(mix(uBase, uHighlight, 0.35), gamma);
+    light = pow(aurora, gamma) * exposure + starTint * (0.18 * stars(direction) * fade);
+  } else {
+    light = pow(toneMap(uBase * glow.x + uHighlight * glow.y), gamma) * exposure;
   }
-  vec3 light = pow(aurora, vec3(1.0 / 2.2)) * exposure;
   fragColor = vec4(uBackground + (1.0 - uBackground) * light, 1.0);
 }

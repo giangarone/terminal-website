@@ -107,10 +107,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   background:
     radial-gradient(ellipse at 50% 22%, var(--background), transparent 70%),
     linear-gradient(112deg,
-      color-mix(in srgb, var(--aurora-base) 26%, transparent),
-      color-mix(in srgb, var(--aurora-highlight) 20%, transparent),
-      color-mix(in srgb, var(--aurora-amber) 14%, transparent),
-      color-mix(in srgb, var(--aurora-vermilion) 22%, transparent));
+      color-mix(in srgb, var(--aurora-base) 14%, transparent),
+      color-mix(in srgb, var(--aurora-highlight) 10%, transparent),
+      color-mix(in srgb, var(--aurora-amber) 8%, transparent),
+      color-mix(in srgb, var(--aurora-vermilion) 12%, transparent));
   mask-image: linear-gradient(#000 78%, transparent);
 }
 .hero-content { position: relative; z-index: 2; }
