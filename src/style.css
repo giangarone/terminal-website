@@ -214,8 +214,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Product demos: alternating copy and 16:9 animations. */
 .section.product-demos {
   display: grid;
-  gap: clamp(64px, 9vw, 128px);
-  padding-block: 0;
+  gap: clamp(96px, 12vw, 192px);
+  padding-block: clamp(48px, 7vw, 96px);
 }
 .product-demo {
   --aurora-base: var(--brand-indigo);
