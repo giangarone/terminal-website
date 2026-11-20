@@ -60,7 +60,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Keep full-width decorative layers within the page bounds. */
 .page-content { overflow: clip; }
 .section { padding-block: 116px; }
-.section h2, .hero h1 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 450; letter-spacing: -0.04em; }
+.section h2 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 500; letter-spacing: -0.04em; }
+.hero h1 { font-size: clamp(36px, 4vw, 54px); line-height: 1.14; font-weight: 500; letter-spacing: -0.04em; }
 .section h3 { font-weight: 500; letter-spacing: -0.025em; }
 .skip-link { position: fixed; top: 12px; left: 20px; background: var(--button); color: var(--button-text); padding: 12px 20px; border-radius: 8px; z-index: 100; transform: translateY(-180%); }
 .skip-link:focus { transform: translateY(0); }
@@ -194,6 +195,84 @@ ul { margin: 0; padding: 0; list-style: none; }
 .depth-feature h3 { font-size: 17px; margin-bottom: 8px; }
 .depth-feature p { color: var(--text-secondary); font-size: 13px; line-height: 1.85; max-width: 380px; }
 .depth-media { aspect-ratio: 4 / 3; }
+
+/* Product demos: alternating copy and 16:9 animations. */
+.section.product-demos {
+  display: grid;
+  gap: clamp(64px, 9vw, 128px);
+  padding-block: 0;
+}
+.product-demo {
+  --aurora-base: #6557ff;
+  --aurora-highlight: #9990ff;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 0.87fr) minmax(0, 1.47fr);
+  grid-template-areas: "copy demo";
+  gap: clamp(32px, 5.2vw, 76px);
+  align-items: center;
+}
+.product-demo--reverse {
+  grid-template-columns: minmax(0, 1.47fr) minmax(0, 0.87fr);
+  grid-template-areas: "demo copy";
+}
+.product-demo--ai { --aurora-base: #aa3fff; --aurora-highlight: #c479ff; }
+.product-demo--liquidity { --aurora-base: #fcaa4a; --aurora-highlight: #fdc480; }
+.product-demo--editor { --aurora-base: #f8522e; --aurora-highlight: #fa866d; }
+.product-demo-aurora {
+  position: absolute;
+  grid-area: demo;
+  inset: -56px -33% -110px -14%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 28% 56% at 82% 48%, color-mix(in srgb, var(--aurora-base) 24%, transparent), transparent);
+  opacity: 0.78;
+  mask-image:
+    linear-gradient(to bottom, transparent, #000 20% 72%, transparent 96%),
+    linear-gradient(to right, transparent, #000 26% 85%, transparent);
+  mask-composite: intersect;
+}
+.product-demo--reverse .product-demo-aurora { inset-inline: -33% -14%; transform: scaleX(-1); }
+.product-demo-aurora canvas { display: block; width: 100%; height: 100%; object-fit: cover; visibility: hidden; }
+.product-demo-aurora canvas.is-ready { visibility: visible; }
+.product-demo-copy { grid-area: copy; }
+.product-demo-copy h2 { text-wrap: balance; }
+.product-demo-copy > p { margin-top: 16px; color: var(--text-secondary); font-size: 1rem; }
+.product-demo-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 400px;
+  margin: 24px 0 0;
+  padding-top: 16px;
+  border-top: 0.5px solid var(--border);
+}
+.product-demo-details dt { font-size: 18px; font-weight: 500; line-height: 1.25; letter-spacing: -0.025em; }
+.product-demo-details dd { margin: 6px 0 0; color: var(--text-secondary); font-size: 13px; line-height: 1.5; }
+.product-demo-copy > .button { margin-top: 24px; }
+.product-demo-media { grid-area: demo; margin: 0; }
+.product-demo-media iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: var(--background);
+  pointer-events: none;
+}
+@media (max-width: 900px) {
+  .product-demos { max-width: 640px; }
+  .product-demo {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "copy" "demo";
+    gap: 24px;
+  }
+  .product-demo .product-demo-aurora {
+    inset: -32px -36px -84px;
+    translate: 0 calc(-75% + 30px);
+  }
+  .product-demo-copy h2 { max-width: 24ch; }
+}
 
 /* Premium collection: native swipe, reserved image frames, and expandable content. */
 .indicators-section { position: relative; isolation: isolate; }

@@ -4,6 +4,7 @@ import { initHeroCells } from './hero-cells.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initCellWave } from './cell-wave.ts';
 import { initAurora } from './aurora.ts';
+import { initDemoAuroras } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 
 setupIndicators();
@@ -29,6 +30,7 @@ if (faqCells) initCellWave(faqCells);
 
 const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
+initDemoAuroras();
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
