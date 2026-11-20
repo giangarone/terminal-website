@@ -179,7 +179,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   overflow: hidden;
   margin-inline: auto;
   margin-bottom: 32px;
-  padding: 0.5px;
+  padding: 1px;
   border-radius: 999px;
   background-color: hsl(0 0% 3% / 30%);
   width: fit-content;
