@@ -243,7 +243,7 @@
         <div class="section-heading centered-heading"><h2 id="pricing-title">Get more from every trade<br />with the full picture</h2><p>Start free, then upgrade when the market demands more.</p></div>
         <fieldset class="billing-period" aria-label="Billing period" hidden>
           <label><input type="radio" name="billing-period" value="monthly" checked /><span>Monthly</span></label>
-          <label><input type="radio" name="billing-period" value="yearly" /><span>Yearly <small>Save 20%</small></span></label>
+          <label><input type="radio" name="billing-period" value="yearly" /><span>Yearly <small></small></span></label>
         </fieldset>
         <div class="pricing-grid">
           <canvas class="aurora-canvas" aria-hidden="true"></canvas>
@@ -281,9 +281,19 @@
               </ul>
             </div>
           </article>
-          <article class="pricing-card featured-plan" aria-labelledby="pro-plan">
-            <div class="plan-heading"><h3 id="pro-plan">Pro</h3><span class="plan-badge">Popular</span></div><p class="plan-description">More intelligence. Greater control.</p>
-            <p class="plan-price"><span data-monthly-cents="7999">$79.99</span><span class="plan-price-period">/ month</span></p>
+          <article class="pricing-card featured-plan" aria-labelledby="pro-plan" data-monthly-discount="25" data-yearly-discount="35">
+            <div class="plan-heading">
+              <h3 id="pro-plan">Pro</h3>
+              <div class="plan-badges">
+                <span class="plan-badge">Popular</span>
+                <span class="plan-badge plan-badge--discount" hidden></span>
+              </div>
+            </div>
+            <p class="plan-description">More intelligence. Greater control.</p>
+            <p class="plan-price">
+              <span class="plan-price-comparison" hidden><s></s> / month</span>
+              <span data-monthly-cents="7999" data-yearly-cents="67192">$79.99</span><span class="plan-price-period">/ month</span>
+            </p>
             <p class="plan-billing">USD · Billed monthly</p>
             <button class="button button-primary button-plan" type="button" aria-disabled="true">Choose Pro</button>
             <div class="plan-features">
@@ -328,9 +338,16 @@
               </ul>
             </div>
           </article>
-          <article class="pricing-card" aria-labelledby="elite-plan">
-            <div class="plan-heading"><h3 id="elite-plan">Elite</h3></div><p class="plan-description">The full picture. Nothing held back.</p>
-            <p class="plan-price"><span data-monthly-cents="14999">$149.99</span><span class="plan-price-period">/ month</span></p>
+          <article class="pricing-card" aria-labelledby="elite-plan" data-monthly-discount="30" data-yearly-discount="40">
+            <div class="plan-heading">
+              <h3 id="elite-plan">Elite</h3>
+              <span class="plan-badge plan-badge--discount" hidden></span>
+            </div>
+            <p class="plan-description">The full picture. Nothing held back.</p>
+            <p class="plan-price">
+              <span class="plan-price-comparison" hidden><s></s> / month</span>
+              <span data-monthly-cents="14999" data-yearly-cents="107993">$149.99</span><span class="plan-price-period">/ month</span>
+            </p>
             <p class="plan-billing">USD · Billed monthly</p>
             <button class="button button-plan" type="button" aria-disabled="true">Choose Elite</button>
             <div class="plan-features">
