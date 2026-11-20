@@ -31,7 +31,7 @@ Element box and text shadows are removed throughout the site.
 
 Pricing and checkout follow the reviews. The WebGL aurora from `src/aurora.ts` is attached to `.pricing-grid` as a full-width decorative background limited to the plan cards' height; the heading and payment icons sit outside it. The quiet grid spans the checkout section and remains layered above the aurora and below the content. The aurora blends navy (`#13233c`) with the Pro plan's blue button (`#2563eb`) and light blue border (`#60a5fa`). Fine, static grain softens gradient banding and fades with the glow at the edges.
 
-The FAQ heading uses the same purple aurora backdrop as “Describe your idea. AI builds it.” Both use the same colors, fade, and animation. The aurora pauses offscreen and in hidden tabs and holds still for reduced motion.
+The FAQ heading shares the hero’s four-color aurora palette and uses the product demos’ backdrop framing and fade. The aurora pauses offscreen and in hidden tabs and holds still for reduced motion.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 

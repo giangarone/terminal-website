@@ -104,17 +104,19 @@ function createRenderer(canvas: HTMLCanvasElement) {
   const uBase = gl.getUniformLocation(program, 'uBase');
   const uHighlight = gl.getUniformLocation(program, 'uHighlight');
   const uHero = gl.getUniformLocation(program, 'uHero');
+  const uBrandPalette = gl.getUniformLocation(program, 'uBrandPalette');
   const uAmber = gl.getUniformLocation(program, 'uAmber');
   const uVermilion = gl.getUniformLocation(program, 'uVermilion');
 
-  return (time: number, palette: Palette, width: number, height: number) => {
+  return (time: number, palette: Palette, width: number, height: number, isHero: boolean) => {
     gl.viewport(0, 0, width, height);
     gl.uniform1f(uAspect, width / height);
     gl.uniform1f(uTime, time);
     gl.uniform3fv(uBackground, palette.background);
     gl.uniform3fv(uBase, palette.base);
     gl.uniform3fv(uHighlight, palette.highlight);
-    gl.uniform1i(uHero, palette.warm ? 1 : 0);
+    gl.uniform1i(uHero, isHero ? 1 : 0);
+    gl.uniform1i(uBrandPalette, palette.warm ? 1 : 0);
     if (palette.warm) {
       gl.uniform3fv(uAmber, palette.warm.amber);
       gl.uniform3fv(uVermilion, palette.warm.vermilion);
@@ -139,7 +141,7 @@ export function initAuroraBackdrops() {
       base: readColor(style, '--aurora-base', 2.2),
       highlight: readColor(style, '--aurora-highlight', 2.2),
     };
-    if (canvas === hero) {
+    if (canvas.closest('.aurora--brand')) {
       palette.warm = {
         amber: readColor(style, '--aurora-amber', 2.2),
         vermilion: readColor(style, '--aurora-vermilion', 2.2),
@@ -179,7 +181,7 @@ export function initAuroraBackdrops() {
         if (!context || !palette) continue;
         const { width, height } = canvas;
         const phase = canvas === hero ? time : time + 4;
-        draw(phase, palette, width, height);
+        draw(phase, palette, width, height, canvas === hero);
         // WebGL's viewport starts at the bottom left of the shared surface.
         context.drawImage(source, 0, source.height - height, width, height, 0, 0, width, height);
         canvas.classList.add('is-ready');

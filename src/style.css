@@ -95,22 +95,25 @@ ul { margin: 0; padding: 0; list-style: none; }
 .mobile-nav .button-small { margin-top: 8px; }
 
 .hero { position: relative; isolation: isolate; text-align: center; padding: 0 0 58px; --hero-inset: 107px; }
-.hero-aurora {
+.aurora--brand {
   --aurora-base: var(--brand-indigo);
   --aurora-highlight: var(--brand-purple);
   --aurora-amber: var(--brand-amber);
   --aurora-vermilion: var(--brand-vermilion);
+  --aurora-brand-gradient: linear-gradient(112deg,
+    color-mix(in srgb, var(--aurora-base) 14%, transparent),
+    color-mix(in srgb, var(--aurora-highlight) 10%, transparent),
+    color-mix(in srgb, var(--aurora-amber) 8%, transparent),
+    color-mix(in srgb, var(--aurora-vermilion) 12%, transparent));
+}
+.hero-aurora {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
     radial-gradient(ellipse at 50% 22%, var(--background), transparent 70%),
-    linear-gradient(112deg,
-      color-mix(in srgb, var(--aurora-base) 14%, transparent),
-      color-mix(in srgb, var(--aurora-highlight) 10%, transparent),
-      color-mix(in srgb, var(--aurora-amber) 8%, transparent),
-      color-mix(in srgb, var(--aurora-vermilion) 12%, transparent));
+    var(--aurora-brand-gradient);
   mask-image: linear-gradient(#000 78%, transparent);
 }
 .hero-stars {
@@ -624,6 +627,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   gap: 100px;
 }
 .faq-section > .product-demo-aurora, .faq-heading { grid-area: heading; }
+.faq-section > .product-demo-aurora { background: var(--aurora-brand-gradient); }
 .faq-list { grid-area: questions; }
 .faq-heading h2 { margin-top: 23px; font-size: clamp(36px, 3.5vw, 46px); }
 .faq-list details { border-bottom: 0.5px solid var(--border); }
@@ -708,7 +712,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .header-inner { height: 72px; gap: 12px; }
   .mobile-nav .button-small { padding: 8px 12px; font-size: 12px; }
   .hero { padding: 0 0 40px; --hero-inset: 67px; }
-  .hero h1 { text-wrap: balance; }
+  .hero h1, #pricing-title { text-wrap: balance; }
   .hero-description { font-size: 13px; max-width: 330px; margin-inline: auto; line-height: 1.8; }
   .desktop-break { display: none; }
   .hero-actions { gap: 10px; margin-top: 28px; }

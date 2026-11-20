@@ -9,6 +9,7 @@ uniform vec3 uBackground;
 uniform vec3 uBase;
 uniform vec3 uHighlight;
 uniform bool uHero;
+uniform bool uBrandPalette;
 uniform vec3 uAmber;
 uniform vec3 uVermilion;
 uniform sampler3D uNoise;
@@ -76,7 +77,7 @@ vec2 traceAurora(vec3 direction) {
 vec3 toneMap(vec3 light) {
   return clamp((light * (2.51 * light + 0.03)) / (light * (2.43 * light + 0.59) + 0.14), 0.0, 1.0);
 }
-vec3 heroPalette(float hue) {
+vec3 brandPalette(float hue) {
   vec3 indigoToPurple = mix(uBase, uHighlight, smoothstep(0.08, 0.35, hue));
   vec3 amberToVermilion = mix(uAmber, uVermilion, smoothstep(0.65, 0.94, hue));
   return mix(indigoToPurple, amberToVermilion, smoothstep(0.35, 0.65, hue));
@@ -111,9 +112,11 @@ void main() {
   // Give the headline some separation from the brightest parts of the curtains.
   float exposure = mix(0.55, 0.82, smoothstep(0.0, 0.9, abs(2.0 * sceneUv.x - 1.0)));
   vec3 light;
-  if (uHero) {
-    float hue = sceneUv.x + 0.12 * (sceneUv.y - 0.5) + 0.025 * sin(4.0 * sceneUv.y + uTime * 0.2);
-    vec3 aurora = heroPalette(hue) * toneMap(vec3(glow.x + glow.y));
+  if (uBrandPalette) {
+    // Fit the full palette inside the FAQ backdrop's cropped, masked edges.
+    float paletteX = uHero ? sceneUv.x : (sceneUv.x - 0.20) / 0.55;
+    float hue = paletteX + 0.12 * (sceneUv.y - 0.5) + 0.025 * sin(4.0 * sceneUv.y + uTime * 0.2);
+    vec3 aurora = brandPalette(hue) * toneMap(vec3(glow.x + glow.y));
     light = pow(aurora, gamma) * exposure;
   } else {
     light = pow(toneMap(uBase * glow.x + uHighlight * glow.y), gamma) * exposure;
