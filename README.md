@@ -31,7 +31,7 @@ Example source: `/images/platform.webp`. Empty sources render empty charcoal fra
 
 The indicator showcase follows market depth. Edit or add entries in `premiumIndicators` in `src/content.ts`; card rendering and carousel navigation adapt automatically. Names stay unchanged.
 
-Each entry has an empty image source ready for a screenshot (approximately 1.8:1). Include the deployment base in image paths, e.g. `/terminal-website/images/indicator.webp` for the current GitHub Pages setup. Empty or failed images leave a clean charcoal frame.
+Each entry's `wave` palette colors a full-frame version of the checkout aurora. The cards share one WebGL renderer, which animates only the visible image frames at about 30 frames per second. Reduced motion shows still waves, and browsers without WebGL show a palette-matched gradient.
 
 The `userCount` values are design placeholders for the number of users using each indicator. Replace them with verified counts before launch. A `null` value displays an em dash. The “View indicator” buttons are intentionally inactive and marked `aria-disabled`.
 

@@ -1,5 +1,5 @@
 import { premiumIndicators } from './content.ts';
-import { initIndicatorOrb } from './indicator-orb.ts';
+import { initIndicatorWaves, type IndicatorWave } from './indicator-waves.ts';
 
 export function setupIndicators() {
   const track = document.querySelector<HTMLElement>('#indicator-track')!;
@@ -8,13 +8,14 @@ export function setupIndicators() {
   const next = document.querySelector<HTMLButtonElement>('#indicator-next')!;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const number = new Intl.NumberFormat('en-US');
+  const waves: IndicatorWave[] = [];
 
   for (const indicator of premiumIndicators) {
     const item = document.createElement('li');
     item.className = 'indicator-item';
     item.innerHTML = `
       <article class="indicator-card">
-        <div class="indicator-image" aria-hidden="true"></div>
+        <div class="indicator-image" aria-hidden="true"><canvas></canvas></div>
         <div class="indicator-body">
           <div class="indicator-heading"><h3></h3></div>
           <p class="indicator-description"></p>
@@ -55,20 +56,12 @@ export function setupIndicators() {
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     const frame = item.querySelector<HTMLElement>('.indicator-image')!;
-    frame.classList.add('indicator-orb-frame');
-    for (const [name, color] of Object.entries(indicator.orb)) {
-      frame.style.setProperty(`--orb-${name}`, color);
-    }
-    const orb = document.createElement('div');
-    orb.className = 'indicator-orb';
-    const canvas = document.createElement('canvas');
-    const grain = document.createElement('span');
-    grain.className = 'indicator-orb-grain';
-    orb.append(canvas, grain);
-    frame.append(orb);
+    frame.style.setProperty('--wave-base', indicator.wave.base);
+    frame.style.setProperty('--wave-highlight', indicator.wave.highlight);
+    waves.push({ canvas: frame.querySelector('canvas')!, palette: indicator.wave });
     list.append(item);
-    initIndicatorOrb(canvas, indicator.orbTexture);
   }
+  initIndicatorWaves(waves, reducedMotion);
 
   const cards = [...list.children] as HTMLElement[];
   list.style.setProperty('--indicator-count', String(Math.max(1, cards.length)));
