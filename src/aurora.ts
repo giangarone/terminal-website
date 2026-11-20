@@ -1,11 +1,8 @@
-export interface AuroraPalette {
-  base: string;
-  shadow: string;
-  highlight: string;
-}
-
+// Aurora behind the pricing grid, using navy and the Pro plan's blue accents.
 const CONFIG = {
-  palette: { base: '#2563eb', shadow: '#13233c', highlight: '#60a5fa' },
+  colorA: '#2563eb',
+  colorB: '#13233c',
+  colorC: '#60a5fa',
   brightness: 1,
   speed: 1.04,
   spread: 0.27,
@@ -34,7 +31,6 @@ uniform vec3 uBackground;
 uniform float uSpread;
 uniform float uDiag;
 uniform vec2 uEdgeFade;
-uniform bool uFillFrame;
 
 vec3 warp3d(vec3 pos, float t) {
   // Unequal fold widths and independent drift give the light its own rhythm.
@@ -62,13 +58,11 @@ void main() {
   vec3 tint = mix(uColorB, uColorA, smoothstep(0.1, 0.9, w.y));
   tint = mix(tint, uColorC, 0.6 * smoothstep(0.25, 0.9, w.z));
   float density = 0.9 * w.x * w.y + 0.65 * w.z;
-  if (!uFillFrame) {
-    density *= smoothstep(uSpread, 1.0, abs(uv.y));
-    float m = smoothstep(uDiag, 1.0, -uv.y * uv.x);
-    density *= m * m;
-    float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
-    density *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
-  }
+  density *= smoothstep(uSpread, 1.0, abs(uv.y));
+  float m = smoothstep(uDiag, 1.0, -uv.y * uv.x);
+  density *= m * m;
+  float edgeFade = uv.y > 0.0 ? uEdgeFade.x : uEdgeFade.y;
+  density *= smoothstep(0.0, max(edgeFade, 0.0001), 1.0 - abs(uv.y));
   // Compress bright folds smoothly to keep the glow soft.
   float glow = 1.0 - exp(-density * uIntensity);
   // Compose the smooth screen-style glow directly against the page color.
@@ -82,14 +76,13 @@ void main() {
   gl_FragColor = vec4(col, 1.0);
 }`;
 
-function setColor(gl: WebGLRenderingContext, location: WebGLUniformLocation | null, hex: string) {
+function hexToRgb(hex: string): Float32Array {
   const value = parseInt(hex.slice(1), 16);
-  gl.uniform3f(
-    location,
+  return new Float32Array([
     ((value >> 16) & 255) / 255,
     ((value >> 8) & 255) / 255,
     (value & 255) / 255,
-  );
+  ]);
 }
 
 function buildProgram(gl: WebGLRenderingContext): WebGLProgram | null {
@@ -119,25 +112,20 @@ function buildProgram(gl: WebGLRenderingContext): WebGLProgram | null {
   return program;
 }
 
-export function createAuroraRenderer(canvas: HTMLCanvasElement, fillFrame = false) {
-  const gl = canvas.getContext('webgl', {
-    alpha: false,
-    depth: false,
-    stencil: false,
-    antialias: false,
-    powerPreference: 'low-power',
-  });
-  if (!gl) return null;
+interface AuroraState {
+  program: WebGLProgram;
+  buffer: WebGLBuffer;
+  uTime: WebGLUniformLocation | null;
+  uIntensity: WebGLUniformLocation | null;
+}
 
+function setup(gl: WebGLRenderingContext): AuroraState | null {
   const program = buildProgram(gl);
   if (!program) return null;
   gl.useProgram(program);
 
   const buffer = gl.createBuffer();
-  if (!buffer) {
-    gl.deleteProgram(program);
-    return null;
-  }
+  if (!buffer) return null;
   gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
 
@@ -145,51 +133,36 @@ export function createAuroraRenderer(canvas: HTMLCanvasElement, fillFrame = fals
   gl.enableVertexAttribArray(position);
   gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
+  gl.uniform3fv(gl.getUniformLocation(program, 'uColorA'), hexToRgb(CONFIG.colorA));
+  gl.uniform3fv(gl.getUniformLocation(program, 'uColorB'), hexToRgb(CONFIG.colorB));
+  gl.uniform3fv(gl.getUniformLocation(program, 'uColorC'), hexToRgb(CONFIG.colorC));
   const background = getComputedStyle(document.documentElement).getPropertyValue('--background').trim();
-  setColor(gl, gl.getUniformLocation(program, 'uBackground'), background);
+  gl.uniform3fv(gl.getUniformLocation(program, 'uBackground'), hexToRgb(background));
   gl.uniform1f(gl.getUniformLocation(program, 'uSpread'), CONFIG.spread);
   gl.uniform1f(gl.getUniformLocation(program, 'uDiag'), CONFIG.diag);
   gl.uniform2f(gl.getUniformLocation(program, 'uEdgeFade'), 0.2, 0.32);
-  gl.uniform1i(gl.getUniformLocation(program, 'uFillFrame'), Number(fillFrame));
-  gl.viewport(0, 0, canvas.width, canvas.height);
-
-  const baseColor = gl.getUniformLocation(program, 'uColorA');
-  const shadowColor = gl.getUniformLocation(program, 'uColorB');
-  const highlightColor = gl.getUniformLocation(program, 'uColorC');
-  const timeUniform = gl.getUniformLocation(program, 'uTime');
-  const intensityUniform = gl.getUniformLocation(program, 'uIntensity');
 
   return {
-    setPalette(palette: AuroraPalette) {
-      setColor(gl, baseColor, palette.base);
-      setColor(gl, shadowColor, palette.shadow);
-      setColor(gl, highlightColor, palette.highlight);
-    },
-    resize(width: number, height: number) {
-      if (canvas.width !== width || canvas.height !== height) {
-        canvas.width = width;
-        canvas.height = height;
-        gl.viewport(0, 0, width, height);
-      }
-    },
-    draw(time: number, intensity: number) {
-      gl.uniform1f(timeUniform, time);
-      gl.uniform1f(intensityUniform, intensity);
-      gl.drawArrays(gl.TRIANGLES, 0, 3);
-    },
-    dispose() {
-      gl.deleteBuffer(buffer);
-      gl.deleteProgram(program);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
-    },
+    program,
+    buffer,
+    uTime: gl.getUniformLocation(program, 'uTime'),
+    uIntensity: gl.getUniformLocation(program, 'uIntensity'),
   };
 }
 
 export function initAurora(canvas: HTMLCanvasElement): () => void {
-  const initial = createAuroraRenderer(canvas);
+  const gl = canvas.getContext('webgl', {
+    alpha: false,
+    depth: false,
+    stencil: false,
+    antialias: false,
+    powerPreference: 'low-power',
+  });
+  if (!gl) return () => { };
+
+  const initial = setup(gl);
   if (!initial) return () => { };
-  let renderer = initial;
-  renderer.setPalette(CONFIG.palette);
+  let state: AuroraState = initial;
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let startTime = 0;
@@ -203,8 +176,10 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     if (!startTime && !reducedMotion.matches) startTime = now;
     const elapsed = now - startTime;
     const animationTime = reducedMotion.matches ? 12000 : now;
+    gl.uniform1f(state.uTime, (animationTime / 1000) * CONFIG.speed);
     const fade = reducedMotion.matches ? 1 : Math.max(0, Math.min(1, (elapsed - 200) / 1500));
-    renderer.draw((animationTime / 1000) * CONFIG.speed, CONFIG.brightness * CONFIG.alpha * fade);
+    gl.uniform1f(state.uIntensity, CONFIG.brightness * CONFIG.alpha * fade);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
 
   const resize = () => {
@@ -216,7 +191,11 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     const scale = Math.min(1, 1536 / width);
     const nextWidth = Math.max(1, Math.round(width * scale));
     const nextHeight = Math.max(1, Math.round(height * scale));
-    renderer.resize(nextWidth, nextHeight);
+    if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+      canvas.width = nextWidth;
+      canvas.height = nextHeight;
+    }
+    gl.viewport(0, 0, nextWidth, nextHeight);
     if (reducedMotion.matches) draw(12000);
   };
 
@@ -261,10 +240,9 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     updateMotion();
   };
   const onContextRestored = () => {
-    const next = createAuroraRenderer(canvas);
+    const next = setup(gl);
     if (!next) return;
-    renderer = next;
-    renderer.setPalette(CONFIG.palette);
+    state = next;
     contextLost = false;
     resize();
     updateMotion();
@@ -280,6 +258,8 @@ export function initAurora(canvas: HTMLCanvasElement): () => void {
     document.removeEventListener('visibilitychange', updateMotion);
     canvas.removeEventListener('webglcontextlost', onContextLost);
     canvas.removeEventListener('webglcontextrestored', onContextRestored);
-    renderer.dispose();
+    gl.deleteBuffer(state.buffer);
+    gl.deleteProgram(state.program);
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
   };
 }
