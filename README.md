@@ -13,17 +13,9 @@ npm run dev
 
 `npm run build` checks TypeScript and produces `dist/`. `npm run preview` serves that production build. `npm run typecheck` checks types independently.
 
-## Replace the three product images
+## Hero demo
 
-Place screenshots in `public/images/`, then set `src` and `alt` for the appropriate entry in `src/content.ts`:
-
-| Slot | Purpose | Desktop frame |
-| --- | --- | --- |
-| `platform` | Full trading workspace | 2.25:1 |
-| `depth` | Order book / market-depth screenshot | 4:3 |
-| `intelligence` | AI assistant / indicator builder | 4:3 |
-
-Example source: `/images/platform.webp`. Empty sources render empty charcoal frames with reserved dimensions, no broken-image requests, and no public placeholder messages. Images fill their frames using `object-fit: cover`; use matching crops for the best fit. Frames adapt on smaller screens.
+The hero and “Describe your idea. AI builds it.” both embed the `#ai` scene from `public/demos/marketstream.html` in a responsive 16:9 frame. To give the hero a different demo, update the iframe inside `.platform-media` in `index.html`.
 
 ## Edit content and pricing
 
@@ -33,7 +25,7 @@ The hero's three social-proof stats are in `index.html` under `.hero-stats`. The
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`.
 
-The hero backdrop and product demos share the WebGL aurora renderer in `src/demo-aurora.ts`. The hero uses the Black Friday homepage’s curtain framing with all four brand colors defined in `src/style.css`. The animation pauses offscreen and in hidden tabs, renders a still frame for reduced motion, and falls back to a CSS gradient if WebGL is unavailable. A separate canvas in `src/hero-stars.ts` draws a static star field at device resolution.
+The hero backdrop and product demos share the WebGL aurora renderer in `src/demo-aurora.ts`. The hero uses the Black Friday homepage’s curtain framing with all four brand colors defined in `src/style.css`. The aurora falls back to a CSS gradient if WebGL is unavailable. A separate canvas in `src/hero-stars.ts` draws crisp stars at device resolution. Two layers drift diagonally at different speeds, with independent twinkling and continuous coverage as stars enter and leave the frame. Both effects pause offscreen and in hidden tabs and show a still frame for reduced motion.
 
 Element box and text shadows are removed throughout the site.
 

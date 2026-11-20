@@ -3,6 +3,5 @@
  * Empty src values leave the finished, empty frame in place (no broken image).
  */
 export const productImages = {
-  platform: { src: '', alt: 'MarketStream multi-asset trading workspace' },
   depth: { src: '', alt: 'MarketStream market depth and liquidity analysis' },
 } satisfies Record<string, { src: string; alt: string }>;
