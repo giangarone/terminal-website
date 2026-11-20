@@ -33,7 +33,7 @@ The hero's three social-proof stats are in `index.html` under `.hero-stats`. The
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`.
 
-The hero backdrop and product demos share the WebGL aurora renderer in `src/demo-aurora.ts`. The hero uses the Black Friday homepage’s curtain framing and sparse star field with all four brand colors defined in `src/style.css`. The animation pauses offscreen and in hidden tabs, renders a still frame for reduced motion, and falls back to a CSS gradient if WebGL is unavailable.
+The hero backdrop and product demos share the WebGL aurora renderer in `src/demo-aurora.ts`. The hero uses the Black Friday homepage’s curtain framing with all four brand colors defined in `src/style.css`. The animation pauses offscreen and in hidden tabs, renders a still frame for reduced motion, and falls back to a CSS gradient if WebGL is unavailable. A separate canvas in `src/hero-stars.ts` draws a static star field at device resolution.
 
 Element box and text shadows are removed throughout the site.
 

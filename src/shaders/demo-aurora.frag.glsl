@@ -81,11 +81,6 @@ vec3 heroPalette(float hue) {
   vec3 amberToVermilion = mix(uAmber, uVermilion, smoothstep(0.65, 0.94, hue));
   return mix(indigoToPurple, amberToVermilion, smoothstep(0.35, 0.65, hue));
 }
-float stars(vec3 direction) {
-  vec3 cell = direction * 180.0;
-  float star = step(0.994, hash(floor(cell)));
-  return star * (1.0 - smoothstep(0.06, 0.36, length(fract(cell) - 0.5)));
-}
 void main() {
   vec2 sceneUv = vUv;
   float aspect = uAspect;
@@ -119,8 +114,7 @@ void main() {
   if (uHero) {
     float hue = sceneUv.x + 0.12 * (sceneUv.y - 0.5) + 0.025 * sin(4.0 * sceneUv.y + uTime * 0.2);
     vec3 aurora = heroPalette(hue) * toneMap(vec3(glow.x + glow.y));
-    vec3 starTint = pow(mix(uBase, uHighlight, 0.35), gamma);
-    light = pow(aurora, gamma) * exposure + starTint * (0.18 * stars(direction) * fade);
+    light = pow(aurora, gamma) * exposure;
   } else {
     light = pow(toneMap(uBase * glow.x + uHighlight * glow.y), gamma) * exposure;
   }
