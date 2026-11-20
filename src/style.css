@@ -232,7 +232,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   grid-template-columns: minmax(0, 1.47fr) minmax(0, 0.87fr);
   grid-template-areas: "demo copy";
 }
-.product-demo--ai { --aurora-base: var(--brand-purple); --aurora-highlight: #c479ff; }
+.product-demo-aurora--ai { --aurora-base: var(--brand-purple); --aurora-highlight: #c479ff; }
 .product-demo--liquidity { --aurora-base: var(--brand-amber); --aurora-highlight: #fdc480; }
 .product-demo--editor { --aurora-base: var(--brand-vermilion); --aurora-highlight: #fa866d; }
 .product-demo-aurora {
@@ -248,7 +248,7 @@ ul { margin: 0; padding: 0; list-style: none; }
     linear-gradient(to right, transparent, #000 26% 85%, transparent);
   mask-composite: intersect;
 }
-.product-demo--reverse .product-demo-aurora { inset-inline: -33% -14%; transform: scaleX(-1); }
+:is(.product-demo--reverse, .faq-section) > .product-demo-aurora { inset-inline: -33% -14%; transform: scaleX(-1); }
 .hero-aurora canvas, .product-demo-aurora canvas { display: block; width: 100%; height: 100%; visibility: hidden; }
 .hero-aurora canvas.is-ready, .product-demo-aurora canvas.is-ready { visibility: visible; }
 .hero-aurora canvas { mix-blend-mode: lighten; }
@@ -276,10 +276,8 @@ ul { margin: 0; padding: 0; list-style: none; }
     grid-template-areas: "copy" "demo";
     gap: 24px;
   }
-  .product-demo .product-demo-aurora {
-    inset: -32px -36px -84px;
-    translate: 0 calc(-75% + 30px);
-  }
+  :is(.product-demo, .faq-section) > .product-demo-aurora { inset: -32px -36px -84px; }
+  .product-demo > .product-demo-aurora { translate: 0 calc(-75% + 30px); }
   .product-demo-copy h2 { max-width: 24ch; }
 }
 
@@ -562,17 +560,11 @@ ul { margin: 0; padding: 0; list-style: none; }
   isolation: isolate;
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
+  grid-template-areas: "heading questions";
   gap: 100px;
 }
-.faq-cells {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 50vw);
-  width: 100vw;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-}
+.faq-section > .product-demo-aurora, .faq-heading { grid-area: heading; }
+.faq-list { grid-area: questions; }
 .faq-heading h2 { margin-top: 23px; font-size: clamp(36px, 3.5vw, 46px); }
 .faq-list details { border-bottom: 0.5px solid var(--border); }
 .faq-list details:first-child { border-top: 0.5px solid var(--border); }
@@ -683,7 +675,7 @@ details[open] .faq-indicator::after { transform: rotate(0); }
   .plan-price > span { font-size: 13px; }
   .button-plan { min-height: 46px; }
   .plan-features li { font-size: 13px; margin-bottom: 14px; padding-left: 23px; }
-  .faq-section { grid-template-columns: 1fr; gap: 35px; }
+  .faq-section { grid-template-columns: 1fr; grid-template-areas: "heading" "questions"; gap: 35px; }
   .faq-list summary { font-size: 13px; gap: 15px; padding-block: 22px; }
   .faq-list details > p { font-size: 12px; padding-right: 10px; }
   .site-footer { padding-top: 40px; }

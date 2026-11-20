@@ -178,7 +178,8 @@ export function initAuroraBackdrops() {
         const palette = palettes.get(canvas);
         if (!context || !palette) continue;
         const { width, height } = canvas;
-        draw(canvas === hero ? time : time + 4, palette, width, height);
+        const phase = canvas === hero ? time : time + 4;
+        draw(phase, palette, width, height);
         // WebGL's viewport starts at the bottom left of the shared surface.
         context.drawImage(source, 0, source.height - height, width, height, 0, 0, width, height);
         canvas.classList.add('is-ready');

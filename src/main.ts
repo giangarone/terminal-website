@@ -1,7 +1,6 @@
 import { productImages } from './content.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initHeroStars } from './hero-stars.ts';
-import { initCellWave } from './cell-wave.ts';
 import { initAurora } from './aurora.ts';
 import { initAuroraBackdrops } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
@@ -21,9 +20,6 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
 
 initHeroStats();
 initHeroStars();
-
-const faqCells = document.querySelector<HTMLCanvasElement>('.faq-cells');
-if (faqCells) initCellWave(faqCells);
 
 const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
