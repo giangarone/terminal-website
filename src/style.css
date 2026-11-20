@@ -434,7 +434,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-size: 10px;
   font-weight: 500;
   line-height: 1;
-  padding: 4px 7px;
+  padding: 6px 7px;
   border: 1px solid color-mix(in srgb, var(--positive) 38%, transparent);
   border-radius: 999px;
   background: color-mix(in srgb, var(--positive) 12%, transparent);
