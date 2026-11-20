@@ -28,7 +28,6 @@
         <nav class="desktop-nav" aria-label="Main navigation">
           <a href="#platform">Platform</a>
           <a href="#market-data">Market data</a>
-          <a href="#indicators">Indicators</a>
           <a href="#pricing">Pricing</a>
         </nav>
         <div class="header-actions">
@@ -41,7 +40,6 @@
       <nav class="mobile-nav container" id="mobile-navigation" aria-label="Mobile navigation" hidden>
         <a href="#platform">Platform</a>
         <a href="#market-data">Market data</a>
-        <a href="#indicators">Indicators</a>
         <a href="#pricing">Pricing</a>
         <button class="button button-primary button-small" type="button" aria-disabled="true">Open app <span aria-hidden="true">→</span></button>
       </nav>
@@ -78,6 +76,165 @@
           <!-- IMAGE SLOT: platform — set its src in src/content.ts. -->
           <div class="media-slot platform-media" data-image-slot="platform" aria-hidden="true"></div>
 
+        </div>
+      </section>
+
+      <div class="product-demos section container" id="product-demos">
+        <section class="product-demo" aria-labelledby="marketstream-trade">
+          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
+          <div class="product-demo-copy">
+            <h2 id="marketstream-trade">A new standard for trading charts.</h2>
+            <p>Stocks, futures, forex, and crypto. Powerful charts, seamless execution, and live trade control, all in one powerhouse workspace.</p>
+            <dl class="product-demo-details">
+              <div><dt>Execute</dt><dd>Place trades on-chart</dd></div>
+              <div><dt>Adjust</dt><dd>Drag stops and targets</dd></div>
+              <div><dt>Track</dt><dd>Follow live P&amp;L</dd></div>
+            </dl>
+            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
+          </div>
+          <figure class="product-demo-media media-slot">
+            <iframe src="%BASE_URL%demos/marketstream.html#trade" title="On-chart trade execution demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          </figure>
+        </section>
+
+        <section class="product-demo product-demo--reverse product-demo--ai" aria-labelledby="marketstream-ai">
+          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
+          <div class="product-demo-copy">
+            <h2 id="marketstream-ai">Describe your idea. AI builds it.</h2>
+            <p>Tell AI what you want to plot. It uses your chart and open script to draft the code. Review the proposed changes, then approve them to put the indicator on your chart.</p>
+            <dl class="product-demo-details">
+              <div><dt>Ask</dt><dd>Get script explanations</dd></div>
+              <div><dt>Edit</dt><dd>Create indicators with AI</dd></div>
+              <div><dt>Review</dt><dd>Accept or reject edits</dd></div>
+            </dl>
+            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
+          </div>
+          <figure class="product-demo-media media-slot">
+            <iframe src="%BASE_URL%demos/marketstream.html#ai" title="AI demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          </figure>
+        </section>
+
+        <section class="product-demo product-demo--liquidity" id="market-data" aria-labelledby="marketstream-liquidity">
+          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
+          <div class="product-demo-copy">
+            <h2 id="marketstream-liquidity">See where resting orders cluster.</h2>
+            <p>The L2 Liquidity Heatmap shows where resting bids and asks concentrate by price. Watch liquidity build or thin as the order book updates alongside your candles.</p>
+            <dl class="product-demo-details">
+              <div><dt>L1</dt><dd>Top of book — best bid &amp; ask</dd></div>
+              <div><dt>L2</dt><dd>Total resting size at each price</dd></div>
+              <div><dt>L3</dt><dd>Every individual order (MBO)</dd></div>
+            </dl>
+            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
+          </div>
+          <figure class="product-demo-media media-slot">
+            <iframe src="%BASE_URL%demos/marketstream.html#l2" title="L2 Liquidity Heatmap demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          </figure>
+        </section>
+
+        <section class="product-demo product-demo--reverse product-demo--editor" aria-labelledby="marketstream-editor">
+          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
+          <div class="product-demo-copy">
+            <h2 id="marketstream-editor">Build the indicator your setup needs.</h2>
+            <p>Turn your own rules into an indicator with MarketStream's scripting language. Write it in the built-in editor, then compile and see the result on your chart.</p>
+            <dl class="product-demo-details">
+              <div><dt>Inputs</dt><dd>Set periods and colors</dd></div>
+              <div><dt>Logic</dt><dd>Built-in RSI and EMA</dd></div>
+              <div><dt>Plots</dt><dd>Overlay or separate pane</dd></div>
+            </dl>
+            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
+          </div>
+          <figure class="product-demo-media media-slot">
+            <iframe src="%BASE_URL%demos/marketstream.html#code" title="AI editor demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
+          </figure>
+        </section>
+      </div>
+
+      <section class="reviews-section section" id="reviews" aria-labelledby="reviews-title">
+        <div class="container"><h2 class="reviews-heading" id="reviews-title">What our users say</h2></div>
+        <!-- Placeholder reviews and fictional names for the design; replace before launch. -->
+        <div class="review-marquee" tabindex="0" role="region" aria-label="Trader reviews. Hover or focus to pause scrolling.">
+          <div class="review-track">
+            <ul class="review-group">
+              <li class="review-card">
+                <h3>The depth view changed how I trade</h3>
+                <p class="review-copy">I spent two years trading off a basic DOM. Seeing the full order book next to the chart is a different game. You start to notice where size is actually sitting before price gets there.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">JB</span><span>James Bennett</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Replaced two subscriptions</h3>
+                <p class="review-copy">Was juggling a charting platform, a separate depth tool, and my broker terminal. Everything lives here now: chart trading, L2 data, the lot. Took me a weekend to move my layouts over and I haven't looked back.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">MR</span><span>Matteo Ricci</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Built an indicator in about 30 seconds</h3>
+                <p class="review-copy">Described what I wanted in plain English, like unusual volume with a trend filter, and it just built it. Still kinda surprised it worked on the first try. Tweaked a couple settings and it's on my charts daily now.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">AM</span><span>Arjun Mehta</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Dragging stops feels obvious now</h3>
+                <p class="review-copy">Used to tab between my broker and my charts constantly. Now I drag my stop right on the chart and move to breakeven with one click. Sounds small until you've done it the old way during a fast move.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">DO</span><span>Daniel Okafor</span></div>
+              </li>
+              <li class="review-card">
+                <h3>The journal called me out</h3>
+                <p class="review-copy">Auto journaling is seamless, stats populate same day. What it showed me was uncomfortable: I overtrade every Monday morning. Fixed that, win rate crept up. Handy tool if you're honest with yourself.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">LF</span><span>Lucas Ferreira</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Crypto and stocks in one place</h3>
+                <p class="review-copy">I trade BTC perps at night and equities during the day. Having both in the same workspace with the same watchlists saved me from juggling three apps. 24/7 crypto feeds have been solid for me so far.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">EP</span><span>Ethan Park</span></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="review-marquee review-marquee-reverse" tabindex="0" role="region" aria-label="More trader reviews. Hover or focus to pause scrolling.">
+          <div class="review-track">
+            <ul class="review-group">
+              <li class="review-card">
+                <h3>News right on the chart is clutch</h3>
+                <p class="review-copy">A headline popped on the chart at the exact moment ES dropped on the last CPI print. Didn't have to switch over to a news terminal. That context in the moment is worth more than I expected.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">OH</span><span>Oliver Hayes</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Can check in from anywhere</h3>
+                <p class="review-copy">I'm at my desk most of the day but love being able to pull up my positions and watchlists from my phone when I'm out. Layouts sync instantly. Little thing, but it's exactly what I wanted.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">RC</span><span>Rafael Costa</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Whale tracking paid for the year</h3>
+                <p class="review-copy">Elite here. The dark pool prints and large trade alerts caught an accumulation pattern in NVDA I'd have totally missed. One good catch covered the subscription. It shows you things a candle never will.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">VS</span><span>Vikram Shah</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Session analysis fixed my London entries</h3>
+                <p class="review-copy">I'm a London open trader and the opening range tools gave me structure I was previously just guessing at. Paired with the news events on the chart, my entries feel way less random than they used to be.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">SM</span><span>Samuel Mensah</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Selling my indicators was a nice bonus</h3>
+                <p class="review-copy">Built a mean reversion tool for myself, threw it on the marketplace half as a joke. A handful of people actually bought it. Not exactly life changing money, but it covers my subscription and then some.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">AR</span><span>Alejandro Ruiz</span></div>
+              </li>
+              <li class="review-card">
+                <h3>Support got me over the hump</h3>
+                <p class="review-copy">There's a lot here, no pretending otherwise, and I had questions my first week. Support got back to me fast and walked me through my setup. Once it clicked I was hooked. The AI scanning is my new favorite thing.</p>
+                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
+                <div class="review-author"><span class="review-avatar" aria-hidden="true">NK</span><span>Noah Kim</span></div>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -230,279 +387,6 @@
         </div>
       </section>
 
-      <div class="product-demos section container" id="product-demos">
-        <section class="product-demo" aria-labelledby="marketstream-trade">
-          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
-          <div class="product-demo-copy">
-            <h2 id="marketstream-trade">A new standard for trading charts.</h2>
-            <p>Stocks, futures, forex, and crypto. Powerful charts, seamless execution, and live trade control, all in one powerhouse workspace.</p>
-            <dl class="product-demo-details">
-              <div><dt>Execute</dt><dd>Place trades on-chart</dd></div>
-              <div><dt>Adjust</dt><dd>Drag stops and targets</dd></div>
-              <div><dt>Track</dt><dd>Follow live P&amp;L</dd></div>
-            </dl>
-            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
-          </div>
-          <figure class="product-demo-media media-slot">
-            <iframe src="%BASE_URL%demos/marketstream.html#trade" title="On-chart trade execution demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
-          </figure>
-        </section>
-
-        <section class="product-demo product-demo--reverse product-demo--ai" aria-labelledby="marketstream-ai">
-          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
-          <div class="product-demo-copy">
-            <h2 id="marketstream-ai">Describe your idea. AI builds it.</h2>
-            <p>Tell AI what you want to plot. It uses your chart and open script to draft the code. Review the proposed changes, then approve them to put the indicator on your chart.</p>
-            <dl class="product-demo-details">
-              <div><dt>Ask</dt><dd>Get script explanations</dd></div>
-              <div><dt>Edit</dt><dd>Create indicators with AI</dd></div>
-              <div><dt>Review</dt><dd>Accept or reject edits</dd></div>
-            </dl>
-            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
-          </div>
-          <figure class="product-demo-media media-slot">
-            <iframe src="%BASE_URL%demos/marketstream.html#ai" title="AI demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
-          </figure>
-        </section>
-
-        <section class="product-demo product-demo--liquidity" aria-labelledby="marketstream-liquidity">
-          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
-          <div class="product-demo-copy">
-            <h2 id="marketstream-liquidity">See where resting orders cluster.</h2>
-            <p>The L2 Liquidity Heatmap shows where resting bids and asks concentrate by price. Watch liquidity build or thin as the order book updates alongside your candles.</p>
-            <dl class="product-demo-details">
-              <div><dt>L1</dt><dd>Top of book — best bid &amp; ask</dd></div>
-              <div><dt>L2</dt><dd>Total resting size at each price</dd></div>
-              <div><dt>L3</dt><dd>Every individual order (MBO)</dd></div>
-            </dl>
-            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
-          </div>
-          <figure class="product-demo-media media-slot">
-            <iframe src="%BASE_URL%demos/marketstream.html#l2" title="L2 Liquidity Heatmap demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
-          </figure>
-        </section>
-
-        <section class="product-demo product-demo--reverse product-demo--editor" aria-labelledby="marketstream-editor">
-          <div class="product-demo-aurora" aria-hidden="true"><canvas width="480" height="260"></canvas></div>
-          <div class="product-demo-copy">
-            <h2 id="marketstream-editor">Build the indicator your setup needs.</h2>
-            <p>Turn your own rules into an indicator with MarketStream's scripting language. Write it in the built-in editor, then compile and see the result on your chart.</p>
-            <dl class="product-demo-details">
-              <div><dt>Inputs</dt><dd>Set periods and colors</dd></div>
-              <div><dt>Logic</dt><dd>Built-in RSI and EMA</dd></div>
-              <div><dt>Plots</dt><dd>Overlay or separate pane</dd></div>
-            </dl>
-            <a class="button button-primary" href="#pricing">Get Started <span aria-hidden="true">→</span></a>
-          </div>
-          <figure class="product-demo-media media-slot">
-            <iframe src="%BASE_URL%demos/marketstream.html#code" title="AI editor demo" loading="lazy" sandbox="allow-scripts" tabindex="-1" aria-hidden="true"></iframe>
-          </figure>
-        </section>
-      </div>
-
-      <section class="indicators-section section container" id="indicators" aria-labelledby="indicators-title">
-        <div class="split-heading indicators-heading">
-          <div><h2 id="indicators-title">Hundreds of<br />next-gen indicators</h2></div>
-          <p>Go deeper with indicators used by professional traders. Powered by live L1 and L2 data to bring order flow, hidden liquidity, and market intent into focus.</p>
-        </div>
-        <div class="indicator-track" id="indicator-track" role="region" aria-label="Premium indicator collection" tabindex="0">
-          <ul class="indicator-list" id="indicator-list"></ul>
-        </div>
-        <noscript><p class="no-script-note">Enable JavaScript to browse the premium indicator collection.</p></noscript>
-        <div class="indicator-navigation">
-          <div class="indicator-controls">
-            <button class="indicator-arrow" id="indicator-previous" type="button" aria-label="Previous indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">←</span></button>
-            <button class="indicator-arrow" id="indicator-next" type="button" aria-label="Next indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">→</span></button>
-          </div>
-        </div>
-      </section>
-
-
-      <section class="coverage-section section container" id="markets" aria-labelledby="coverage-title">
-        <div class="split-heading"><h2 id="coverage-title">Follow every market.<br />See every angle.</h2><p>From the assets you follow to the liquidity and events that move them. Bring the whole picture into view.</p></div>
-        <div class="coverage-grid">
-          <article class="coverage-card coverage-crypto">
-            <div class="coverage-card-heading"><h3>Crypto</h3><div class="coverage-coins" aria-hidden="true"><img src="/assets/btc.png" width="25" height="25" alt="" loading="lazy" /><img src="/assets/eth.png" width="25" height="25" alt="" loading="lazy" /><img src="/assets/sol.png" width="25" height="25" alt="" loading="lazy" /></div></div>
-            <p class="coverage-stat">4,000+</p>
-            <p class="coverage-description">Perpetuals and spot pairs.<br />A market that never closes.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>BTC / USD</span><span>24 / 7</span></div>
-              <svg class="coverage-chart" viewBox="0 0 320 86" preserveAspectRatio="none" fill="none">
-                <path class="chart-gridline" d="M0 22H320M0 64H320" />
-                <path class="chart-area" d="M0 61L12 57L24 64L36 48L48 53L60 42L72 46L84 35L96 44L108 39L120 54L132 48L144 52L156 38L168 42L180 30L192 34L204 23L216 32L228 27L240 36L252 21L264 26L276 13L288 20L300 11L320 16V86H0Z" />
-                <path class="chart-line" d="M0 61L12 57L24 64L36 48L48 53L60 42L72 46L84 35L96 44L108 39L120 54L132 48L144 52L156 38L168 42L180 30L192 34L204 23L216 32L228 27L240 36L252 21L264 26L276 13L288 20L300 11L320 16" />
-                <circle class="chart-point" cx="320" cy="16" r="3" />
-              </svg>
-              <div class="coverage-chart-axis"><span>Spot</span><span>Perpetuals</span></div>
-            </div>
-          </article>
-          <article class="coverage-card coverage-stocks">
-            <div class="coverage-card-heading"><h3>US stocks</h3><span class="coverage-symbols" aria-hidden="true">NVDA · AAPL · TSLA</span></div>
-            <p class="coverage-stat">5,000+</p>
-            <p class="coverage-description">Stocks and ETFs listed on<br />NYSE and Nasdaq.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>US equities</span><span>Regular session</span></div>
-              <svg class="coverage-chart" viewBox="0 0 320 86" preserveAspectRatio="none" fill="none">
-                <path class="chart-gridline" d="M0 22H320M0 64H320" />
-                <g class="chart-candles"><path d="M8 53V68M46 64V77M58.67 52V71M71.33 46V58M96.67 53V65M109.33 39V60M122 34V45M160 40V52M172.67 37V48M198 47V62M210.67 30V52M223.33 26V38M248.67 34V44M261.33 18V39M274 11V27M312 13V31" /><path stroke-width="6" d="M8 56V61M46 68V70M58.67 54V68M71.33 50V54M96.67 57V58M109.33 41V57M122 38V42M160 43V49M172.67 42V43M198 50V54M210.67 32V50M223.33 30V32M248.67 36V40M261.33 22V36M274 17V22M312 16V28" /></g>
-                <g class="chart-candles chart-down"><path d="M20.67 51V67M33.33 59V78M84 49V62M134.67 29V50M147.33 41V55M185.33 39V56M236 25V43M286.67 7V30M299.33 20V34" /><path stroke-width="6" d="M20.67 56V64M33.33 64V71M84 50V58M134.67 38V46M147.33 46V49M185.33 43V54M236 30V40M286.67 17V25M299.33 25V28" /></g>
-              </svg>
-              <div class="coverage-chart-axis"><span>09:30</span><span>16:00 ET</span></div>
-            </div>
-          </article>
-          <article class="coverage-card coverage-forex">
-            <div class="coverage-card-heading"><h3>Forex</h3><span class="coverage-symbols" aria-hidden="true">USD · EUR · JPY</span></div>
-            <p class="coverage-stat">1,000+</p>
-            <p class="coverage-description">Currency pairs across global markets.<br />Plus gold and silver.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>EUR / USD</span><span>Global FX</span></div>
-              <svg class="coverage-chart" viewBox="0 0 320 86" preserveAspectRatio="none" fill="none">
-                <path class="chart-gridline" d="M0 22H320M0 64H320" />
-                <path class="chart-reference" d="M0 47H320" />
-                <path class="chart-area" d="M0 54C3 52.67 6 50 9 50C11.67 50 14.33 57 17 57C19 57 21 55 23 55C25.67 55 28.33 62.41 31 64C35.33 66.58 39.67 69 44 69C46 69 48 67 50 67C52.33 67 54.67 74 57 74C59 74 61 66.67 63 65C65.33 63.05 67.67 61 70 61C72 61 74 64 76 64C80.33 64 84.67 43 89 43C91.33 43 93.67 46 96 46C99 46 102 39 105 39C109 39 113 42 117 42C119.33 42 121.67 40 124 40C127 40 130 47 133 47C135.67 47 138.33 44 141 44C144 44 147 46 150 46C153.67 46 157.33 31 161 31C163.33 31 165.67 34 168 34C170.67 34 173.33 18 176 18C178.33 18 180.67 23 183 23C185.67 23 188.33 12 191 12C194.33 12 197.67 16 201 16C204 16 207 14 210 14C213 14 216 28 219 28C221 28 223 25 225 25C227.33 25 229.67 38.23 232 40C235 42.27 238 44 241 44C243.33 44 245.67 36 248 36C251.33 36 254.67 38 258 38C262 38 266 26 270 26C272.67 26 275.33 29 278 29C280 29 282 22 284 22C286.33 22 288.67 25 291 25C294 25 297 20 300 20C302.67 20 305.33 27 308 27C312 27 316 25 320 24V86H0Z" />
-                <path class="chart-line" d="M0 54C3 52.67 6 50 9 50C11.67 50 14.33 57 17 57C19 57 21 55 23 55C25.67 55 28.33 62.41 31 64C35.33 66.58 39.67 69 44 69C46 69 48 67 50 67C52.33 67 54.67 74 57 74C59 74 61 66.67 63 65C65.33 63.05 67.67 61 70 61C72 61 74 64 76 64C80.33 64 84.67 43 89 43C91.33 43 93.67 46 96 46C99 46 102 39 105 39C109 39 113 42 117 42C119.33 42 121.67 40 124 40C127 40 130 47 133 47C135.67 47 138.33 44 141 44C144 44 147 46 150 46C153.67 46 157.33 31 161 31C163.33 31 165.67 34 168 34C170.67 34 173.33 18 176 18C178.33 18 180.67 23 183 23C185.67 23 188.33 12 191 12C194.33 12 197.67 16 201 16C204 16 207 14 210 14C213 14 216 28 219 28C221 28 223 25 225 25C227.33 25 229.67 38.23 232 40C235 42.27 238 44 241 44C243.33 44 245.67 36 248 36C251.33 36 254.67 38 258 38C262 38 266 26 270 26C272.67 26 275.33 29 278 29C280 29 282 22 284 22C286.33 22 288.67 25 291 25C294 25 297 20 300 20C302.67 20 305.33 27 308 27C312 27 316 25 320 24" />
-                <circle class="chart-point" cx="320" cy="24" r="3" />
-              </svg>
-              <div class="coverage-chart-axis"><span>Major & cross pairs</span><span>XAU · XAG</span></div>
-            </div>
-          </article>
-          <article class="coverage-card coverage-futures">
-            <div class="coverage-card-heading"><h3>Futures</h3><span class="coverage-symbols" aria-hidden="true">ES · ZN · CL · GC</span></div>
-            <p class="coverage-stat">CME</p>
-            <p class="coverage-description">Index, rates, energy, and metals.<br />The benchmarks that move the world.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>Futures curve</span><span>Across expiries</span></div>
-              <svg class="coverage-chart" viewBox="0 0 320 86" preserveAspectRatio="none" fill="none">
-                <path class="chart-gridline" d="M0 22H320M0 64H320" />
-                <path class="chart-line" d="M0 20C35 20 46 33 68 34S109 45 129 46S170 49 190 50S230 53 251 55S294 63 320 65" />
-                <g class="chart-point"><circle cx="0" cy="20" r="4" /><circle cx="68" cy="34" r="3" /><circle cx="129" cy="46" r="3" /><circle cx="190" cy="50" r="3" /><circle cx="251" cy="55" r="3" /><circle cx="320" cy="65" r="3" /></g>
-              </svg>
-              <div class="coverage-chart-axis"><span>Near term</span><span>Longer dated</span></div>
-            </div>
-          </article>
-          <article class="coverage-card coverage-depth">
-            <div class="coverage-card-heading"><h3>Market depth</h3><span class="coverage-symbols" aria-hidden="true">BID / ASK</span></div>
-            <p class="coverage-stat">Full depth</p>
-            <p class="coverage-description">From the best bid and ask<br />to the full order book.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>Resting liquidity</span><span>Order book</span></div>
-              <svg class="coverage-chart" viewBox="0 0 320 86" preserveAspectRatio="none" fill="none">
-                <path class="chart-gridline" d="M0 22H320M0 64H320" />
-                <path class="chart-area" d="M0 15H25V24H53V34H79V47H105V58H130V69H150V80H0Z" />
-                <path class="chart-line" d="M0 15H25V24H53V34H79V47H105V58H130V69H150V80" />
-                <path class="chart-area chart-ask" d="M170 80V69H191V56H216V46H242V33H267V23H294V12H320V80Z" />
-                <path class="chart-line chart-ask" d="M170 80V69H191V56H216V46H242V33H267V23H294V12H320" />
-                <path class="chart-reference" d="M160 8V80" />
-              </svg>
-              <div class="coverage-chart-axis"><span class="bid-label">Bids</span><span class="ask-label">Asks</span></div>
-            </div>
-          </article>
-          <article class="coverage-card coverage-context">
-            <div class="coverage-card-heading"><h3>Market context</h3><span class="coverage-symbols" aria-hidden="true">NEWS + SESSIONS</span></div>
-            <p class="coverage-stat">3 sessions</p>
-            <p class="coverage-description">Asian, London, and New York.<br />Opening ranges and news, in context.</p>
-            <div class="coverage-visual" aria-hidden="true">
-              <div class="coverage-chart-label"><span>Follow the trading day</span><span>Session view</span></div>
-              <div class="session-chart">
-                <div class="session-row"><span>Asian</span><div class="session-track"><i class="session-bar session-asian"></i></div></div>
-                <div class="session-row"><span>London</span><div class="session-track"><i class="session-bar session-london"></i></div></div>
-                <div class="session-row"><span>New York</span><div class="session-track"><i class="session-bar session-newyork"></i></div></div>
-              </div>
-              <div class="coverage-chart-axis"><span>Opening ranges</span><span class="context-news"><i></i> News & events</span></div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="reviews-section section" id="reviews" aria-labelledby="reviews-title">
-        <div class="container"><h2 class="reviews-heading" id="reviews-title">What our users say</h2></div>
-        <!-- Placeholder reviews and fictional names for the design; replace before launch. -->
-        <div class="review-marquee" tabindex="0" role="region" aria-label="Trader reviews. Hover or focus to pause scrolling.">
-          <div class="review-track">
-            <ul class="review-group">
-              <li class="review-card">
-                <h3>The depth view changed how I trade</h3>
-                <p class="review-copy">I spent two years trading off a basic DOM. Seeing the full order book next to the chart is a different game. You start to notice where size is actually sitting before price gets there.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">JB</span><span>James Bennett</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Replaced two subscriptions</h3>
-                <p class="review-copy">Was juggling a charting platform, a separate depth tool, and my broker terminal. Everything lives here now: chart trading, L2 data, the lot. Took me a weekend to move my layouts over and I haven't looked back.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">MR</span><span>Matteo Ricci</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Built an indicator in about 30 seconds</h3>
-                <p class="review-copy">Described what I wanted in plain English, like unusual volume with a trend filter, and it just built it. Still kinda surprised it worked on the first try. Tweaked a couple settings and it's on my charts daily now.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">AM</span><span>Arjun Mehta</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Dragging stops feels obvious now</h3>
-                <p class="review-copy">Used to tab between my broker and my charts constantly. Now I drag my stop right on the chart and move to breakeven with one click. Sounds small until you've done it the old way during a fast move.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">DO</span><span>Daniel Okafor</span></div>
-              </li>
-              <li class="review-card">
-                <h3>The journal called me out</h3>
-                <p class="review-copy">Auto journaling is seamless, stats populate same day. What it showed me was uncomfortable: I overtrade every Monday morning. Fixed that, win rate crept up. Handy tool if you're honest with yourself.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">LF</span><span>Lucas Ferreira</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Crypto and stocks in one place</h3>
-                <p class="review-copy">I trade BTC perps at night and equities during the day. Having both in the same workspace with the same watchlists saved me from juggling three apps. 24/7 crypto feeds have been solid for me so far.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">EP</span><span>Ethan Park</span></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="review-marquee review-marquee-reverse" tabindex="0" role="region" aria-label="More trader reviews. Hover or focus to pause scrolling.">
-          <div class="review-track">
-            <ul class="review-group">
-              <li class="review-card">
-                <h3>News right on the chart is clutch</h3>
-                <p class="review-copy">A headline popped on the chart at the exact moment ES dropped on the last CPI print. Didn't have to switch over to a news terminal. That context in the moment is worth more than I expected.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">OH</span><span>Oliver Hayes</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Can check in from anywhere</h3>
-                <p class="review-copy">I'm at my desk most of the day but love being able to pull up my positions and watchlists from my phone when I'm out. Layouts sync instantly. Little thing, but it's exactly what I wanted.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">RC</span><span>Rafael Costa</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Whale tracking paid for the year</h3>
-                <p class="review-copy">Elite here. The dark pool prints and large trade alerts caught an accumulation pattern in NVDA I'd have totally missed. One good catch covered the subscription. It shows you things a candle never will.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">VS</span><span>Vikram Shah</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Session analysis fixed my London entries</h3>
-                <p class="review-copy">I'm a London open trader and the opening range tools gave me structure I was previously just guessing at. Paired with the news events on the chart, my entries feel way less random than they used to be.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">SM</span><span>Samuel Mensah</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Selling my indicators was a nice bonus</h3>
-                <p class="review-copy">Built a mean reversion tool for myself, threw it on the marketplace half as a joke. A handful of people actually bought it. Not exactly life changing money, but it covers my subscription and then some.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">AR</span><span>Alejandro Ruiz</span></div>
-              </li>
-              <li class="review-card">
-                <h3>Support got me over the hump</h3>
-                <p class="review-copy">There's a lot here, no pretending otherwise, and I had questions my first week. Support got back to me fast and walked me through my setup. Once it clicked I was hooked. The AI scanning is my new favorite thing.</p>
-                <div class="review-stars" role="img" aria-label="5 out of 5 stars"><span aria-hidden="true">★★★★★</span></div>
-                <div class="review-author"><span class="review-avatar" aria-hidden="true">NK</span><span>Noah Kim</span></div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <section class="faq-section section container" id="faq" aria-labelledby="faq-title">
         <canvas class="faq-cells" aria-hidden="true"></canvas>
         <div class="faq-heading"><h2 id="faq-title">Your questions.<br />Answered.</h2></div>
@@ -527,14 +411,12 @@
             <h2 id="footer-platform-title">Platform</h2>
             <ul>
               <li><a href="#platform">Overview</a></li>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#indicators">Premium indicators</a></li>
+              <li><a href="#product-demos">Features</a></li>
             </ul>
           </nav>
           <nav class="footer-link-group" aria-labelledby="footer-explore-title">
             <h2 id="footer-explore-title">Explore</h2>
             <ul>
-              <li><a href="#markets">Markets</a></li>
               <li><a href="#market-data">Market data</a></li>
               <li><a href="#pricing">Plans &amp; pricing</a></li>
               <li><a href="#faq">FAQs</a></li>

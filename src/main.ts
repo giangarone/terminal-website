@@ -1,5 +1,4 @@
 import { productImages } from './content.ts';
-import { setupIndicators } from './indicators.ts';
 import { initHeroCells } from './hero-cells.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initCellWave } from './cell-wave.ts';
@@ -7,7 +6,6 @@ import { initAurora } from './aurora.ts';
 import { initDemoAuroras } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 
-setupIndicators();
 initPlanFeatureTooltips();
 
 // A matching second group makes the marquee wrap without a visible jump.
@@ -78,11 +76,10 @@ const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
 const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
-  '.section-heading', '.split-heading', '.coverage-card',
+  '.section-heading',
   '.platform-media', '.depth-feature', '.depth-visual',
   '.feature-card', '.pricing-card',
   '.faq-heading', '.faq-list details',
-  '.indicator-track',
 ].join(', '))];
 let entranceObserver: IntersectionObserver | undefined;
 

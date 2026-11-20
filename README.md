@@ -27,14 +27,6 @@ Example source: `/images/platform.webp`. Empty sources render empty charcoal fra
 
 ## Edit content and pricing
 
-### Premium indicators
-
-The indicator showcase follows market depth. Edit or add entries in `premiumIndicators` in `src/content.ts`; card rendering and carousel navigation adapt automatically. Names stay unchanged.
-
-The `userCount` values are design placeholders for the number of users using each indicator. Replace them with verified counts before launch. A `null` value displays an em dash. The “View indicator” buttons are intentionally inactive and marked `aria-disabled`.
-
-The collection supports touch swiping, trackpad scrolling, previous/next buttons, and Left/Right/Home/End keys when focused. Reduced-motion preferences disable animated scrolling.
-
 Marketing copy, FAQs, and the three mock plans are in `index.html`. Prices are USD monthly: Free $0, Pro $49, Elite $99. The mock plan buttons have no handlers or links, and use `aria-disabled="true"`. All acquisition links point to `#pricing`.
 
 The hero's three social-proof stats are in `index.html` under `.hero-stats`. The figures (100K+ active users, 1M+ trades tracked, and 4.9★ average rating) are design placeholders; replace the values and labels with verified metrics before launch. They use an accessible description list and a responsive three-column layout beneath the main button. `src/hero-stats.ts` counts each `data-count-to` value up once when the group enters view, easing out over 1.6 seconds after a short entrance delay. Keep the final text and accessible labels in sync when editing targets. Symbols stay fixed, screen readers retain the final values, and reduced motion or disabled JavaScript shows the finished stats immediately.
@@ -45,13 +37,13 @@ The hero’s animated circle lives in `src/hero-cells.ts`. Identical 6px squares
 
 Element box and text shadows are removed throughout the site.
 
-Pricing and checkout follow the hero's platform media. The WebGL aurora from `src/aurora.ts` is attached to `.pricing-grid` as a full-width decorative background limited to the plan cards' height; the heading and payment icons sit outside it. The quiet grid spans the checkout section and remains layered above the aurora and below the content. The aurora blends navy (`#13233c`) with the Pro plan's blue button (`#2563eb`) and light blue border (`#60a5fa`). Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
+Pricing and checkout follow the reviews. The WebGL aurora from `src/aurora.ts` is attached to `.pricing-grid` as a full-width decorative background limited to the plan cards' height; the heading and payment icons sit outside it. The quiet grid spans the checkout section and remains layered above the aurora and below the content. The aurora blends navy (`#13233c`) with the Pro plan's blue button (`#2563eb`) and light blue border (`#60a5fa`). Fine, static grain softens gradient banding and fades with the glow at the edges. The FAQ section uses the plain page background.
 
 The “Safe & Secure Checkout” block below the plans preserves the `n-safe-div` structure, spacing, responsive breakpoints, and original SVG icons from https://v1-7.webflow.io/blackfriday. It inherits the site's Inter font. Its six icons are stored in `public/assets/payments/`.
 
-### Feature showcase
+### Product demos
 
-The five-card section at `#features` sits immediately after pricing and checkout. Edit its copy and inline SVG illustrations in `index.html`; its scoped styles are in `src/style.css`. The graphics are illustrative, including the labeled sample journal results and economic event, and do not use live data. Each card uses the same entrance animation as the market-coverage cards in `src/main.ts`; its text and illustrations remain static within the card. Cards appear immediately without JavaScript or with reduced motion enabled.
+The product demos at `#product-demos` sit between the hero and the reviews. Edit their copy in `index.html` and their styles in `src/style.css`.
 
 ## Asset provenance
 
