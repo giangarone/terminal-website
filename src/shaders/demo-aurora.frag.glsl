@@ -8,6 +8,9 @@ uniform float uAspect;
 uniform vec3 uBackground;
 uniform vec3 uBase;
 uniform vec3 uHighlight;
+uniform bool uHero;
+uniform vec3 uAmber;
+uniform vec3 uVermilion;
 uniform sampler3D uNoise;
 const int STEPS = 32;
 const vec3 VOLUME_LOW = vec3(-250.0, 50.0, -500.0);
@@ -49,14 +52,14 @@ float curtainDensity(vec3 point, float timeFlow) {
   float radiance = pow(0.3025 / (2.0 * noise * noise + vertical * vertical), 6.0);
   return radiance * max(0.0, cos(0.13 * warped.x));
 }
-vec3 traceAurora(vec3 direction) {
+vec2 traceAurora(vec3 direction) {
   vec3 a = (VOLUME_LOW - EYE) / direction;
   vec3 b = (VOLUME_HIGH - EYE) / direction;
   vec3 nearPlane = min(a, b);
   vec3 farPlane = max(a, b);
   float nearDist = max(max(nearPlane.x, nearPlane.y), max(nearPlane.z, 10.0));
   float farDist = min(min(farPlane.x, farPlane.y), farPlane.z);
-  if (farDist <= nearDist) return vec3(0.0);
+  if (farDist <= nearDist) return vec2(0.0);
   float stepSize = (farDist - nearDist) / float(STEPS);
   float offset = 0.35 + 0.3 * hash(vec3(gl_FragCoord.xy, 7.0));
   vec3 point = EYE + direction * (nearDist + offset * stepSize);
@@ -68,10 +71,15 @@ vec3 traceAurora(vec3 direction) {
     light += curtainDensity(point, timeFlow) * vec2(1.0 - height, height);
     point += stepVector;
   }
-  return 0.05 * stepSize * (uBase * light.x + uHighlight * light.y);
+  return 0.05 * stepSize * light;
 }
 vec3 toneMap(vec3 light) {
   return clamp((light * (2.51 * light + 0.03)) / (light * (2.43 * light + 0.59) + 0.14), 0.0, 1.0);
+}
+vec3 heroPalette(float hue) {
+  vec3 indigoToPurple = mix(uBase, uHighlight, smoothstep(0.08, 0.35, hue));
+  vec3 amberToVermilion = mix(uAmber, uVermilion, smoothstep(0.65, 0.94, hue));
+  return mix(indigoToPurple, amberToVermilion, smoothstep(0.35, 0.65, hue));
 }
 void main() {
   float fade = smoothstep(0.04, 0.40, vUv.y);
@@ -79,8 +87,10 @@ void main() {
     fragColor = vec4(uBackground, 1.0);
     return;
   }
-  // Keep the curtains in view as the hero gets taller relative to its width.
-  float pitch = mix(0.31, 0.45, smoothstep(0.6, 1.6, uAspect));
+  // Keep the curtains in view as the canvas gets taller relative to its width.
+  float pitch = uHero
+    ? mix(0.13, 0.18, smoothstep(0.55, 1.5, uAspect))
+    : mix(0.31, 0.45, smoothstep(0.6, 1.6, uAspect));
   vec3 forward = normalize(vec3(
     -0.4 + sin(uTime * 0.1) * 0.1,
     pitch + cos(uTime * 0.05) * 0.05,
@@ -89,10 +99,22 @@ void main() {
   vec3 right = normalize(cross(forward, vec3(0.0, 1.0, 0.0)));
   vec3 up = cross(right, forward);
   vec2 screen = (2.0 * vUv - 1.0) * vec2(uAspect, 1.0);
+  float distanceFromCenter = abs(2.0 * vUv.x - 1.0);
+  if (uHero) {
+    float arch = 1.0 - smoothstep(0.0, 1.0, abs(2.0 * vUv.x - 1.1));
+    screen.y -= mix(0.14, 0.52, arch);
+  }
   vec3 direction = normalize(forward * 1.73205 + right * screen.x + up * screen.y);
-  vec3 aurora = pow(toneMap(traceAurora(direction) * fade), vec3(1.0 / 2.2));
+  vec2 glow = traceAurora(direction) * fade;
+  vec3 aurora = toneMap(uBase * glow.x + uHighlight * glow.y);
   // Give the headline some separation from the brightest parts of the curtains.
-  float exposure = mix(0.55, 0.82, smoothstep(0.0, 0.9, abs(2.0 * vUv.x - 1.0)));
-  vec3 light = aurora * exposure;
+  float exposure = mix(0.55, 0.82, smoothstep(0.0, 0.9, distanceFromCenter));
+  if (uHero) {
+    float hue = vUv.x + 0.12 * (vUv.y - 0.5) + 0.025 * sin(4.0 * vUv.y + uTime * 0.2);
+    aurora = heroPalette(hue) * toneMap(vec3(glow.x + glow.y));
+    float edgeExposure = mix(0.68, 1.0, smoothstep(0.65, 1.25, uAspect));
+    exposure = mix(0.40, edgeExposure, smoothstep(0.18, 0.96, distanceFromCenter));
+  }
+  vec3 light = pow(aurora, vec3(1.0 / 2.2)) * exposure;
   fragColor = vec4(uBackground + (1.0 - uBackground) * light, 1.0);
 }

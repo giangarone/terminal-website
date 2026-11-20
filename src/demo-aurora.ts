@@ -13,6 +13,7 @@ interface Palette {
   background: Float32Array;
   base: Float32Array;
   highlight: Float32Array;
+  warm?: { amber: Float32Array; vermilion: Float32Array };
 }
 
 function readColor(style: CSSStyleDeclaration, property: string, gamma: number) {
@@ -96,37 +97,55 @@ function createRenderer(canvas: HTMLCanvasElement) {
   gl.enableVertexAttribArray(position);
   gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
-  gl.viewport(0, 0, canvas.width, canvas.height);
-  gl.uniform1f(gl.getUniformLocation(program, 'uAspect'), canvas.width / canvas.height);
   gl.uniform1i(gl.getUniformLocation(program, 'uNoise'), 0);
+  const uAspect = gl.getUniformLocation(program, 'uAspect');
   const uTime = gl.getUniformLocation(program, 'uTime');
   const uBackground = gl.getUniformLocation(program, 'uBackground');
   const uBase = gl.getUniformLocation(program, 'uBase');
   const uHighlight = gl.getUniformLocation(program, 'uHighlight');
+  const uHero = gl.getUniformLocation(program, 'uHero');
+  const uAmber = gl.getUniformLocation(program, 'uAmber');
+  const uVermilion = gl.getUniformLocation(program, 'uVermilion');
 
-  return (time: number, palette: Palette) => {
+  return (time: number, palette: Palette, width: number, height: number) => {
+    gl.viewport(0, 0, width, height);
+    gl.uniform1f(uAspect, width / height);
     gl.uniform1f(uTime, time);
     gl.uniform3fv(uBackground, palette.background);
     gl.uniform3fv(uBase, palette.base);
     gl.uniform3fv(uHighlight, palette.highlight);
+    gl.uniform1i(uHero, palette.warm ? 1 : 0);
+    if (palette.warm) {
+      gl.uniform3fv(uAmber, palette.warm.amber);
+      gl.uniform3fv(uVermilion, palette.warm.vermilion);
+    }
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   };
 }
 
-export function initDemoAuroras() {
+export function initAuroraBackdrops() {
+  const hero = document.querySelector<HTMLCanvasElement>('.hero-aurora canvas');
   const canvases = [...document.querySelectorAll<HTMLCanvasElement>('.product-demo-aurora canvas')];
+  if (hero) canvases.unshift(hero);
   if (!canvases.length || !('IntersectionObserver' in window)) return;
 
   const source = document.createElement('canvas');
-  source.width = canvases[0].width;
-  source.height = canvases[0].height;
-  const palettes = new Map(canvases.map(canvas => {
+  source.width = 720;
+  source.height = 480;
+  const palettes = new Map<HTMLCanvasElement, Palette>(canvases.map(canvas => {
     const style = getComputedStyle(canvas);
-    return [canvas, {
+    const palette: Palette = {
       background: readColor(style, '--background', 1),
       base: readColor(style, '--aurora-base', 2.2),
       highlight: readColor(style, '--aurora-highlight', 2.2),
-    }] as const;
+    };
+    if (canvas === hero) {
+      palette.warm = {
+        amber: readColor(style, '--aurora-amber', 2.2),
+        vermilion: readColor(style, '--aurora-vermilion', 2.2),
+      };
+    }
+    return [canvas, palette];
   }));
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const visible = new Set<HTMLCanvasElement>();
@@ -158,14 +177,32 @@ export function initDemoAuroras() {
         const context = canvas.getContext('2d', { alpha: false });
         const palette = palettes.get(canvas);
         if (!context || !palette) continue;
-        draw(time, palette);
-        context.drawImage(source, 0, 0);
+        const { width, height } = canvas;
+        draw(time, palette, width, height);
+        // WebGL's viewport starts at the bottom left of the shared surface.
+        context.drawImage(source, 0, source.height - height, width, height, 0, 0, width, height);
         canvas.classList.add('is-ready');
       }
       needsPaint = false;
       previous = now;
     }
     syncPlayback();
+  }
+
+  if (hero) {
+    const resize = () => {
+      const bounds = hero.getBoundingClientRect();
+      const scale = Math.min(0.5, source.width / bounds.width, source.height / bounds.height);
+      const width = Math.max(1, Math.round(bounds.width * scale));
+      const height = Math.max(1, Math.round(bounds.height * scale));
+      if (hero.width === width && hero.height === height) return;
+      hero.width = width;
+      hero.height = height;
+      needsPaint = true;
+      syncPlayback();
+    };
+    resize();
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(hero);
   }
 
   const observer = new IntersectionObserver(entries => {

@@ -1,9 +1,8 @@
 import { productImages } from './content.ts';
-import { initHeroCells } from './hero-cells.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initCellWave } from './cell-wave.ts';
 import { initAurora } from './aurora.ts';
-import { initDemoAuroras } from './demo-aurora.ts';
+import { initAuroraBackdrops } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 
 initPlanFeatureTooltips();
@@ -19,8 +18,6 @@ for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track'
   reviewTrack.classList.add('is-looping');
 }
 
-const heroCells = document.querySelector<HTMLCanvasElement>('.hero-cells');
-if (heroCells) initHeroCells(heroCells);
 initHeroStats();
 
 const faqCells = document.querySelector<HTMLCanvasElement>('.faq-cells');
@@ -28,7 +25,7 @@ if (faqCells) initCellWave(faqCells);
 
 const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
-initDemoAuroras();
+initAuroraBackdrops();
 
 const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
 const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;

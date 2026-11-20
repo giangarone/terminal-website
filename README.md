@@ -33,7 +33,7 @@ The hero's three social-proof stats are in `index.html` under `.hero-stats`. The
 
 Color, surface, typography, and spacing rules live in `src/style.css`; palette variables are declared at the top. The MarketStream navbar uses the logo at `public/assets/marketstream-logo.svg`.
 
-The hero’s animated circle lives in `src/hero-cells.ts`. Identical 6px squares sit on an invisible 8px grid (2px gaps) at every screen size, with the last row flush to the bottom edge. On entrance, cells expand and fade in from below the bottom center over 2.4 seconds using `cubic-bezier(0.32, 0, 0.1, 1)`, revealing the cyan edge and soft blue interior. The finished circle breathes by 6% every 7 seconds, with the pulse easing in over 0.9 seconds after the entrance. Light softens around the heading and the top and side edges while staying lit along the bottom. Cell positions and sizes stay fixed until the hero resizes. A separate, subtle background grid remains visible behind the animated cells. The renderer pauses outside the viewport and in hidden tabs, resumes without replaying its entrance, and shows the finished still composition for reduced motion.
+The hero backdrop and product demos share the WebGL aurora renderer in `src/demo-aurora.ts`. The hero uses all four brand colors defined in `src/style.css` across one curtain. The animation pauses offscreen and in hidden tabs, renders a still frame for reduced motion, and falls back to a CSS gradient if WebGL is unavailable.
 
 Element box and text shadows are removed throughout the site.
 
