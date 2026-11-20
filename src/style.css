@@ -168,6 +168,59 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* Section rhythm and empty, replaceable product-image frames. */
 .centered-heading { text-align: center; margin-inline: auto; max-width: 750px; }
+
+/* NEW tag pill (ported from reference new-tag-frame) */
+.new-tag-frame {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-inline: auto;
+  margin-bottom: 32px;
+  padding: 0.5px;
+  border-radius: 999px;
+  background-color: var(--surface);
+  width: fit-content;
+}
+.new-tag-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  padding: 4px 12px 4px 4px;
+  border-radius: 999px;
+  background-color: var(--surface);
+}
+.new-tag {
+  flex: none;
+  padding: 6px 8px;
+  border: 0.5px solid var(--border);
+  border-radius: 9999px;
+  color: var(--text);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01rem;
+}
+.new-tag-name {
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+.rotating-tag-stroke {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-image: linear-gradient(transparent, var(--brand-indigo) 20%, var(--brand-purple) 40%, var(--brand-amber) 60%, var(--brand-vermilion) 80%, transparent);
+  animation: rotate 8s linear infinite;
+}
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
 .section-heading h2 { margin-top: 21px; }
 .section-heading > p:last-child { color: var(--text-secondary); margin-top: 22px; font-size: 14px; line-height: 1.8; }
 .media-slot { position: relative; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
