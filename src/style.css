@@ -428,7 +428,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .billing-period input:checked + span { color: var(--text); background: var(--surface-hover); }
 .billing-period input:focus-visible + span { outline: 2px solid var(--accent-blue); outline-offset: 2px; }
-.billing-period small { color: #a7ff33; font-size: 12px; }
+.billing-period small { color: var(--positive); font-size: 12px; }
 .pricing-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 52px; }
 .billing-period:not([hidden]) + .pricing-grid { margin-top: 32px; }
 /* Limit the aurora to the plans' height, below the section's grid background. */
@@ -481,9 +481,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .plan-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
 .plan-badge { flex-shrink: 0; border: 0.5px solid #3983f7; border-radius: 8px; background: #3983f780; padding: 2px 8px; font-size: 11px; font-weight: 550; white-space: nowrap; }
 .plan-badge--discount {
-  color: #a7ff33;
-  border-color: #a7ff33;
-  background: #212b12;
+  color: var(--positive);
+  border-color: color-mix(in srgb, var(--positive) 38%, transparent);
+  background: color-mix(in srgb, var(--positive) 12%, transparent);
 }
 .plan-description { margin-top: 8px; color: var(--text-secondary); font-size: 13px; }
 .plan-price { position: relative; font-size: clamp(29px, calc(8vw - 22.5px), 52px); font-weight: 450; line-height: 1.1; letter-spacing: -0.065em; margin-top: 30px; }
