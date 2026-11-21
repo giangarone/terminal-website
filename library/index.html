@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080808" />
+    <meta name="description" content="Explore the MarketStream indicator library. Search by name or author and filter indicators by volume, momentum, order flow, and more." />
+    <link rel="icon" type="image/png" href="/marketstream-favicon.png" />
+    <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="/src/library.css" />
+    <title>Indicator Library | MarketStream</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page-content">
+      <header class="site-header">
+        <div class="container header-inner">
+          <div class="header-left">
+            <a class="wordmark" href="%BASE_URL%" aria-label="MarketStream home">
+              <img src="/assets/marketstream-logo.svg" alt="MarketStream" width="1897" height="208" />
+            </a>
+            <nav class="desktop-nav" aria-label="Main navigation">
+              <a href="%BASE_URL%#pricing">Pricing</a>
+              <a href="%BASE_URL%#reviews">Testimonials</a>
+              <a href="%BASE_URL%#market-data">Market data</a>
+              <a href="%BASE_URL%library/" aria-current="page">Indicators</a>
+              <a href="%BASE_URL%#faq">FAQ</a>
+            </nav>
+          </div>
+          <div class="header-actions">
+            <button class="button button-secondary button-small" type="button" aria-disabled="true">Log in</button>
+            <button class="button button-primary button-small" type="button" aria-disabled="true">Open app <span aria-hidden="true">→</span></button>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation">
+              <span></span><span></span><span></span>
+            </button>
+          </div>
+        </div>
+        <nav class="mobile-nav container" id="mobile-navigation" aria-label="Mobile navigation" hidden>
+          <a href="%BASE_URL%#pricing">Pricing</a>
+          <a href="%BASE_URL%#reviews">Testimonials</a>
+          <a href="%BASE_URL%#market-data">Market data</a>
+          <a href="%BASE_URL%library/" aria-current="page">Indicators</a>
+          <a href="%BASE_URL%#faq">FAQ</a>
+          <button class="button button-secondary button-small" type="button" aria-disabled="true">Log in</button>
+          <button class="button button-primary button-small" type="button" aria-disabled="true">Open app <span aria-hidden="true">→</span></button>
+        </nav>
+      </header>
+
+      <main id="main">
+        <div class="library-intro">
+          <div class="container">
+            <h1>Indicator Library</h1>
+            <p>Explore tools for trend, momentum, and volume, alongside live order flow and liquidity indicators.</p>
+          </div>
+        </div>
+
+        <div class="library-catalog container">
+          <div id="library-controls" class="library-controls" hidden>
+            <form id="library-search-form" class="library-search" role="search" aria-label="Indicator library">
+              <label class="library-label" for="library-search">Search indicators</label>
+              <input id="library-search" type="search" placeholder="Name, author, or keyword" autocomplete="off" spellcheck="false" />
+            </form>
+            <div>
+              <p class="library-label" id="library-filter-label">Filter by tag</p>
+              <div class="library-filters" id="library-filters" role="group" aria-labelledby="library-filter-label"></div>
+            </div>
+          </div>
+
+          <noscript><p class="library-count">Enable JavaScript to browse the indicator library.</p></noscript>
+          <p class="library-count" id="library-count" role="status"></p>
+          <ul class="library-grid" id="library-results" aria-label="Indicators" role="list"></ul>
+          <div class="library-empty" id="library-empty" hidden>
+            <p>Try a different search or reset your filters.</p>
+            <button class="button button-secondary" type="button" id="library-reset">Reset search and filters</button>
+          </div>
+          <div class="library-pagination" id="library-pagination" hidden>
+            <button class="button button-secondary" type="button" id="library-more" aria-controls="library-results">Show more indicators</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <div class="footer-main">
+            <div class="footer-brand">
+              <p>Charts, market data, and intelligence.<br />One connected workspace for the way you trade.</p>
+              <p class="footer-copyright">© <span id="copyright-year">2026</span> MarketStream. All rights reserved.</p>
+            </div>
+            <nav class="footer-link-group" aria-labelledby="footer-platform-title">
+              <h2 id="footer-platform-title">Platform</h2>
+              <ul>
+                <li><a href="%BASE_URL%#platform">Overview</a></li>
+                <li><a href="%BASE_URL%#product-demos">Features</a></li>
+                <li><a href="%BASE_URL%library/" aria-current="page">Indicator library</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-link-group" aria-labelledby="footer-explore-title">
+              <h2 id="footer-explore-title">Explore</h2>
+              <ul>
+                <li><a href="%BASE_URL%#market-data">Market data</a></li>
+                <li><a href="%BASE_URL%#pricing">Plans &amp; pricing</a></li>
+                <li><a href="%BASE_URL%#faq">FAQs</a></li>
+              </ul>
+            </nav>
+            <nav class="footer-link-group" aria-labelledby="footer-legal-title">
+              <h2 id="footer-legal-title">Legal</h2>
+              <ul>
+                <li><a role="link" aria-disabled="true">Privacy policy</a></li>
+                <li><a role="link" aria-disabled="true">Terms &amp; conditions</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="footer-disclaimer">
+            <p>Trading involves risk, including the loss of your invested capital. Market data, indicators, and AI-generated insights are provided for informational purposes and do not constitute investment advice. Past performance does not guarantee future results. Make your own assessment before placing a trade.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/library.ts"></script>
+  </body>
+</html>

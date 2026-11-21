@@ -1,4 +1,5 @@
 import { premiumIndicators } from './content.ts';
+import { createIndicatorCard } from './indicator-card.ts';
 
 export function setupIndicators() {
   const track = document.querySelector<HTMLElement>('#indicator-track')!;
@@ -8,43 +9,14 @@ export function setupIndicators() {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
   for (const indicator of premiumIndicators) {
-    const item = document.createElement('li');
-    item.className = 'indicator-item';
-    item.innerHTML = `
-      <article class="indicator-card">
-        <div class="indicator-body">
-          <h3></h3>
-          <ul class="indicator-tags" aria-label="Indicator tags" role="list"></ul>
-          <p class="indicator-description"></p>
-          <div class="indicator-card-footer">
-            <span class="indicator-author">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="7" r="3"/>
-                <path d="M5 20v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
-              </svg>
-              <span></span>
-            </span>
-            <button class="indicator-detail" type="button" aria-disabled="true">View indicator</button>
-          </div>
-        </div>
-      </article>`;
-    const card = item.querySelector('article')!;
-    const title = card.querySelector('h3')!;
-    title.id = `indicator-${indicator.id}`;
-    title.textContent = indicator.name;
-    const tagList = card.querySelector('.indicator-tags')!;
-    for (const label of indicator.tags) {
-      const tag = document.createElement('li');
-      tag.className = 'indicator-tag';
-      tag.dataset.tag = label;
-      tag.textContent = label;
-      tagList.append(tag);
-    }
-    card.setAttribute('aria-labelledby', title.id);
-    item.querySelector('.indicator-description')!.textContent = indicator.description;
-    item.querySelector('.indicator-author span')!.textContent = indicator.author;
-    item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
-
+    const item = createIndicatorCard(indicator, 'h3');
+    const button = document.createElement('button');
+    button.className = 'indicator-detail';
+    button.type = 'button';
+    button.textContent = 'View indicator';
+    button.setAttribute('aria-disabled', 'true');
+    button.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
+    item.querySelector('.indicator-card-footer')!.append(button);
     list.append(item);
   }
 

@@ -6,6 +6,7 @@ import { initAurora } from './aurora.ts';
 import { initAuroraBackdrops } from './demo-aurora.ts';
 import { initPlanFeatureTooltips } from './plan-feature-tooltips.ts';
 import { initPricingBilling } from './pricing-billing.ts';
+import { setupSiteNavigation } from './site-navigation.ts';
 
 initPricingBilling();
 initPlanFeatureTooltips();
@@ -28,32 +29,7 @@ initHeroStars();
 const pricingAurora = document.querySelector<HTMLCanvasElement>('.pricing-grid > .aurora-canvas');
 if (pricingAurora) initAurora(pricingAurora);
 initAuroraBackdrops();
-
-const menuButton = document.querySelector<HTMLButtonElement>('.menu-toggle')!;
-const mobileMenu = document.querySelector<HTMLElement>('#mobile-navigation')!;
-
-function setMenu(open: boolean) {
-  menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-  mobileMenu.hidden = !open;
-}
-
-menuButton.addEventListener('click', () => setMenu(mobileMenu.hidden));
-mobileMenu.addEventListener('click', event => {
-  if ((event.target as HTMLElement).closest('a')) setMenu(false);
-});
-document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && !mobileMenu.hidden) {
-    setMenu(false);
-    menuButton.focus();
-  }
-});
-document.addEventListener('click', event => {
-  if (!mobileMenu.hidden && !(event.target as HTMLElement).closest('.site-header')) setMenu(false);
-});
-window.matchMedia('(min-width: 851px)').addEventListener('change', event => {
-  if (event.matches) setMenu(false);
-});
+setupSiteNavigation();
 
 for (const [slot, image] of Object.entries(productImages)) {
   if (!image.src) continue;
@@ -145,5 +121,3 @@ motionPreference.addEventListener('change', event => {
   entranceObserver?.disconnect();
   entranceElements.forEach(showImmediately);
 });
-
-document.querySelector('#copyright-year')!.textContent = String(new Date().getFullYear());
