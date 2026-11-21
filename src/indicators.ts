@@ -17,7 +17,13 @@ export function setupIndicators() {
           <ul class="indicator-tags" aria-label="Indicator tags" role="list"></ul>
           <p class="indicator-description"></p>
           <div class="indicator-card-footer">
-            <span class="indicator-author"></span>
+            <span class="indicator-author">
+              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="7" r="3"/>
+                <path d="M5 20v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
+              </svg>
+              <span></span>
+            </span>
             <button class="indicator-detail" type="button" aria-disabled="true">View indicator</button>
           </div>
         </div>
@@ -36,7 +42,7 @@ export function setupIndicators() {
     }
     card.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
-    item.querySelector('.indicator-author')!.textContent = indicator.author;
+    item.querySelector('.indicator-author span')!.textContent = indicator.author;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     list.append(item);
