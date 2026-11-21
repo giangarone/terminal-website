@@ -41,7 +41,7 @@ export function setupIndicators() {
     }
     card.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
-    item.querySelector('.indicator-author span')!.textContent = `By ${indicator.author}`;
+    item.querySelector('.indicator-author span')!.textContent = indicator.author;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     list.append(item);
