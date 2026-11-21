@@ -26,10 +26,9 @@ export function setupIndicators() {
     const title = card.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
-    const { category, access, level } = indicator;
-    const levelLabel = level && (level === 'L2' ? 'Orderbook • L2' : 'Orderflow • L1');
+    const { category, access } = indicator;
     const tagList = card.querySelector('.indicator-tags')!;
-    for (const label of [category, access, levelLabel]) {
+    for (const label of [category, access]) {
       if (!label) continue;
       const tag = document.createElement('li');
       tag.className = 'indicator-tag';

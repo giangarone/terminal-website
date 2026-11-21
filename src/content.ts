@@ -9,7 +9,6 @@ export const productImages = {
 export interface PremiumIndicator {
   id: string;
   name: string;
-  level?: 'L1' | 'L2';
   category?: string;
   access?: 'Open source' | 'Protected';
   description: string;
@@ -17,32 +16,6 @@ export interface PremiumIndicator {
 }
 
 export const premiumIndicators: PremiumIndicator[] = [
-  // Author names for the original five cards are fictional placeholders.
-  {
-    id: 'exhaustion', name: 'Exhaustion', level: 'L2', category: 'Momentum',
-    description: 'Spot when buying or selling pressure fades and a move starts to lose momentum.',
-    author: 'Mara Voss',
-  },
-  {
-    id: 'flowprint-blocks', name: 'Flowprint Blocks', level: 'L2', category: 'Liquidity',
-    description: 'See where buy and sell orders cluster, and track how price reacts when it reaches those levels.',
-    author: 'Nolan Vance',
-  },
-  {
-    id: 'liquidation-prints', name: 'Liquidation Prints', level: 'L1', category: 'Liquidations',
-    description: 'See forced exits on perpetual futures charts. Red bubbles below candles mark long liquidations, and green bubbles above mark short liquidations.',
-    author: 'Lina Calder',
-  },
-  {
-    id: 'prime-support-resistance', name: 'Prime Support & Resistance', level: 'L1', category: 'Order flow',
-    description: 'See potential support and resistance directly on your chart. Our servers calculate each level from executed market trades.',
-    author: 'Dev Saran',
-  },
-  {
-    id: 'footprint', name: 'Footprint', level: 'L1', category: 'Order flow',
-    description: 'See how much traded at the bid and ask at every price within each candle. Fine-tune the view with dedicated footprint settings.',
-    author: 'Tessa Vale',
-  },
   {
     id: '9-100-ema-cross', name: '9/100 EMA CROSS', category: 'Trend', access: 'Open source',
     description: 'Track crossovers between the 9-period and 100-period exponential moving averages to see when short-term momentum shifts relative to the longer trend.',

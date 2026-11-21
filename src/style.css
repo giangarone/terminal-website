@@ -409,8 +409,8 @@ ul { margin: 0; padding: 0; list-style: none; }
   line-height: 1.3;
 }
 .indicator-tag:is([data-tag='Trend'], [data-tag='Open source']) { --tag-color: var(--positive); }
-.indicator-tag:is([data-tag='Volume'], [data-tag='Orderflow • L1']) { --tag-color: var(--accent-blue); }
-.indicator-tag:is([data-tag='Momentum'], [data-tag='Protected'], [data-tag='Orderbook • L2']) { --tag-color: var(--accent-purple); }
+.indicator-tag[data-tag='Volume'] { --tag-color: var(--accent-blue); }
+.indicator-tag:is([data-tag='Momentum'], [data-tag='Protected']) { --tag-color: var(--accent-purple); }
 .indicator-tag[data-tag='Volatility'] { --tag-color: var(--negative); }
 .indicator-description { color: var(--text-secondary); font-size: 12px; line-height: 1.85; margin-top: 12px; margin-bottom: 25px; }
 .indicator-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 0.5px solid var(--border); padding-top: 15px; margin-top: auto; }
