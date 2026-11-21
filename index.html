@@ -30,7 +30,7 @@
             <a href="#pricing">Pricing</a>
             <a href="#reviews">Testimonials</a>
             <a href="#market-data">Market data</a>
-            <a role="link" aria-disabled="true">Indicators</a>
+            <a href="#indicators">Indicators</a>
             <a href="#faq">FAQ</a>
           </nav>
         </div>
@@ -46,7 +46,7 @@
         <a href="#pricing">Pricing</a>
         <a href="#reviews">Testimonials</a>
         <a href="#market-data">Market data</a>
-        <a role="link" aria-disabled="true">Indicators</a>
+        <a href="#indicators">Indicators</a>
         <a href="#faq">FAQ</a>
         <button class="button button-secondary button-small" type="button" aria-disabled="true">Log in</button>
        <button class="button button-primary button-small" type="button" aria-disabled="true">Open app <span aria-hidden="true">→</span></button>
@@ -164,6 +164,23 @@
           </figure>
         </section>
       </div>
+
+      <section class="indicators-section section container" id="indicators" aria-labelledby="indicators-title">
+        <div class="indicators-heading">
+          <div><h2 id="indicators-title">Hundreds of<br />next-gen indicators</h2></div>
+          <p>Go deeper with indicators used by professional traders. Powered by live L1 and L2 data to bring order flow, hidden liquidity, and market intent into focus.</p>
+        </div>
+        <div class="indicator-track" id="indicator-track" role="region" aria-label="Premium indicator collection" tabindex="0">
+          <ul class="indicator-list" id="indicator-list"></ul>
+        </div>
+        <noscript><p class="no-script-note">Enable JavaScript to browse the premium indicator collection.</p></noscript>
+        <div class="indicator-navigation">
+          <div class="indicator-controls">
+            <button class="indicator-arrow" id="indicator-previous" type="button" aria-label="Previous indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">←</span></button>
+            <button class="indicator-arrow" id="indicator-next" type="button" aria-label="Next indicators" aria-controls="indicator-track" disabled><span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </section>
 
       <section class="reviews-section section" id="reviews" aria-labelledby="reviews-title">
         <div class="container"><h2 class="reviews-heading" id="reviews-title">What our users say</h2></div>
@@ -434,6 +451,7 @@
             <ul>
               <li><a href="#platform">Overview</a></li>
               <li><a href="#product-demos">Features</a></li>
+              <li><a href="#indicators">Premium indicators</a></li>
             </ul>
           </nav>
           <nav class="footer-link-group" aria-labelledby="footer-explore-title">

@@ -1,4 +1,5 @@
 import { productImages } from './content.ts';
+import { setupIndicators } from './indicators.ts';
 import { initHeroStats } from './hero-stats.ts';
 import { initHeroStars } from './hero-stars.ts';
 import { initAurora } from './aurora.ts';
@@ -8,6 +9,7 @@ import { initPricingBilling } from './pricing-billing.ts';
 
 initPricingBilling();
 initPlanFeatureTooltips();
+setupIndicators();
 
 // A matching second group makes the marquee wrap without a visible jump.
 for (const reviewTrack of document.querySelectorAll<HTMLElement>('.review-track')) {
@@ -74,6 +76,7 @@ const entranceAnimations = new Map<Element, Animation>();
 const entranceElements = [...document.querySelectorAll<HTMLElement>([
   '.hero .centered-heading > *',
   '.section-heading',
+  '.indicators-heading', '.indicator-track',
   '.platform-media', '.depth-feature', '.depth-visual',
   '.feature-card', '.pricing-card',
   '.faq-heading', '.faq-list details',
