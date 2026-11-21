@@ -59,7 +59,7 @@
 .library-filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .library-filter {
   --filter-accent: var(--tag-color, var(--text));
-  padding: 8px 12px;
+  padding: 6px 10px;
   border: 1px solid var(--border-strong);
   border-radius: 100px;
   background: var(--surface-inset);
