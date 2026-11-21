@@ -412,6 +412,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .indicator-tag[data-tag='Volume'] { --tag-color: var(--accent-blue); }
 .indicator-tag:is([data-tag='Momentum'], [data-tag='Protected']) { --tag-color: var(--accent-purple); }
 .indicator-tag[data-tag='Volatility'] { --tag-color: var(--negative); }
+.indicator-tag[data-tag='Structure'] { --tag-color: var(--accent-gold); }
 .indicator-description { color: var(--text-secondary); font-size: 12px; line-height: 1.85; margin-top: 12px; margin-bottom: 25px; }
 .indicator-card-footer { display: flex; justify-content: space-between; align-items: center; gap: 10px; border-top: 0.5px solid var(--border); padding-top: 15px; margin-top: auto; }
 .indicator-author { min-width: 0; color: var(--text-muted); font-size: 11px; overflow-wrap: anywhere; }

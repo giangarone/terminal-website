@@ -91,4 +91,69 @@ export const premiumIndicators: PremiumIndicator[] = [
     description: 'Spot candles where heavy trading at a price level produced little movement beyond it. The indicator evaluates trades when each candle closes.',
     author: 'Melek',
   },
+  {
+    id: 'opening-auction-profile', name: 'Opening Auction Profile',
+    description: 'Profile a configurable opening window for each UTC session and extend its value levels. Volume at each price is estimated from chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'pivot-volume-confluence', name: 'Pivot Volume Confluence',
+    description: 'Highlight confirmed price pivots that line up with high-volume levels in a rolling profile. Volume at each price is estimated from chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'multi-horizon-value-nodes', name: 'Multi Horizon Value Nodes', category: 'Volume', access: 'Open source',
+    description: 'Compare estimated volume profiles over 7, 30, 60, 180, and 365 bars. Each profile allocates volume across candle bodies and wicks.',
+    author: 'TZack',
+  },
+  {
+    id: 'range-participation-density', name: 'Range Participation Density', category: 'Volume', access: 'Open source',
+    description: 'Track price participation over a rolling window. Each candle’s full volume counts at every price level it crosses.',
+    author: 'TZack',
+  },
+  {
+    id: 'bounded-auction-profile', name: 'Bounded Auction Profile', category: 'Volume', access: 'Open source',
+    description: 'Set Unix start and end times to build a fixed auction profile. Volume at each price is estimated from chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'swing-auction-map', name: 'Swing Auction Map', category: 'Volume', access: 'Open source',
+    description: 'Anchor an estimated volume profile to the latest swing pivot. Subsequent bars confirm the pivot, and the profile uses chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'session-value-atlas', name: 'Session Value Atlas', category: 'Volume', access: 'Open source',
+    description: 'Compare historical value areas across UTC sessions with a configurable start hour. Volume at each price is estimated from chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'calendar-value-ledger', name: 'Calendar Value Ledger', category: 'Volume', access: 'Open source',
+    description: 'Track completed and developing weekly volume profiles. Each week starts on Monday UTC, and volume at each price is estimated from chart OHLCV.',
+    author: 'TZack',
+  },
+  {
+    id: 'imbalance-streak-signal', name: 'Imbalance Streak Signal', category: 'Structure', access: 'Open source',
+    description: 'Mark qualifying gap zones and track streaks of gaps in the same direction. ATR filtering and candle confirmation refine the signals.',
+    author: 'TZack',
+  },
+  {
+    id: 'inversion-transition-zones', name: 'Inversion Transition Zones', category: 'Structure', access: 'Open source',
+    description: 'Track gap zones that flip direction when invalidated. Each inverted zone stays active until price breaches its far edge in the opposite direction.',
+    author: 'TZack',
+  },
+  {
+    id: 'gap-rejection-watch', name: 'Gap Rejection Watch', category: 'Structure', access: 'Open source',
+    description: 'Flag one rejection per qualifying gap after a two-bar wait. Set the minimum gap size manually or use 14-period ATR, with wick-based invalidation.',
+    author: 'TZack',
+  },
+  {
+    id: 'momentum-gap-spectrum', name: 'Momentum Gap Spectrum', category: 'Structure', access: 'Open source',
+    description: 'Filter gaps by size and candle direction, then measure momentum with smoothed RSI of percentage returns. Each gap retains its initial momentum reading.',
+    author: 'TZack',
+  },
+  {
+    id: 'gap-auction-detail', name: 'Gap Auction Detail', category: 'Structure', access: 'Open source',
+    description: 'Filter gaps against the rolling average of recent gap widths, avoid overlapping zones, and track fills at the far edge.',
+    author: 'TZack',
+  },
 ];
