@@ -13,16 +13,11 @@ export function setupIndicators() {
     item.innerHTML = `
       <article class="indicator-card">
         <div class="indicator-body">
-          <div class="indicator-heading"><h3></h3></div>
+          <h3></h3>
+          <ul class="indicator-tags" aria-label="Indicator tags" role="list"></ul>
           <p class="indicator-description"></p>
           <div class="indicator-card-footer">
-            <span class="indicator-author">
-              <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="7" r="3"/>
-                <path d="M5 20v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
-              </svg>
-              <span></span>
-            </span>
+            <span class="indicator-author"></span>
             <button class="indicator-detail" type="button" aria-disabled="true">View indicator</button>
           </div>
         </div>
@@ -31,17 +26,20 @@ export function setupIndicators() {
     const title = card.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
-    const { level } = indicator;
-    if (level) {
-      card.dataset.level = level;
-      const levelTag = document.createElement('span');
-      levelTag.className = 'indicator-level';
-      levelTag.textContent = level === 'L2' ? 'Orderbook • L2' : 'Orderflow • L1';
-      title.after(levelTag);
+    const { category, access, level } = indicator;
+    const levelLabel = level && (level === 'L2' ? 'Orderbook • L2' : 'Orderflow • L1');
+    const tagList = card.querySelector('.indicator-tags')!;
+    for (const label of [category, access, levelLabel]) {
+      if (!label) continue;
+      const tag = document.createElement('li');
+      tag.className = 'indicator-tag';
+      tag.dataset.tag = label;
+      tag.textContent = label;
+      tagList.append(tag);
     }
     card.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
-    item.querySelector('.indicator-author span')!.textContent = indicator.author;
+    item.querySelector('.indicator-author')!.textContent = indicator.author;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     list.append(item);
