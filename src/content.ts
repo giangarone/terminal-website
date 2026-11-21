@@ -12,35 +12,34 @@ export interface PremiumIndicator {
   level: 'L1' | 'L2' | null;
   category: string;
   description: string;
-  userCount: number | null;
+  author: string;
 }
 
-// User counts are design placeholders. Replace with verified counts (or null)
-// before launch. Add entries here to extend the carousel.
+// Author names are fictional placeholders. Add entries here to extend the carousel.
 export const premiumIndicators: PremiumIndicator[] = [
   {
     id: 'exhaustion', name: 'Exhaustion', level: 'L2', category: 'Momentum',
     description: 'Spot when buying or selling pressure fades and a move starts to lose momentum.',
-    userCount: 782,
+    author: 'Mara Voss',
   },
   {
     id: 'flowprint-blocks', name: 'Flowprint Blocks', level: 'L2', category: 'Liquidity',
     description: 'See where buy and sell orders cluster, and track how price reacts when it reaches those levels.',
-    userCount: 1084,
+    author: 'Nolan Vance',
   },
   {
     id: 'liquidation-prints', name: 'Liquidation Prints', level: 'L1', category: 'Liquidations',
     description: 'See forced exits on perpetual futures charts. Red bubbles below candles mark long liquidations, and green bubbles above mark short liquidations.',
-    userCount: 947,
+    author: 'Lina Calder',
   },
   {
     id: 'prime-support-resistance', name: 'Prime Support & Resistance', level: 'L1', category: 'Order flow',
     description: 'See potential support and resistance directly on your chart. Our servers calculate each level from executed market trades.',
-    userCount: 1316,
+    author: 'Dev Saran',
   },
   {
     id: 'footprint', name: 'Footprint', level: 'L1', category: 'Order flow',
     description: 'See how much traded at the bid and ask at every price within each candle. Fine-tune the view with dedicated footprint settings.',
-    userCount: 1542,
+    author: 'Tessa Vale',
   },
 ];

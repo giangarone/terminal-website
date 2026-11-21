@@ -6,7 +6,6 @@ export function setupIndicators() {
   const previous = document.querySelector<HTMLButtonElement>('#indicator-previous')!;
   const next = document.querySelector<HTMLButtonElement>('#indicator-next')!;
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const number = new Intl.NumberFormat('en-US');
 
   for (const indicator of premiumIndicators) {
     const item = document.createElement('li');
@@ -17,10 +16,10 @@ export function setupIndicators() {
           <div class="indicator-heading"><h3></h3></div>
           <p class="indicator-description"></p>
           <div class="indicator-card-footer">
-            <span class="indicator-users" role="img">
+            <span class="indicator-author">
               <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="7" r="3"/>
-                <path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 4a3 3 0 0 1 0 6m2 4a4 4 0 0 1 3 4v2"/>
+                <circle cx="12" cy="7" r="3"/>
+                <path d="M5 20v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/>
               </svg>
               <span></span>
             </span>
@@ -32,7 +31,7 @@ export function setupIndicators() {
     const title = card.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
-    const { level, userCount } = indicator;
+    const { level } = indicator;
     if (level) {
       card.dataset.level = level;
       const levelTag = document.createElement('span');
@@ -42,14 +41,7 @@ export function setupIndicators() {
     }
     card.setAttribute('aria-labelledby', title.id);
     item.querySelector('.indicator-description')!.textContent = indicator.description;
-    const users = item.querySelector<HTMLElement>('.indicator-users')!;
-    const countText = userCount === null ? '—' : number.format(userCount);
-    const countLabel = userCount === null
-      ? 'User count unavailable'
-      : `${countText} ${userCount === 1 ? 'user' : 'users'} using this indicator`;
-    users.title = countLabel;
-    users.setAttribute('aria-label', countLabel);
-    users.querySelector('span')!.textContent = countText;
+    item.querySelector('.indicator-author span')!.textContent = `By ${indicator.author}`;
     item.querySelector('button')!.setAttribute('aria-label', `View ${indicator.name} (coming soon)`);
 
     list.append(item);
