@@ -26,10 +26,8 @@ export function setupIndicators() {
     const title = card.querySelector('h3')!;
     title.id = `indicator-${indicator.id}`;
     title.textContent = indicator.name;
-    const { category, access } = indicator;
     const tagList = card.querySelector('.indicator-tags')!;
-    for (const label of [category, access]) {
-      if (!label) continue;
+    for (const label of indicator.tags) {
       const tag = document.createElement('li');
       tag.className = 'indicator-tag';
       tag.dataset.tag = label;
